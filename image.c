@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/10/30 19:48:34 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/03 14:45:01 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	main(void)
 	int		color;
 	int		width = 1000;
 	int		height = 800;
+	// int		width = 44;
+	// int		height = 38;
 	t_plane	pl;
 	t_cam	cam;
 	t_sphere	sp;
@@ -49,29 +51,29 @@ amb.color = 0xffffff;
 ** light coordintates
 */
 li.x = 20;
-li.y = 60;
-li.z = 20;
+li.y = 0;
+li.z = 0;
 light.l = li;
 light.intensity = 1;
 light.color = 0xffffff;
 /*
 ** Plane's P coordinates
 */
-p.x = 0;
+p.x = -20;
 p.y = 0;
 p.z = 0;
 pl.p = p;
 /*
 ** Plane's normal
 */
-n.x = 1;
+n.x = 30;
 n.y = 0;
 n.z = 0;
 pl.n = n;
 /*
 ** Plane's color;
 */
-pl.color = 0xff00ff;
+pl.color = 0x8A2BE2;
 
 /*
 ** camera coordinates
@@ -138,18 +140,17 @@ pl.color = 0xff00ff;
 		while (i < width)
 		{
 		 	ray = cam_ray_build(i, j, &cam, width, height);
-			if ((t = sp_intersect(ray, &cam, sp)) >= 0.0)
+			// if ((t = sp_intersect(ray, &cam, sp)) >= 0.0)
+			// {
+			// 	color = sp_shading(t, &light, &cam, sp, amb, ray);
+			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
+			// }
+
+			if ((t = pl_intersect(ray, &cam, pl)) >= 0.0)
 			{
-				color = sp_shading(t, &light, &cam, sp, amb, ray);
+				color = pl_shading(t, &light, &cam, pl, amb, ray);
 				mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			}
-//
-		// 	if ((t = pl_intersect(ray, &cam, pl)) >= 0.0)
-		// 	{
-		// //		printf("2");
-		// 		color = pl_shading(t, &light, &cam, pl, amb, ray);
-		// 		mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
-		// 	}
 
 			// else
 			// 	mlx_pixel_put(mlx_ptr, win_ptr,i , j, 0x4a4a4a);

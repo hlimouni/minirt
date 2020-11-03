@@ -6,11 +6,12 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 19:10:32 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/10/28 17:26:05 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/03 14:45:36 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include <stdio.h>
 # define TMAX 72000
 
 /*
@@ -54,17 +55,25 @@ float   pl_intersect(t_vect ray, t_cam *cam, t_plane plane)
     float      dir_dot_n;
     t_vect      p_c;
     float       t;
-
+    // printf("the ray_screen x coordinate is %f\n", ray.x);
+    // printf("the ray_screen y coordinate is %f\n", ray.y);
+    // printf("the ray_screen z coordinate is %f\n", ray.z);
     dir = vect_diff(ray, cam->c);
-    dir_dot_n = vect_dot(dir, plane.n);
-    if (dir_dot_n < 0.001)
+    // printf("the dir x coordinate is %f\n", dir.x);
+    // printf("the dir y coordinate is %f\n", dir.y);
+    // printf("the dir z coordinate is %f\n", dir.z);
+    dir_dot_n = vect_dot(dir, vect_unit(plane.n));
+    // printf("the dir_dot_n is %f\n", dir_dot_n);
+    if (fabs(dir_dot_n) < 0.00001)
         return(-1.0);
     else
     {
         p_c = vect_diff(plane.p, cam->c);
-        t = vect_dot(p_c, plane.n) / dir_dot_n;
+        t = vect_dot(p_c, vect_unit(plane.n)) / dir_dot_n;
+        printf("the solution t is %f\n", t);
     }
-    if (t < 0 || fabs(t) > TMAX)
-        return (-1);
-    return (fabs(t));
+    if (t < 0)
+    // if (t < 0 || fabs(t) > TMAX)
+        return (-1.0);
+    return (t);
 }
