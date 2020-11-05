@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/03 14:45:01 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/05 11:46:31 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ light.color = 0xffffff;
 /*
 ** Plane's P coordinates
 */
-p.x = -20;
+p.x = 0;
 p.y = 0;
 p.z = 0;
 pl.p = p;
 /*
 ** Plane's normal
 */
-n.x = 30;
+n.x = -1;
 n.y = 0;
 n.z = 0;
 pl.n = n;

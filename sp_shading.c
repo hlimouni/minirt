@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 18:00:56 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/03 14:45:34 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/05 11:53:42 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,26 +176,36 @@ int	pl_shading(float t, t_light *light, t_cam *cam, t_plane pl,
 	ray_object = vect_diff(ray_screen, cam->c);
 	ray_object = vect_const_prod(t, ray_object);
 	ray_object = vect_sum(cam->c, ray_object);
-	n = vect_unit(pl.n);
 	l = vect_diff(light->l, ray_object);
 	l = vect_unit(l);
+	// if (vect_dot(n, l) < 0)
+	// 	n = vect_const_prod(-1.0, vect_unit(pl.n));
+	// else
+	n = vect_unit(pl.n);
 	// shade = light->intensity * fmax(0, vect_dot(n, l));
-	shade = light->intensity * fmax(0, vect_dot(n, l));
+	/*
+	** fabs is applied to n dot l because in the case of a plane even if 
+	** that dot is negative (light hits the plane from the outside layer)
+	** we still need to shade the outside layer of the plane
+	*/
+	shade = light->intensity * fabs(vect_dot(n, l));
+	//shade = light->intensity * fmax(0, vect_dot(n, l));
 	//printf("the t solution is  %f\n", t);
 	// printf("shade of the diffuse %f\n", shade);
 	diffuse = vect_const_prod(shade, itovect(pl.color));
 	v = vect_unit(vect_diff(cam->c ,ray_object));
-	h = vect_unit(vect_sum(l, v));
-	shade = vect_dot(n, h);
-	// shade = 2 * vect_dot(n, l);
-	// h = vect_const_prod(shade, n);
-	// // //printf("the h vect now is [%f][%f][%f]\n", h.x, h.y, h.z);
-	// h = vect_unit(vect_diff(h, l));
-	// // //printf("the h vect now is [%f][%f][%f]\n", h.x, h.y, h.z);
-	// shade = vect_dot(v, h);
+	// h = vect_unit(vect_sum(l, v));
+	// shade = vect_dot(n, h);
+	//printf("the shade is %f\n", shade);
+	shade = 2 * vect_dot(n, l);
+	h = vect_const_prod(shade, n);
+	//printf("the h vect now is [%f][%f][%f]\n", h.x, h.y, h.z);
+	h = vect_unit(vect_diff(h, l));
+	//printf("the h vect now is [%f][%f][%f]\n", h.x, h.y, h.z);
+	shade = vect_dot(v, h);
 	//printf("dot prod of v and h %f\n", shade);
-	specular = 150 * fmax(0, pow(shade, 500));
-	//printf("shade of the specualr %f\n", shade);
+	specular = 150 * pow(shade, 50);
+	// printf("the specualr %f\n", specular);
 	color_vect = vect_sum(ambiant, diffuse);
 	//vect_dot(n, l) < 0 ? (shade = 0) : 0;
 	// specular = 0;

@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 19:10:32 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/03 14:45:36 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/04 13:42:37 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ float   pl_intersect(t_vect ray, t_cam *cam, t_plane plane)
     // printf("the dir z coordinate is %f\n", dir.z);
     dir_dot_n = vect_dot(dir, vect_unit(plane.n));
     // printf("the dir_dot_n is %f\n", dir_dot_n);
-    if (fabs(dir_dot_n) < 0.00001)
+    if (fabs(dir_dot_n) < 0.000001)
         return(-1.0);
     else
     {
         p_c = vect_diff(plane.p, cam->c);
         t = vect_dot(p_c, vect_unit(plane.n)) / dir_dot_n;
-        printf("the solution t is %f\n", t);
+        // printf("the solution t is %f\n", t);
     }
     if (t < 0)
     // if (t < 0 || fabs(t) > TMAX)
