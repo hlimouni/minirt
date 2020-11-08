@@ -42,6 +42,16 @@ t_vect  vect_prod(t_vect u, t_vect v)
     return (prd);
 }
 
+t_vect  vect_cross(t_vect u, t_vect v)
+{
+    t_vect  cross;
+
+    cross.x = u.y * v.z - u.z * v.y;
+    cross.y = u.z * v.x - u.x * v.z;
+    cross.z = u.x * v.y - u.y * v.x;
+    return (cross);
+}
+
 float   vect_dot(t_vect u, t_vect v)
 {
     return (u.x * v.x + u.y * v.y + u.z * v.z);
