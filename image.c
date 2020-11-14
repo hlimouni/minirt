@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/05 11:46:31 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/14 20:43:45 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,17 @@ int	main(void)
 	int		j;
 	float	t;
 	int		color;
-	int		width = 1000;
-	int		height = 800;
-	// int		width = 44;
-	// int		height = 38;
+	// int		width = 1000;
+	// int		height = 800;
+	int		width = 44;
+	int		height = 38;
 	t_plane	pl;
 	t_cam	cam;
 	t_sphere	sp;
 	t_amb		amb;
 	t_light		light;
-	t_vect	c, l, o, ray,li, p, n;
+	t_square	sq;
+	t_vect	c, l, o, ray,li, p, n, origin, normal;
 
 /*
 ** Ambiant light
@@ -50,23 +51,42 @@ amb.color = 0xffffff;
 /*
 ** light coordintates
 */
-li.x = 20;
+li.x = 40;
 li.y = 0;
 li.z = 0;
 light.l = li;
 light.intensity = 1;
 light.color = 0xffffff;
 /*
+** Square center coordinates
+*/
+origin.x = 2;
+origin.y = 0;
+origin.z = 0;
+sq.origin = origin;
+/*
+** Square normal coordinates
+*/
+normal.x = 1;
+normal.y = 0;
+normal.z = 0;
+sq.normal = normal;
+/*
+** square side and color
+*/
+sq.side = 0.6;
+sq.color = 0x8A2BE2;
+/*
 ** Plane's P coordinates
 */
-p.x = 0;
+p.x = 2;
 p.y = 0;
 p.z = 0;
 pl.p = p;
 /*
 ** Plane's normal
 */
-n.x = -1;
+n.x = 1;
 n.y = 0;
 n.z = 0;
 pl.n = n;
@@ -79,7 +99,7 @@ pl.color = 0x8A2BE2;
 ** camera coordinates
 */
 /**********************/
-	c.x = 3;
+	c.x = 6;
 	c.y = 0;
 	c.z = 0;
 /**********************/
@@ -146,11 +166,19 @@ pl.color = 0x8A2BE2;
 			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			// }
 
-			if ((t = pl_intersect(ray, &cam, pl)) >= 0.0)
+			// if ((t = pl_intersect(ray, &cam, pl)) >= 0.0)
+			// {
+			// 	color = pl_shading(t, &light, &cam, pl, amb, ray);
+			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
+			// }
+
+			if ((t = sq_intersect(ray, &cam, sq)) >= 0.0)
 			{
-				color = pl_shading(t, &light, &cam, pl, amb, ray);
+				color = 0x8A2BE2;
+			//	color = pl_shading(t, &light, &cam, pl, amb, ray);
 				mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			}
+
 
 			// else
 			// 	mlx_pixel_put(mlx_ptr, win_ptr,i , j, 0x4a4a4a);

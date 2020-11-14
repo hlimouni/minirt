@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/10/17 11:39:12 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/12 17:23:36 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ typedef struct		s_plane
 	int				color;
 }					t_plane;
 
+typedef struct		s_square
+{
+	t_vect			origin;
+	t_vect			normal;
+	float			side;
+	int				color;
+}					t_square;
 
 typedef struct		s_light
 {
@@ -108,5 +115,9 @@ int					sp_shading(float t, t_light *light,
 					t_cam *cam, t_sphere sp, t_amb amb, t_vect ray_screen);
 int					pl_shading(float t, t_light *light, t_cam *cam, t_plane pl,
 					t_amb amb, t_vect ray_screen);
+int     			is_vect_equal(t_vect u, t_vect v);
+t_vect  			vect_cross(t_vect u, t_vect v);
+float   			sq_intersect(t_vect ray_screen, t_cam *cam, t_square square);
+t_vect				itovect(int color);
 
 #endif

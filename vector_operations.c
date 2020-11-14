@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 18:51:07 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/03/11 00:37:20 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/14 20:04:20 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,16 @@ t_vect  vect_prod(t_vect u, t_vect v)
     return (prd);
 }
 
+t_vect  vect_cross(t_vect u, t_vect v)
+{
+    t_vect  cross;
+
+    cross.x = u.y * v.z - u.z * v.y;
+    cross.y = u.z * v.x - u.x * v.z;
+    cross.z = u.x * v.y - u.y * v.x;
+    return (cross);
+}
+
 float   vect_dot(t_vect u, t_vect v)
 {
     return (u.x * v.x + u.y * v.y + u.z * v.z);
@@ -56,12 +66,16 @@ t_vect   vect_unit(t_vect v)
 {
     t_vect  unit;
     float   norm;
-
+    
     norm = vect_norm(v);
-    unit.x = v.x / norm;
-    unit.y = v.y / norm;
-    unit.z = v.z / norm;
-    return (unit);
+    if (norm != 0.0)
+    {
+        unit.x = v.x / norm;
+        unit.y = v.y / norm;
+        unit.z = v.z / norm;
+        return (unit);
+    }
+    return (v);
 }
 
 t_vect	vect_const_prod(float cst, t_vect v)
@@ -80,4 +94,11 @@ t_vect	vect_const_sum(float cst, t_vect v)
 	v.y = cst + v.y;
 	v.z = cst + v.z;
 	return (v);
+}
+
+int     is_vect_equal(t_vect u, t_vect v)
+{
+    if (u.x == v.x && u.y == v.y && u.z == v.z)
+        return (1);
+    return (0);
 }
