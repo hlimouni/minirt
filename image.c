@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/14 20:43:45 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/15 13:55:06 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	main(void)
 	int		j;
 	float	t;
 	int		color;
-	// int		width = 1000;
-	// int		height = 800;
-	int		width = 44;
-	int		height = 38;
+	int		width = 1000;
+	int		height = 800;
+	// int		width = 44;
+	// int		height = 38;
 	t_plane	pl;
 	t_cam	cam;
 	t_sphere	sp;
@@ -60,14 +60,14 @@ light.color = 0xffffff;
 /*
 ** Square center coordinates
 */
-origin.x = 2;
+origin.x = 0;
 origin.y = 0;
 origin.z = 0;
 sq.origin = origin;
 /*
 ** Square normal coordinates
 */
-normal.x = 1;
+normal.x = -1;
 normal.y = 0;
 normal.z = 0;
 sq.normal = normal;
@@ -79,14 +79,14 @@ sq.color = 0x8A2BE2;
 /*
 ** Plane's P coordinates
 */
-p.x = 2;
+p.x = 0;
 p.y = 0;
 p.z = 0;
 pl.p = p;
 /*
 ** Plane's normal
 */
-n.x = 1;
+n.x = -1;
 n.y = 0;
 n.z = 0;
 pl.n = n;
@@ -99,7 +99,7 @@ pl.color = 0x8A2BE2;
 ** camera coordinates
 */
 /**********************/
-	c.x = 6;
+	c.x = 3;
 	c.y = 0;
 	c.z = 0;
 /**********************/
@@ -174,8 +174,8 @@ pl.color = 0x8A2BE2;
 
 			if ((t = sq_intersect(ray, &cam, sq)) >= 0.0)
 			{
-				color = 0x8A2BE2;
-			//	color = pl_shading(t, &light, &cam, pl, amb, ray);
+			//	color = 0x8A2BE2;
+				color = pl_shading(t, &light, &cam, pl, amb, ray);
 				mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			}
 
