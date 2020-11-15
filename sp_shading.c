@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 18:00:56 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/14 18:39:21 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/15 13:59:33 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	sp_shading(float t, t_light *light, t_cam *cam, t_sphere sp,
 	ambiant = vect_prod(itovect(sp.color), ambiant);
 //	printf("the ambiant is %#08x\n", ambiant);
 
-	ray_object = vect_diff(ray_screen, cam->c);
+	ray_object = vect_unit(vect_diff(ray_screen, cam->c));
 	ray_object = vect_const_prod(t, ray_object);
 	ray_object = vect_sum(cam->c, ray_object);
 	n = vect_diff(ray_object, sp.o);
@@ -173,7 +173,7 @@ int	pl_shading(float t, t_light *light, t_cam *cam, t_plane pl,
 	ambiant = vect_prod(itovect(pl.color), ambiant);
 //	printf("the ambiant is %#08x\n", ambiant);
 
-	ray_object = vect_diff(ray_screen, cam->c);
+	ray_object = vect_unit(vect_diff(ray_screen, cam->c));
 	ray_object = vect_const_prod(t, ray_object);
 	ray_object = vect_sum(cam->c, ray_object);
 	l = vect_diff(light->l, ray_object);
