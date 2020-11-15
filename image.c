@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/05 11:46:31 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/15 14:03:34 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	main(void)
 	t_sphere	sp;
 	t_amb		amb;
 	t_light		light;
-	t_vect	c, l, o, ray,li, p, n;
+	t_square	sq;
+	t_vect	c, l, o, ray,li, p, n, origin, normal;
 
 /*
 ** Ambiant light
@@ -50,12 +51,31 @@ amb.color = 0xffffff;
 /*
 ** light coordintates
 */
-li.x = 20;
+li.x = 40;
 li.y = 0;
 li.z = 0;
 light.l = li;
 light.intensity = 1;
 light.color = 0xffffff;
+/*
+** Square center coordinates
+*/
+origin.x = 0;
+origin.y = 0;
+origin.z = 0;
+sq.origin = origin;
+/*
+** Square normal coordinates
+*/
+normal.x = -1;
+normal.y = 0;
+normal.z = 1;
+sq.normal = normal;
+/*
+** square side and color
+*/
+sq.side = 0.6;
+sq.color = 0x8A2BE2;
 /*
 ** Plane's P coordinates
 */
@@ -68,7 +88,7 @@ pl.p = p;
 */
 n.x = -1;
 n.y = 0;
-n.z = 0;
+n.z = 0.0;
 pl.n = n;
 /*
 ** Plane's color;
@@ -151,6 +171,14 @@ pl.color = 0x8A2BE2;
 				color = pl_shading(t, &light, &cam, pl, amb, ray);
 				mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			}
+
+			// if ((t = sq_intersect(ray, &cam, sq)) >= 0.0)
+			// {
+			// //	color = 0x8A2BE2;
+			// 	color = pl_shading(t, &light, &cam, pl, amb, ray);
+			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
+			// }
+
 
 			// else
 			// 	mlx_pixel_put(mlx_ptr, win_ptr,i , j, 0x4a4a4a);
