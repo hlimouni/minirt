@@ -6,13 +6,13 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 19:10:32 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/15 13:53:02 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/20 14:34:52 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <stdio.h>
-# define TMAX 72000
+# define TMAX 3
 
 /*
 ** The intersection of the ray and sphere is computed by solving the quadratic
@@ -112,7 +112,15 @@ float   sq_intersect(t_vect ray_screen, t_cam *cam, t_square square)
 	    ray_object = vect_const_prod(t, ray_object);
 	    ray_object = vect_sum(cam->c, ray_object);
   //      printf("ray_object %f %f %f\n", ray_object.x, ray_object.y, ray_object.z);
-    
+    /*
+    ** The cam_up vector is the up vector of the camera coordinate system it is calculated
+    ** just as in the cam_ray_build function.
+    ** the u vector defines the intersection between the (forward, right) plane of the camera 
+    ** and the square's plane, hence the use of the cross (square_normal x cam_up) which resuls in a
+    ** vector perpendicular to each plane's normal <=> the vector belongs to both planes <=> intersection.
+    ** Now that we have u as a vector in the plane we construct the base as
+    ** (square.origin, square.normal, u, v)
+    */
     
         l = vect_unit(vect_const_prod(-1.0, cam->l));
         cam_up = vect_cross(itovect(0x000100), l);
@@ -161,9 +169,38 @@ float   sq_intersect(t_vect ray_screen, t_cam *cam, t_square square)
         // // printf("a ^ 2 + b ^ 2 == %f \n",pow(u_distance ,2) + pow(v_distance * vect_norm(v),2));
         // //printf("%f \n",pow(v_distance,2));
         // //if ((u_distance < 0.3 && u_distance > -0.3) && (v_distance < 0.3 && v_distance > -0.3))
-         if (fabs(u_distance) < 1 && fabs(v_distance) < 1)
+         if (fabs(u_distance) < 0.2 && fabs(v_distance) < 0.2)
          // //if (pow(u_distance,2) + pow(v_distance,2) == vect_dot(origin_to_hit, origin_to_hit))
               return (t);
     }
     return(-1.0);
+}
+
+float  cy_intersect(t_vect ray_screen, t_cam *cam, t_cylinder cy)
+{
+    float   delta;
+    float   t1;
+    float   t2;
+    float   a;
+    float   b;
+    float   c;
+    t_vect  d;
+    t_vect  c_oc;
+
+    d = vect_unit(vect_diff(ray, cam->c));
+    c_oc = vect_diff(cy.origin, cam->c);
+    a = ;
+    b = ;
+    c = ;
+    delta = b * b - 4 * a * c;
+    if (delta < 0)
+        return (-1);
+    t1 = (- b - sqrt(delta)) / (2 * a);
+    t2 = (- b + sqrt(delta)) / (2 * a);
+    if (signbit(t1) ^ signbit(t2))
+        return (t1 > t2 ? t1 : t2);
+    else if (t1 < 0 && t2 < 0)
+        return (-1);
+	else
+        return (t1 < t2 ? t1 : t2);
 }

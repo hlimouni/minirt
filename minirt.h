@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/12 17:23:36 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/20 09:51:19 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,16 @@ typedef struct		s_square
 	float			side;
 	int				color;
 }					t_square;
+
+typedef struct		s_cylinder
+{
+	t_vect			origin;
+	t_vect			axis;
+	float			height;
+	float			diameter;
+	int				color;
+}					t_cylinder;
+
 
 typedef struct		s_light
 {

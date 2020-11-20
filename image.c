@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/15 14:03:34 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/17 12:23:06 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ amb.color = 0xffffff;
 ** light coordintates
 */
 li.x = 40;
-li.y = 0;
+li.y = 30;
 li.z = 0;
 light.l = li;
 light.intensity = 1;
@@ -67,9 +67,9 @@ sq.origin = origin;
 /*
 ** Square normal coordinates
 */
-normal.x = -1;
-normal.y = 0;
-normal.z = 1;
+normal.x = 0.1;
+normal.y = -0.8;
+normal.z = 0.0;
 sq.normal = normal;
 /*
 ** square side and color
@@ -86,8 +86,8 @@ pl.p = p;
 /*
 ** Plane's normal
 */
-n.x = -1;
-n.y = 0;
+n.x = 0.1;
+n.y = -0.8;
 n.z = 0.0;
 pl.n = n;
 /*
@@ -99,8 +99,8 @@ pl.color = 0x8A2BE2;
 ** camera coordinates
 */
 /**********************/
-	c.x = 3;
-	c.y = 0;
+	c.x = 4;
+	c.y = -2;
 	c.z = 0;
 /**********************/
 	cam.c = c;
@@ -166,18 +166,18 @@ pl.color = 0x8A2BE2;
 			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			// }
 
-			if ((t = pl_intersect(ray, &cam, pl)) >= 0.0)
-			{
-				color = pl_shading(t, &light, &cam, pl, amb, ray);
-				mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
-			}
-
-			// if ((t = sq_intersect(ray, &cam, sq)) >= 0.0)
+			// if ((t = pl_intersect(ray, &cam, pl)) >= 0.0)
 			// {
-			// //	color = 0x8A2BE2;
 			// 	color = pl_shading(t, &light, &cam, pl, amb, ray);
 			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			// }
+
+			if ((t = sq_intersect(ray, &cam, sq)) >= 0.0)
+			{
+			//	color = 0x8A2BE2;
+				color = pl_shading(t, &light, &cam, pl, amb, ray);
+				mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
+			}
 
 
 			// else
