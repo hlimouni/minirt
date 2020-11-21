@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/20 09:51:19 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/21 11:18:08 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,13 @@ t_vect				vect_const_prod(float cst, t_vect v);
 int					sp_shading(float t, t_light *light,
 					t_cam *cam, t_sphere sp, t_amb amb, t_vect ray_screen);
 int					pl_shading(float t, t_light *light, t_cam *cam, t_plane pl,
-					t_amb amb, t_vect ray_screen);
+							t_amb amb, t_vect ray_screen);
 int     			is_vect_equal(t_vect u, t_vect v);
 t_vect  			vect_cross(t_vect u, t_vect v);
 float   			sq_intersect(t_vect ray_screen, t_cam *cam, t_square square);
+float  				cy_intersect(t_vect ray_screen, t_cam *cam, t_cylinder cy);
+int					cy_shading(float t, t_light *light, t_cam *cam, t_cylinder cy,
+							t_amb amb, t_vect ray_screen);
 t_vect				itovect(int color);
 
 #endif
