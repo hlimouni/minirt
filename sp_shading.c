@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 18:00:56 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/15 13:59:33 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/21 11:19:34 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,62 @@ int	pl_shading(float t, t_light *light, t_cam *cam, t_plane pl,
 	color_vect = vect_sum(ambiant, diffuse);
 	//vect_dot(n, l) < 0 ? (shade = 0) : 0;
 	// specular = 0;
+	color_vect = vect_const_sum(specular, color_vect);
+	// return (color);
+	color = vectoi(color_vect);
+	return (color);
+}
+
+int	cy_shading(float t, t_light *light, t_cam *cam, t_cylinder cy,
+					t_amb amb, t_vect ray_screen)
+{
+	int			color;
+	t_vect		ambiant;
+	t_vect		diffuse;
+	double		specular;
+	t_vect		r;
+	t_vect		v;
+	t_vect		ray_object;
+	t_vect		n;
+	t_vect		l;
+	t_vect		color_vect;
+	float		shade;
+
+	diffuse = itovect(0);
+//	ambiant = rgb_const_prod(1/255, ambiant);
+	ambiant = vect_const_prod(1.0/255.0, itovect(amb.color));
+//	printf("the ambiant is %#08x\n", ambiant);
+	ambiant = vect_const_prod(amb.intensity, ambiant);
+//	printf("the ambiant is %#08x\n", ambiant);
+	ambiant = vect_prod(itovect(cy.color), ambiant);
+//	printf("the ambiant is %#08x\n", ambiant);
+
+	ray_object = vect_unit(vect_diff(ray_screen, cam->c));
+	ray_object = vect_const_prod(t, ray_object);
+	ray_object = vect_sum(cam->c, ray_object);
+	cy.axis = vect_unit(cy.axis);
+	n = vect_diff(ray_object, cy.origin);
+	n = vect_diff(n, vect_const_prod(vect_dot(cy.axis, n), cy.axis));
+	n = vect_unit(n);
+	l = vect_diff(light->l, ray_object);
+	l = vect_unit(l);
+	shade = light->intensity * fmax(0, vect_dot(n, l));
+	//printf("shade of the diffuse %f\n", shade);
+	diffuse = vect_const_prod(shade, itovect(cy.color));
+	v = vect_unit(vect_diff(cam->c ,ray_object));
+	r = vect_unit(vect_sum(l, v));
+	shade = vect_dot(n, r);
+	/*
+	shade = 2 * vect_dot(n, l);
+	r = vect_const_prod(shade, n);
+	r = vect_unit(vect_diff(r, l));
+	shade = vect_dot(v, r);
+	*/
+	//printf("dot prod of v and h %f\n", shade);
+	specular = 150 * fmax(0, pow(shade, 50));
+	//printf("shade of the specualr %f\n", shade);
+	color_vect = vect_sum(ambiant, diffuse);
+	vect_dot(n, l) < 0 ? (specular = 0) : 0;
 	color_vect = vect_const_sum(specular, color_vect);
 	// return (color);
 	color = vectoi(color_vect);
