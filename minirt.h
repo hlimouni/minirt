@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/21 11:18:08 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/24 14:54:29 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ typedef	struct		s_vect
 	float			z;
 }					t_vect;
 
+typedef struct		s_mat3x3
+{
+	t_vect			line1;
+	t_vect			line2;
+	t_vect			line3;
+}					t_mat3x3;
+
 typedef struct		s_mat44
 {
 	float			element[4][4];
@@ -41,6 +48,7 @@ typedef	struct		s_cam
 {
 	t_vect			c;
 	t_vect			l;
+	t_vect			up;
 	float			fov;
 	struct s_cam	*next;
 }					t_cam;
@@ -110,6 +118,8 @@ typedef	struct		s_resolution
 }					t_resolution;
 
 t_vect				cam_ray_build(int i, int j, t_cam *cam,
+						float width, float height);
+t_vect				cam_ray_build2(int i, int j, t_cam *cam,
 						float width, float height);
 float				sp_intersect(t_vect ray, t_cam *cam, t_sphere sp);
 float				pl_intersect(t_vect ray, t_cam *cam, t_plane plane);
