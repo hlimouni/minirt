@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/21 14:17:14 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/24 14:52:55 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ amb.color = 0xffffff;
 /*
 ** light coordintates
 */
-li.x = -40;
-li.y = 0;
-li.z = 70;
+li.x = -20;
+li.y = -10;
+li.z = 0;
 light.l = li;
 light.intensity = 1;
 light.color = 0xffffff;
@@ -68,7 +68,7 @@ sq.origin = origin;
 /*
 ** Square normal coordinates
 */
-normal.x = 0.1;
+normal.x = 0;
 normal.y = -0.8;
 normal.z = 0.0;
 sq.normal = normal;
@@ -100,8 +100,8 @@ pl.color = 0x8A2BE2;
 ** camera coordinates
 */
 /**********************/
-	c.x = -4;
-	c.y = 0;
+	c.x = 0;
+	c.y = -4;
 	c.z = 0;
 /**********************/
 	cam.c = c;
@@ -110,8 +110,8 @@ pl.color = 0x8A2BE2;
 ** camera look at vector coordinates
 */
 /**********************/
-	l.x = 1;
-	l.y = 0;
+	l.x = 0.000001;
+	l.y = 1;
 	l.z = 0;
 /**********************/
 	cam.l = l;
@@ -153,7 +153,7 @@ pl.color = 0x8A2BE2;
 ** cylinder origin coordinates
 */
 /**********************/
-	cy_o.x = 0;
+	cy_o.x = -1.5;
 	cy_o.y = 0;
 	cy_o.z = 0;
 /**********************/
@@ -163,7 +163,7 @@ pl.color = 0x8A2BE2;
 ** cylinder Diameter
 */
 /**********************/
-	cy.diameter = 2;
+	cy.diameter = 1;
 /**********************/
 /*
 ** cylinder Color
@@ -175,13 +175,13 @@ pl.color = 0x8A2BE2;
 ** cylinder axis
 */
 /*********************/
-	axis.x = 1;
+	axis.x = 0;
 	axis.y = 0;
-	axis.z = 0.1;
+	axis.z = 1;
 /********************/
 	cy.axis = axis;
 /*******************/
-	cy.height = 3;
+	cy.height = 2;
 
 	// ray = cam_ray_build(i, j, &cam, width, height);
 	// print_vect(ray);
@@ -194,7 +194,8 @@ pl.color = 0x8A2BE2;
 		i = 0;
 		while (i < width)
 		{
-		 	ray = cam_ray_build(i, j, &cam, width, height);
+		 	// ray = cam_ray_build(i, j, &cam, width, height);
+		 	ray = cam_ray_build2(i, j, &cam, width, height);
 			// if ((t = sp_intersect(ray, &cam, sp)) >= 0.0)
 			// {
 			// 	color = sp_shading(t, &light, &cam, sp, amb, ray);
