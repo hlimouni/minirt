@@ -24,23 +24,34 @@ t_vect	mat_vect_prod(t_mat3x3	mat, t_vect	v)
 
 t_vect	cam_ray_build2(int i, int j, t_cam *cam, float w, float h)
 {
-	// float		px;
-	// float		py;
 	t_vect		p;
+	t_vect		tmp;
 	t_vect		ray_screen;
 	float		alpha;
-    t_vect  	cam_forward;
-    t_vect  	cam_up;
-    t_vect  	cam_right;
+    	t_vect  	cam_forward;
+    	t_vect  	cam_up;
+    	t_vect  	cam_right;
 	t_mat3x3	mat;
 
 	alpha = (cam->fov * M_PI) / 180.0;
 	p.x = (2 * (i + 0.5) / w - 1) * (w / h) * tan(alpha / 2);
 	p.y = (1 - 2 * (j + 0.5) / h) * tan(alpha / 2);
 	p.z = -1;
-    cam_forward = vect_unit(vect_const_prod(-1, cam->l));
-    cam_right = vect_unit(vect_cross(itovect(0x000100), cam_forward));
-    cam_up = vect_unit(vect_cross(cam_forward, cam_right));
+    	cam_forward = vect_unit(vect_const_prod(-1, cam->l));
+	tmp = vect_cross(cam->l, itovect(0x000100));
+//	if (is_vect_equal(tmp, itovect(0))
+	if (is_vect_equal(tmp, itovect(0)))
+	{
+		if (vect_dot(cam->l, itovect(0x000100)) > 0)
+			tmp = vect_const_prod(-1, itovect(0x010000));
+		else
+			tmp = itovect(0x010000);
+	}
+	else
+		tmp = itovect(0x000100);
+    	cam_right = vect_unit(vect_cross(tmp, cam_forward));
+    	cam_up = vect_unit(vect_cross(cam_forward, cam_right));
+	cam->up = cam_up;
 	mat.line1.x = cam_right.x;
 	mat.line1.y = cam_up.x;
 	mat.line1.z = cam_forward.x;
@@ -51,11 +62,5 @@ t_vect	cam_ray_build2(int i, int j, t_cam *cam, float w, float h)
 	mat.line3.y = cam_up.z;
 	mat.line3.z = cam_forward.z;
 	ray_screen = vect_sum(cam->c, mat_vect_prod(mat, p));
-	// ray_screen.x = -cam->l.z * px - cam->l.x * cam->l.y * py + cam->l.x
-	// 	+ cam->c.x;
-	// ray_screen.y = (cam->l.x * cam->l.x + cam->l.z * cam->l.z) * py +
-	// 	cam->l.y + cam->c.y;
-	// ray_screen.z = cam->l.x * px - cam->l.y * cam->l.z * py +
-	// 	cam->l.z + cam->c.z;
 	return (ray_screen);
 }
