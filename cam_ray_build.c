@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:18 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/03/12 21:53:54 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:32:29 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_vect	cam_ray_build(int i, int j, t_cam *cam, float w, float h)
 	py = (1 - 2 * (j + 0.5) / h) * tan(alpha / 2);
 	ray_screen.x = -cam->l.z * px - cam->l.x * cam->l.y * py + cam->l.x
 		+ cam->c.x;
-	ray_screen.y = -(cam->l.x * cam->l.x + cam->l.z * cam->l.z) * py +
+	ray_screen.y = (cam->l.x * cam->l.x + cam->l.z * cam->l.z) * py +
 		cam->l.y + cam->c.y;
 	ray_screen.z = cam->l.x * px - cam->l.y * cam->l.z * py +
 		cam->l.z + cam->c.z;

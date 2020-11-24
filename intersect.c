@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 19:10:32 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/21 13:36:58 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/24 14:49:47 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,25 +187,26 @@ float  cy_intersect(t_vect ray_screen, t_cam *cam, t_cylinder cy)
     float   b;
     float   c;
     t_vect  d;
+    t_vect  u;
     t_vect  tmp;
     t_vect  oc_c;
     
-    cy.axis = vect_unit(cy.axis);
+    u = vect_unit(cy.axis);
     d = vect_unit(vect_diff(ray_screen, cam->c));
     oc_c = vect_diff(cy.origin, cam->c);
-    a = 1 - pow(vect_dot(d, cy.axis), 2);
-    b = 2 * (vect_dot(d, cy.axis) * vect_dot(oc_c, cy.axis) - vect_dot(oc_c, d));
-    tmp = vect_diff(oc_c, vect_const_prod(vect_dot(oc_c, cy.axis), cy.axis));
+    a = 1 - pow(vect_dot(d, u), 2);
+    b = 2 * (vect_dot(d, u) * vect_dot(oc_c, u) - vect_dot(oc_c, d));
+    tmp = vect_diff(oc_c, vect_const_prod(vect_dot(oc_c, u), u));
     c = vect_dot(tmp, tmp) - (cy.diameter / 2) * (cy.diameter / 2);
     delta = b * b - 4 * a * c;
     if (delta < 0)
         return (-1);
     t1 = (- b - sqrt(delta)) / (2 * a);
     t2 = (- b + sqrt(delta)) / (2 * a);
-    tmin = vect_dot(cy.axis, oc_c) / vect_dot(d, cy.axis);
-    tmax = (cy.height + vect_dot(cy.axis, oc_c)) / vect_dot(d, cy.axis);
+    tmin = vect_dot(u, oc_c) / vect_dot(d, u);
+    tmax = (cy.height + vect_dot(u, oc_c)) / vect_dot(d, u);
     // printf("d ")
-    // printf("d.u == %f", vect_dot(d, cy.axis));
+    // printf("d.u == %f", vect_dot(d, u));
     if (t1 < tmin || t1 > tmax)
         t1 = -1;
     if (t2 < tmin || t2 > tmax)
