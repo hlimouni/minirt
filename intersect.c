@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 19:10:32 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/24 14:49:47 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/25 12:11:17 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ float   sq_intersect(t_vect ray_screen, t_cam *cam, t_square square)
 
     plane.n = square.normal;
     plane.p = square.origin;
-    t = pl_intersect(ray_screen, cam, plane);
+   // t = pl_intersect(ray_screen, cam, plane);
   //  printf("t 1 square is %f\n", t);
     if ((t = pl_intersect(ray_screen, cam, plane)) >= 0.0)
     {
@@ -122,11 +122,14 @@ float   sq_intersect(t_vect ray_screen, t_cam *cam, t_square square)
     ** (square.origin, square.normal, u, v)
     */
     
-        l = vect_unit(vect_const_prod(-1.0, cam->l));
-        cam_up = vect_cross(itovect(0x000100), l);
-        cam_up = vect_cross(l,cam_up);
+        // l = vect_unit(vect_const_prod(-1.0, cam->l));
+        // cam_up = vect_cross(itovect(0x000100), l);
+        // cam_up = vect_cross(l,cam_up);
+        cam_up = cam->up;
         u = vect_cross(vect_unit(square.normal), cam_up);
         v = vect_cross(vect_unit(square.normal), u);
+        u = vect_unit(u);
+        v = vect_unit(v);
     
         // printf("the l vect is [%f][%f][%f]\n", l.x, l.y, l.z);
         // printf("the sq normal vect is [%f][%f][%f]\n",
@@ -169,7 +172,7 @@ float   sq_intersect(t_vect ray_screen, t_cam *cam, t_square square)
         // // printf("a ^ 2 + b ^ 2 == %f \n",pow(u_distance ,2) + pow(v_distance * vect_norm(v),2));
         // //printf("%f \n",pow(v_distance,2));
         // //if ((u_distance < 0.3 && u_distance > -0.3) && (v_distance < 0.3 && v_distance > -0.3))
-         if (fabs(u_distance) < 0.2 && fabs(v_distance) < 0.2)
+         if (fabs(u_distance) < 0.3 && fabs(v_distance) < 0.3)
          // //if (pow(u_distance,2) + pow(v_distance,2) == vect_dot(origin_to_hit, origin_to_hit))
               return (t);
     }
@@ -217,4 +220,29 @@ float  cy_intersect(t_vect ray_screen, t_cam *cam, t_cylinder cy)
         return (-1);
 	else
         return (t1 < t2 ? t1 : t2);
+}
+
+
+ float   tr_intersect(t_vect ray_screen, t_cam *cam, t_triangle *tr)
+ {
+     t_vect      ray_object;
+     t_plane     plane;
+     float       t;
+     t_vect      origin_to_hit;
+     plane.n = vect_cross(vect_diff(tr->B, tr->A), vect_diff(tr->C, tr->A));
+     plane.n = vect_unit(plane.n);
+     tr->noraml = plane.n;
+     plane.p = tr->A;
+     //t = pl_intersect(ray_screen, cam, plane);
+     if ((t = pl_intersect(ray_screen, cam, plane)) >= 0.0)
+     {    
+ 	    ray_object = vect_unit(vect_diff(ray_screen, cam->c));
+ 	    ray_object = vect_const_prod(t, ray_object);
+ 	    ray_object = vect_sum(cam->c, ray_object);
+         if (vect_dot(plane.n, vect_cross(vect_diff(tr->B, tr->A), vect_diff(ray_object, tr->A))) >= 0.0 &&
+         vect_dot(plane.n, vect_cross(vect_diff(tr->C, tr->B), vect_diff(ray_object, tr->B))) >= 0.0
+         && vect_dot(plane.n, vect_cross(vect_diff(tr->A, tr->C), vect_diff(ray_object, tr->C))) >= 0.0)
+            return (t);
+    }
+    return(-1.0);
 }
