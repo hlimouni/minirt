@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/24 14:54:29 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/25 12:02:31 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,16 @@ typedef struct		s_square
 	float			side;
 	int				color;
 }					t_square;
+
+typedef struct 		s_triangle
+{
+	t_vect			A;
+	t_vect			B;
+	t_vect			C;
+	t_vect			noraml;
+	int				color;
+}					t_triangle;
+
 
 typedef struct		s_cylinder
 {
@@ -139,6 +149,7 @@ int     			is_vect_equal(t_vect u, t_vect v);
 t_vect  			vect_cross(t_vect u, t_vect v);
 float   			sq_intersect(t_vect ray_screen, t_cam *cam, t_square square);
 float  				cy_intersect(t_vect ray_screen, t_cam *cam, t_cylinder cy);
+float   			tr_intersect(t_vect ray_screen, t_cam *cam, t_triangle *tr);
 int					cy_shading(float t, t_light *light, t_cam *cam, t_cylinder cy,
 							t_amb amb, t_vect ray_screen);
 t_vect				itovect(int color);

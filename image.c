@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/24 14:52:55 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/25 12:15:18 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,15 @@ int	main(void)
 	int		height = 800;
 	// int		width = 44;
 	// int		height = 38;
-	t_plane	pl;
+	t_plane	pl,tr_pl;
 	t_cam	cam;
 	t_sphere	sp;
 	t_amb		amb;
 	t_light		light;
 	t_square	sq;
 	t_cylinder	cy;
-	t_vect	c, l, o, ray,li, p, n, origin, normal, cy_o, axis;
+	t_triangle	tr;
+	t_vect	c, l, o, ray,li, p, n, origin, normal, cy_o, axis, A, B, C;
 
 /*
 ** Ambiant light
@@ -52,8 +53,8 @@ amb.color = 0xffffff;
 /*
 ** light coordintates
 */
-li.x = -20;
-li.y = -10;
+li.x = 0;
+li.y = 10;
 li.z = 0;
 light.l = li;
 light.intensity = 1;
@@ -87,7 +88,7 @@ pl.p = p;
 /*
 ** Plane's normal
 */
-n.x = 0.1;
+n.x = 0;
 n.y = -0.8;
 n.z = 0.0;
 pl.n = n;
@@ -101,7 +102,7 @@ pl.color = 0x8A2BE2;
 */
 /**********************/
 	c.x = 0;
-	c.y = -4;
+	c.y = 4;
 	c.z = 0;
 /**********************/
 	cam.c = c;
@@ -110,8 +111,8 @@ pl.color = 0x8A2BE2;
 ** camera look at vector coordinates
 */
 /**********************/
-	l.x = 0.000001;
-	l.y = 1;
+	l.x = 0.0;
+	l.y = -1;
 	l.z = 0;
 /**********************/
 	cam.l = l;
@@ -182,7 +183,34 @@ pl.color = 0x8A2BE2;
 	cy.axis = axis;
 /*******************/
 	cy.height = 2;
-
+/*******************/
+/*
+** Triangle
+*/
+/*****************/
+	A.x = -1;
+	A.y = 0;
+	A.z = 0;
+/****************/
+	tr.A = A;
+/****************/
+	B.x = 1;
+	B.y = 0;
+	B.z = 0;
+/***************/
+	tr.B = B;
+/***************/
+	C.x = 0;
+	C.y = 0;
+	C.z = 1;
+/***************/
+	tr.C = C;
+/***************/
+	tr.color = 0x8A2BE2;
+/*************************
+ ** 
+ **
+ */
 	// ray = cam_ray_build(i, j, &cam, width, height);
 	// print_vect(ray);
 	
@@ -210,14 +238,23 @@ pl.color = 0x8A2BE2;
 
 			// if ((t = sq_intersect(ray, &cam, sq)) >= 0.0)
 			// {
-			//	color = 0x8A2BE2;
-				// color = pl_shading(t, &light, &cam, pl, amb, ray);
-				// mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
+			// 	//color = 0x8A2BE2;
+			// 	color = pl_shading(t, &light, &cam, pl, amb, ray);
+			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			// }
-			if ((t = cy_intersect(ray, &cam, cy)) >= 0.0)
+			// if ((t = cy_intersect(ray, &cam, cy)) >= 0.0)
+			// {
+			// 	//color = 0x8A2BE2;
+			// 	color = cy_shading(t, &light, &cam, cy, amb, ray);
+			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
+			// }
+			if ((t = tr_intersect(ray, &cam, &tr)) >= 0.0)
 			{
 				//color = 0x8A2BE2;
-				color = cy_shading(t, &light, &cam, cy, amb, ray);
+				tr_pl.n = tr.noraml;
+				tr_pl.p = tr.A;
+				tr_pl.color = tr.color;
+				color = pl_shading(t, &light, &cam, tr_pl, amb, ray);
 				mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			}
 

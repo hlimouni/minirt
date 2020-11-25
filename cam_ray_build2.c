@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 20:32:27 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/24 14:13:52 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/25 09:36:48 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ t_vect	cam_ray_build2(int i, int j, t_cam *cam, float w, float h)
 	}
 	else
 		tmp = itovect(0x000100);
-    	cam_right = vect_unit(vect_cross(tmp, cam_forward));
-    	cam_up = vect_unit(vect_cross(cam_forward, cam_right));
+    cam_right = vect_unit(vect_cross(tmp, cam_forward));
+    cam_up = vect_unit(vect_cross(cam_forward, cam_right));
 	cam->up = cam_up;
 	mat.line1.x = cam_right.x;
 	mat.line1.y = cam_up.x;
