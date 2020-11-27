@@ -6,11 +6,11 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/25 12:15:18 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/26 12:38:25 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf/ft_printf.h"
+//#include "libftprintf/ft_printf.h"
 #include "minilibx/mlx.h"
 #include "minirt.h"
 #include <stdio.h>

@@ -6,13 +6,13 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/25 12:02:31 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/11/26 12:36:38 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
-# include "libft/libft.h"
+//# include "libft/libft.h"
 # include <stdlib.h>
 # include <math.h>
 
