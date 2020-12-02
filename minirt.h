@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/26 12:36:38 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/02 20:38:48 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 //# include "libft/libft.h"
 # include <stdlib.h>
 # include <math.h>
+# include <stdio.h>
+# include <errno.h>
 
 # define TO_RAD(DEG) ((DEG) * M_PI / 180.0)
 # define WIDTH 1000
