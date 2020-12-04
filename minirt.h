@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/02 20:38:48 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:50:47 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@
 # include <math.h>
 # include <stdio.h>
 # include <errno.h>
+# include <unistd.h>
+# include <fcntl.h>
 
-# define TO_RAD(DEG) ((DEG) * M_PI / 180.0)
-# define WIDTH 1000
-# define HEIGHT 700
+typedef struct	s_scene
+{
+	/* scene data */
+}				t_scene;
+
 
 typedef	struct		s_vect
 {
@@ -52,7 +56,6 @@ typedef	struct		s_cam
 	t_vect			l;
 	t_vect			up;
 	float			fov;
-	struct s_cam	*next;
 }					t_cam;
 
 typedef struct		s_plane
