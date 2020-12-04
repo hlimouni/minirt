@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:08:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/04 13:13:17 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/04 14:25:37 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,26 @@ void    rt_print_error(const char* string)
 int     open_rt_file(int ac, char *av[])
 {
     int     fd;
+    char    c;
 
     if (ac == 1)
-        rt_print_error("Error\nminirt: no input file");
+        rt_print_error("Error\nminirt: No input file");
     if (ac > 3)
-        rt_print_error("Error\nminirt: too many arguments");
+        rt_print_error("Error\nminirt: Too many arguments");
     if ((fd = open(av[1], O_RDONLY)) < 0)
     {
         perror("Error\nOpen");
         exit(1);
     }
-    if (strcmp(strchr(av[1], '.'), ".rt"))
-        rt_print_error("Error\nminirt: wrong file format");
+    while (read(fd, &c, 1) > 0)
+    {
+        putc(c, stdout);
+    }
+    printf("fd == %d\n", fd);
+    if (!strchr(av[1], '.') || strcmp(strchr(av[1], '.'), ".rt"))
+        rt_print_error("Error\nminirt: Wrong file format");
     if (ac == 3 && strcmp(av[2], "--save") != 0)
-        rt_print_error("Error\nminirt: wrong argument\n");
+        rt_print_error("Error\nminirt: Wrong argument");
     return (fd);
 }
 /*
