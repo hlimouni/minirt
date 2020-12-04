@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/15 14:51:59 by hlimouni          #+#    #+#             */
-/*   Updated: 2019/12/15 14:52:49 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/02 19:35:25 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_read_and_store(char **str, char **end, int *ret, int fd)
 	if (!(buff = (char*)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (ft_free_null(str, -1));
 	while (!(*end = ft_strchr(*str, '\n')) &&
-										(*ret = read(fd, buff, BUFFER_SIZE)))
+										(*ret = read(fd, buff, BUFFER_SIZE)) > 0)
 	{
 		buff[*ret] = '\0';
 		if (!(tmp = ft_strjoin(*str, buff)))
@@ -46,7 +46,7 @@ static int	ft_fill_line(char *end, char **str, char **line, int ret)
 {
 	if (!end || (**str == '\0' && ret == 0))
 	{
-		if (!(*line = ft_strdup(*str)))
+		if (!(*line = ft_strdup(*str)) || ret < 0)
 			return (ft_free_null(str, -1));
 		return (ft_free_null(str, 0));
 	}
