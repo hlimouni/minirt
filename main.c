@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:08:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/04 19:41:10 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/05 16:45:23 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,6 @@ int     open_rt_file(int ac, char *av[])
         write(2, "Error\nminiRT: ", 15);
         print_error_exit(strerror(errno));
     }
-    // {
-    //     perror("Error\nOpen");
-    //     exit(1);
-    // }
-    //if (read(fd, NULL, 0) < 0)
-    // {
-    //     perror("Error\nRead");
-    //     exit(1);
-    // }
     if (!strchr(av[1], '.') || strcmp(strrchr(av[1], '.'), ".rt"))
         print_error_exit("Error\nminiRT: Wrong file format");
     if (ac == 3 && strcmp(av[2], "--save") != 0)
