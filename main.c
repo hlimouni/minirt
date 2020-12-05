@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:08:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/04 14:25:37 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/04 19:41:10 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 Note: the functions in "string" library should be replaced by theire libft equivalent
 */
 
-void    rt_print_error(const char* string)
+void    print_error_exit(const char* string)
 {
     write(2, string, strlen(string));
     write(2, "\n", 1);
@@ -27,26 +27,29 @@ void    rt_print_error(const char* string)
 int     open_rt_file(int ac, char *av[])
 {
     int     fd;
-    char    c;
 
     if (ac == 1)
-        rt_print_error("Error\nminirt: No input file");
+        print_error_exit("Error\nminiRT: No input file");
     if (ac > 3)
-        rt_print_error("Error\nminirt: Too many arguments");
-    if ((fd = open(av[1], O_RDONLY)) < 0)
+        print_error_exit("Error\nminiRT: Too many arguments");
+    if ((fd = open(av[1], O_RDONLY)) < 0 || read(fd, NULL, 0) < 0)
     {
-        perror("Error\nOpen");
-        exit(1);
+        write(2, "Error\nminiRT: ", 15);
+        print_error_exit(strerror(errno));
     }
-    while (read(fd, &c, 1) > 0)
-    {
-        putc(c, stdout);
-    }
-    printf("fd == %d\n", fd);
-    if (!strchr(av[1], '.') || strcmp(strchr(av[1], '.'), ".rt"))
-        rt_print_error("Error\nminirt: Wrong file format");
+    // {
+    //     perror("Error\nOpen");
+    //     exit(1);
+    // }
+    //if (read(fd, NULL, 0) < 0)
+    // {
+    //     perror("Error\nRead");
+    //     exit(1);
+    // }
+    if (!strchr(av[1], '.') || strcmp(strrchr(av[1], '.'), ".rt"))
+        print_error_exit("Error\nminiRT: Wrong file format");
     if (ac == 3 && strcmp(av[2], "--save") != 0)
-        rt_print_error("Error\nminirt: Wrong argument");
+        print_error_exit("Error\nminiRT: Wrong argument");
     return (fd);
 }
 /*
@@ -78,7 +81,7 @@ int main(int ac, char* av[])
 
     // if (ac == 1)
     // {
-    //     write(2, "Error\nminirt: no input file\n", 29);
+    //     write(2, "Error\nminiRT: no input file\n", 29);
     //     exit(1);
     // }
     fd = open_rt_file(ac, av);
@@ -93,7 +96,7 @@ int main(int ac, char* av[])
         // }
         // if (strcmp(strchr(av[1], '.'), ".rt"))
         // {
-        //     write(2, "Error\nminirt: wrong file format\n", 33);
+        //     write(2, "Error\nminiRT: wrong file format\n", 33);
         //     exit(1);
         // }
         printf("displaying image\n");
@@ -109,7 +112,7 @@ int main(int ac, char* av[])
         // }
         // if (strcmp(strchr(av[1], '.'), ".rt"))
         // {
-        //     write(2, "Error\nminirt: wrong file format\n", 33);
+        //     write(2, "Error\nminiRT: wrong file format\n", 33);
         //     exit(1);
         // }
         // if (strcmp(av[2], "--save") == 0)
@@ -119,14 +122,14 @@ int main(int ac, char* av[])
         // }
         // else
         // {
-        //     write(2, "Error\nminirt: wrong argument\n", 30);
+        //     write(2, "Error\nminiRT: wrong argument\n", 30);
         //     exit (1);
         // }
         printf("the image is saved and no display was generated\n");
     }
     // else
     // {
-    //     write(2, "Error\nminirt: too many arguments\n", 34);
+    //     write(2, "Error\nminiRT: too many arguments\n", 34);
     //     exit (1);
     // }
     return (0);
