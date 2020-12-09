@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_vector.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 22:40:04 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/08 14:53:08 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/08 23:28:42 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int		is_str_int(char *str)
 	int		i;
 
 	i = 0;
-	if (str[i] == '-' || str[i] == '+')
+	if ((str[i] == '-' || str[i] == '+') && ft_strlen(str) > 1)
 		i++;
 	while (ft_isdigit(str[i++]))
 	if (ft_strlen(str) == i)
-		return (1);
+		return (i);
 	return (0);
 }
 
@@ -31,7 +31,8 @@ int		is_str_float(char *str)
 {
 	int		point_ct;
 	char	*point_ptr;
-	int		i;
+	int		i,j;
+	int		dim;
 
 	point_ct = ft_strchar_count(str, '.');
 	point_ptr = ft_strchr(str, '.');
@@ -39,12 +40,8 @@ int		is_str_float(char *str)
 	{
 		if (point_ptr == NULL)
 		{
-			if (arr[i][j] == '-' || arr[i][j] == '+')
-				j++;
-			while (ft_isdigit(arr[i][j++]))
-			if (ft_strlen(arr[i]) == j)
-				dim += i;
-			i++;		
+			if (is_str_int(str))
+				
 		}
 	}
 }
@@ -121,11 +118,22 @@ int		main(void)
 	t_vect	vector;
 	char	*str = "000233,523,111029";
 
+	printf("%s ? == %d\n", "23233", is_str_int("23233"));
+	printf("%s ? == %d\n", "-2222", is_str_int("-2222"));
+	printf("%s ? == %d\n", "+2", is_str_int("+2"));
+	printf("%s ? == %d\n", "23.2", is_str_int("23.2"));
+	printf("%s ? == %d\n", "lkl", is_str_int("lkl"));
+	printf("%s ? == %d\n", "00023233", is_str_int("00023233"));
+	printf("%s ? == %d\n", "+", is_str_int("-"));
+	printf("%s ? == %d\n", "-", is_str_int("+"));
+
+	/*
 	printf("%d\n", is_3x3vect(str));
 	if (is_3x3vect(str))
 	{
 		vector = arr_to_vect(str);
 		printf("%f, %f, %f\n", vector.x, vector.y, vector.z);
 	}
+	*/
 	return (0);
 }
