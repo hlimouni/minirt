@@ -6,7 +6,7 @@
 #    By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 15:24:42 by hlimouni          #+#    #+#              #
-#    Updated: 2020/12/10 10:43:57 by hlimouni         ###   ########.fr        #
+#    Updated: 2020/12/10 11:22:27 by hlimouni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC=ft_atoi.c \
 	ft_strchar_count.c \
 	ft_free_null.c \
 	ft_free_ret.c \
+	free_2d_array.c \
 	ft_split.c \
 	ft_strnlen.c \
 	ft_substr.c\
