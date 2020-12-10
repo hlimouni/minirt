@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_str_vect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 19:01:50 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/10 14:25:24 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/10 21:37:36 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		is_strint(char *str)
 {
 	int		i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	if ((str[i] == '-' || str[i] == '+') && ft_strlen(str) > 1)
 		i++;
@@ -36,6 +38,8 @@ int		is_strsign(char *str)
 {
 	int		i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
@@ -49,10 +53,9 @@ int		is_strnint(char *str, size_t n)
 {
 	int		i;
 	int		snlen;
-	
+	if (!str)
+		return (0);
 	i = 0;
-	//  if (n == 0)
-	//  	return (0);
 	snlen = ft_strnlen(str, n);
 	if ((str[i] == '-' || str[i] == '+') && snlen > 1)
 		i++;
@@ -69,8 +72,8 @@ int		is_strnsign(char *str, size_t n)
 	int		snlen;
 	
 	i = 0;
-	//  if (n == 0)
-	//  	return (0);
+	if (!str)
+		return (0);
 	snlen = ft_strnlen(str, n);
 	if (str[i] == '-' || str[i] == '+')
 		i++;
@@ -85,6 +88,8 @@ int		is_struint(char *str)
 {
 	int		i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	while (ft_isdigit(str[i++]))
 	if (ft_strlen(str) == i)
@@ -129,6 +134,8 @@ int     is_str_vect(char *str)
 	char	*trimd_str;
 	char	comma_count;
 	
+	if (!str)
+		return (0);
 	if ((comma_count = ft_strchar_count(str, ',')) != 2)
 		return (0);
 	trimd_str = ft_strtrim(str, ",");
@@ -152,7 +159,9 @@ int     is_str_color(char *str)
 	char	**arr;
 	char	*trimd_str;
 	char	comma_count;
-	
+
+	if (!str)
+		return (0);
 	if ((comma_count = ft_strchar_count(str, ',')) != 2)
 		return (0);
 	trimd_str = ft_strtrim(str, ",");
