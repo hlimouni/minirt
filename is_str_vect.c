@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 19:01:50 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/10 21:37:36 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/13 19:01:58 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,36 @@ int     is_str_vect(char *str)
 	return (i == 3 ? 1 : 0);
 }
 
-int     is_str_color(char *str)
+float   str_to_float(char *str)
+{
+	char    **arr;
+	double	f;
+	char	*prec;
+
+	arr = ft_split(str, '.');
+	f = ft_atoi(*arr);
+	if ((prec = arr[1]))
+		f = f + (double)ft_atoi(prec) / pow(10.0, ft_strlen(prec));
+	free_2d_array(&arr);
+	return (f);
+}
+
+float	str_int_part(char *str)
+{
+	"23998239823";
+	int		sign;
+	float	f;
+	
+	f = 0.0;
+	if (*str == '-')
+	{
+		f = -0.0;
+		str++;
+	}
+	while
+}
+
+int     is_str_rgb(char *str)
 {
 	int		i;
 	char	**arr;
@@ -181,22 +210,31 @@ int     is_str_color(char *str)
 
 int		main(void)
 {
-	char	str1[] = "8,0,-";
-	char	str2[] = "";
-	char	str3[] = "12.0,+.02,-.+3";
+	char	str1[] = "000008";
+	char	str2[] = "23.00003";
+	char	str3[] = ".02";
 	char	str4[] = "22208,-0.222,1.111110";
-	char	str5[] = "29382,+22.22,-35.";
-	char	str6[] = "-2.,2.,+.6";
-	char	str7[] = "+000.03230000001,22.1,123s45";
-	char	str8[] = "2,3232332328.22,20,";
-	printf("is the string [%s] a vector? == %s\n", str1, is_str_vect(str1) ? "True" : "False");
-	printf("is the string [%s] a vector? == %s\n", str2, is_str_vect(str2) ? "True" : "False");
-	printf("is the string [%s] a vector? == %s\n", str3, is_str_vect(str3) ? "True" : "False");
-	printf("is the string [%s] a vector? == %s\n", str4, is_str_vect(str4) ? "True" : "False");
-	printf("is the string [%s] a vector? == %s\n", str5, is_str_vect(str5) ? "True" : "False");
-	printf("is the string [%s] a vector? == %s\n", str6, is_str_vect(str6) ? "True" : "False");
-	printf("is the string [%s] a vector? == %s\n", str7, is_str_vect(str7) ? "True" : "False");
-	printf("is the string [%s] a vector? == %s\n", str8, is_str_vect(str8) ? "True" : "False");
+	char	str5[] = "+22.22";
+	char	str6[] = "-2.";
+	char	str7[] = "+000.03230000001";
+	char	str8[] = "3232332328.22";
+	printf("the string [%s] converted to float is  == %f\n", str1, str_to_float(str1));
+	printf("the string [%s] converted to float is  == %f\n", str2, str_to_float(str2));
+	printf("the string [%s] converted to float is  == %f\n", str3, str_to_float(str3));
+	printf("the string [%s] converted to float is  == %f\n", str4, str_to_float(str4));
+	printf("the string [%s] converted to float is  == %f\n", str5, str_to_float(str5));
+	printf("the string [%s] converted to float is  == %f\n", str6, str_to_float(str6));
+	printf("the string [%s] converted to float is  == %f\n", str7, str_to_float(str7));
+	printf("the string [%s] converted to float is  == %f\n", str8, str_to_float(str8));
 	printf("is atoi test %d\n", ft_atoi("0"));
+	// printf("is the string [%s] a vector? == %s\n", str1, is_str_vect(str1) ? "True" : "False");
+	// printf("is the string [%s] a vector? == %s\n", str2, is_str_vect(str2) ? "True" : "False");
+	// printf("is the string [%s] a vector? == %s\n", str3, is_str_vect(str3) ? "True" : "False");
+	// printf("is the string [%s] a vector? == %s\n", str4, is_str_vect(str4) ? "True" : "False");
+	// printf("is the string [%s] a vector? == %s\n", str5, is_str_vect(str5) ? "True" : "False");
+	// printf("is the string [%s] a vector? == %s\n", str6, is_str_vect(str6) ? "True" : "False");
+	// printf("is the string [%s] a vector? == %s\n", str7, is_str_vect(str7) ? "True" : "False");
+	// printf("is the string [%s] a vector? == %s\n", str8, is_str_vect(str8) ? "True" : "False");
+	// printf("is atoi test %d\n", ft_atoi("0"));
 	return (0);
 }
