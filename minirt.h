@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/05 17:06:36 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/17 14:07:42 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,128 @@
 # include <errno.h>
 # include <unistd.h>
 # include <fcntl.h>
+
+# define RT_TYPES_NUM 8
+# define SQ_PARAMS 5
+# define SP_PARAMS 4
+# define TR_PARAMS 5
+# define CY_PARAMS 5
+# define PL_PARAMS 4
+# define TRAN_PARAMS 3
+# define ROT_PARAMS 5
+
+
+enum	e_elements
+{
+	rt_camera,
+	rt_ambiant,
+	rt_resolution,
+	rt_square,
+	rt_trinagle,
+	rt_sphere,
+	rt_cylinder,
+	rt_plane,
+	rt_translation,
+	rt_rotation
+
+};
+
+typedef struct	s_element_info
+{
+	int		*params;
+	t_square	square;
+}		t_element_info;
+
+enum	e_square_params
+{
+	sq_ID,
+	sq_position,
+	sq_normal,
+	sq_side,
+	sq_color	
+};
+
+enum	e_rt_types
+{
+	ID_type,
+	vector_type,
+	decimal_type,
+	udecimal_type,
+	rgb_type,
+	ratio_type,
+	angle_type,
+	uint_type	
+};
+
+int	is_str_ID(char *str)
+{
+	if (!str)
+		return (0);
+	if (ft_strcmp(str, "sq") == 0)
+		return (rt_square);
+	if (ft_strcmp(str, "A") == 0)
+		return (rt_ambiant);
+	if (ft_strcmp(str, "R") == 0)
+		return (rt_resolution);
+	if (ft_strcmp(str, "c") == 0)
+		return (rt_camera);
+	if (ft_strcmp(str, "tr") == 0)
+		return (rt_triangle);
+	if (ft_strcmp(str, "pl") == 0)
+		return (rt_plane);
+	if (ft_strcmp(str, "sp") == 0)
+		return (rt_sphere);
+	if (ft_strcmp(str, "cy") == 0)
+		return (rt_cylinder);
+	if (ft_strcmp(str, "tran") == 0)
+		return (rt_translation);
+	if (ft_strcmp(str, "rot") == 0)
+		return (rt_rotation);
+	return (0);
+}
+
+void elem_info_set(void)
+{
+	t_element_info	square_info;
+	t_element_info	sphere_info;
+	t_element_info	triangle_info;
+	t_element_info	cylinder_info;
+	t_element_info	plane_info;
+	t_element_info	tran_info;
+	t_element_info	rot_info;
+	int		square[SQ_PARAMS];
+	int		sphere[SP_PARAMS];
+	int		triangle[TR_PARAMS];
+	int		cylinder[CY_PARAMS];
+	int		plane[PL_PARAMS];
+	int		tran[TR_PARAMS];
+	int		rot[ROT_PARAMS];	
+
+	square[sq_ID] = rt_square;;
+	square[sq_position] = vector_type;
+	square[sq_normal] = vector_type;
+	square[sq_side] = udecimal_type;
+	square[sq_color] = rgb_type;
+	square_info.params= square;
+}
+
+typedef	int (t_typechecker)(char *);
+
+
+
+int	is_str(char *str, int rt_type)
+{
+	t_typechecker	typechecker_arr[RT_TYPES_NUM];
+
+	typechecker_arr[rt_ID] = is_str_ID;
+	typechecker_arr[rt_vector] = is_str_vector;
+	typechecker_arr[rt_float] = is_str_float;
+	typechecker_arr[rt_rgb] = is_str_rgb;
+	typechecker_arr[rt_ratio] = is_str_ratio;
+	typechecker_arr[rt_angle] = is_str_angle;
+	typechecker_arr[rt_positive_int] = is_str_uint;;
+	return (typechecker_arr[rt_type](str));
+}
 
 typedef struct	s_scene
 {
@@ -46,9 +168,9 @@ typedef struct		s_mat44
 }					t_mat44;
 
 /*
-** camera List that contains it's "coordinate vector" ==> "c" "The look at direction" ==>
-**     "l", the "field of view" ==> fov
-*/
+ ** camera List that contains it's "coordinate vector" ==> "c" "The look at direction" ==>
+ **     "l", the "field of view" ==> fov
+ */
 
 typedef	struct		s_cam
 {
@@ -110,8 +232,8 @@ typedef struct		s_ray
 
 
 /*
-** s_object structs will contain the object's unique propreties
-*/
+ ** s_object structs will contain the object's unique propreties
+ */
 
 typedef struct		s_amb
 {
@@ -133,9 +255,9 @@ typedef	struct		s_resolution
 }					t_resolution;
 
 t_vect				cam_ray_build(int i, int j, t_cam *cam,
-						float width, float height);
+		float width, float height);
 t_vect				cam_ray_build2(int i, int j, t_cam *cam,
-						float width, float height);
+		float width, float height);
 float				sp_intersect(t_vect ray, t_cam *cam, t_sphere sp);
 float				pl_intersect(t_vect ray, t_cam *cam, t_plane plane);
 t_vect				vect_diff(t_vect u, t_vect v);
@@ -147,16 +269,16 @@ t_vect  			vect_prod(t_vect u, t_vect v);
 t_vect				vect_const_sum(float cst, t_vect v);
 t_vect				vect_const_prod(float cst, t_vect v);
 int					sp_shading(float t, t_light *light,
-					t_cam *cam, t_sphere sp, t_amb amb, t_vect ray_screen);
+		t_cam *cam, t_sphere sp, t_amb amb, t_vect ray_screen);
 int					pl_shading(float t, t_light *light, t_cam *cam, t_plane pl,
-							t_amb amb, t_vect ray_screen);
+		t_amb amb, t_vect ray_screen);
 int     			is_vect_equal(t_vect u, t_vect v);
 t_vect  			vect_cross(t_vect u, t_vect v);
 float   			sq_intersect(t_vect ray_screen, t_cam *cam, t_square square);
 float  				cy_intersect(t_vect ray_screen, t_cam *cam, t_cylinder cy);
 float   			tr_intersect(t_vect ray_screen, t_cam *cam, t_triangle *tr);
 int					cy_shading(float t, t_light *light, t_cam *cam, t_cylinder cy,
-							t_amb amb, t_vect ray_screen);
+		t_amb amb, t_vect ray_screen);
 t_vect				itovect(int color);
 
 #endif
