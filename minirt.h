@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/17 14:07:42 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/17 22:16:44 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define ROT_PARAMS 5
 
 
-enum	e_elements
+enum	e_minirt_elements
 {
 	rt_camera,
 	rt_ambiant,
@@ -51,7 +51,7 @@ typedef struct	s_element_info
 	t_square	square;
 }		t_element_info;
 
-enum	e_square_params
+enum	e_square_parameters
 {
 	sq_ID,
 	sq_position,
@@ -60,7 +60,7 @@ enum	e_square_params
 	sq_color	
 };
 
-enum	e_rt_types
+enum	e_minirt_elements_parameter_types
 {
 	ID_type,
 	vector_type,
@@ -99,6 +99,54 @@ int	is_str_ID(char *str)
 	return (0);
 }
 
+int	*square_info_set(void)
+{
+	int	*sq_info;
+
+	square_info = (int *)malloc(sizeof(int) * (SQ_PARAMS + 1));
+	square_info[sq_ID] = rt_square;
+	square_info[sq_position] = vector_type;
+	square_info[sq_normal] = vector_type;
+	square_info[sq_side] = udecimal_type;
+	square_info[sq_color] = rgb_type;
+	square_info[SQ_PARAMS] = -1;
+}
+
+void	free_info_arr(int ***info)
+{
+	int	i;
+
+	i = 0;
+	while (i < 
+/*
+void    free_2d_array(char ***arr)
+{
+        int             i;
+
+        i = 0;
+        while ((*arr)[i])
+        {
+                free((*arr)[i]);
+                (*arr)[i] = NULL;
+                i++;
+        }
+        free(*arr);
+        *arr = NULL;
+}
+*/
+}
+
+int	element_len(int	*element)
+{
+	int	i;
+
+	i = 0;
+	while (element[i] >= 0)
+		i++;
+	return (i);
+}
+
+
 void elem_info_set(void)
 {
 	t_element_info	square_info;
@@ -108,20 +156,37 @@ void elem_info_set(void)
 	t_element_info	plane_info;
 	t_element_info	tran_info;
 	t_element_info	rot_info;
-	int		square[SQ_PARAMS];
-	int		sphere[SP_PARAMS];
-	int		triangle[TR_PARAMS];
-	int		cylinder[CY_PARAMS];
-	int		plane[PL_PARAMS];
-	int		tran[TR_PARAMS];
-	int		rot[ROT_PARAMS];	
+	int		*info[RT_ELEMS];
+	int		square[SQ_PARAMS + 1];
+	int		sphere[SP_PARAMS + 1];
+	int		triangle[TR_PARAMS + 1];
+	int		cylinder[CY_PARAMS + 1];
+	int		plane[PL_PARAMS + 1];
+	int		tran[TR_PARAMS + 1];
+	int		rot[ROT_PARAMS + 1];	
+	int		camera[C_PARAMS + 1];
+	int		res[RES_PARAMS + 1];
 
-	square[sq_ID] = rt_square;;
+	square[sq_ID] = rt_square;
 	square[sq_position] = vector_type;
 	square[sq_normal] = vector_type;
 	square[sq_side] = udecimal_type;
 	square[sq_color] = rgb_type;
+	square[SQ_PARAMS] = -1;
+	info[rt_square] = square;
 	square_info.params= square;
+	sphere[sp_ID] = rt_sphere;
+	sphere[sp_center] = vector_type;
+	sphere[sp_radius] = udecimal_type;
+	sphere[sp_color] = rgb_type;
+	sphere_info.params = sphere;
+	triangle[tr_ID] = rt_triangle;
+	triangle[tr_1st_pnt] = vector_type;
+	triangle[tr_2nd_pnt] = vector_type;
+	triangle[tr_3rd_pnt] = vector_type;
+	triangle[tr_color] = rgb_type;
+	triangle_info.params = triangle;
+	cylinder[cy_
 }
 
 typedef	int (t_typechecker)(char *);
