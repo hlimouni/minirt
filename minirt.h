@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/17 22:16:44 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/19 20:42:32 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,47 +20,35 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# define RT_TYPES_NUM 8
-# define SQ_PARAMS 5
-# define SP_PARAMS 4
-# define TR_PARAMS 5
-# define CY_PARAMS 5
-# define PL_PARAMS 4
-# define TRAN_PARAMS 3
-# define ROT_PARAMS 5
+INT32_MIN
+// # define RT_TYPES_NUM 8
+// //# define RT_ELEMS_COUNT 10
+// # define SQ_PARAMS 5
+// # define SP_PARAMS 4
+// # define TR_PARAMS 5
+// # define CY_PARAMS 5
+// # define PL_PARAMS 4
+// # define TRAN_PARAMS 3
+// # define ROT_PARAMS 5
 
 
-enum	e_minirt_elements
+enum	e_rt_file_elements
 {
 	rt_camera,
 	rt_ambiant,
 	rt_resolution,
+	rt_light,
 	rt_square,
 	rt_trinagle,
+	rt_rotation,
 	rt_sphere,
 	rt_cylinder,
 	rt_plane,
 	rt_translation,
-	rt_rotation
-
+	rt_elems_num
 };
 
-typedef struct	s_element_info
-{
-	int		*params;
-	t_square	square;
-}		t_element_info;
-
-enum	e_square_parameters
-{
-	sq_ID,
-	sq_position,
-	sq_normal,
-	sq_side,
-	sq_color	
-};
-
-enum	e_minirt_elements_parameter_types
+enum	e_rt_file_param_types
 {
 	ID_type,
 	vector_type,
@@ -69,83 +57,89 @@ enum	e_minirt_elements_parameter_types
 	rgb_type,
 	ratio_type,
 	angle_type,
-	uint_type	
+	uint_type,
+	rt_types_num
+};
+// typedef struct	s_element_info
+// {
+// 	int		*params;
+// 	t_square	square;
+// }				t_element_info;
+
+
+
+enum	e_ambiant_parameters
+{
+	amb_ID,
+	amb_ratio,
+	amb_color,
+	amb_params_num
 };
 
-int	is_str_ID(char *str)
+enum	e_camera_parameters
 {
-	if (!str)
-		return (0);
-	if (ft_strcmp(str, "sq") == 0)
-		return (rt_square);
-	if (ft_strcmp(str, "A") == 0)
-		return (rt_ambiant);
-	if (ft_strcmp(str, "R") == 0)
-		return (rt_resolution);
-	if (ft_strcmp(str, "c") == 0)
-		return (rt_camera);
-	if (ft_strcmp(str, "tr") == 0)
-		return (rt_triangle);
-	if (ft_strcmp(str, "pl") == 0)
-		return (rt_plane);
-	if (ft_strcmp(str, "sp") == 0)
-		return (rt_sphere);
-	if (ft_strcmp(str, "cy") == 0)
-		return (rt_cylinder);
-	if (ft_strcmp(str, "tran") == 0)
-		return (rt_translation);
-	if (ft_strcmp(str, "rot") == 0)
-		return (rt_rotation);
-	return (0);
-}
+	c_ID,
+	c_position,
+	c_orientation,
+	c_fov,
+	c_params_num
+};
 
-int	*square_info_set(void)
+enum	e_light_parameters
 {
-	int	*sq_info;
+	l_ID,
+	l_position,
+	l_bright,
+	l_color,
+	l_params_num
+};
 
-	square_info = (int *)malloc(sizeof(int) * (SQ_PARAMS + 1));
-	square_info[sq_ID] = rt_square;
-	square_info[sq_position] = vector_type;
-	square_info[sq_normal] = vector_type;
-	square_info[sq_side] = udecimal_type;
-	square_info[sq_color] = rgb_type;
-	square_info[SQ_PARAMS] = -1;
-}
-
-void	free_info_arr(int ***info)
+enum 	e_resolution_parameters
 {
-	int	i;
+	res_ID,
+	res_width,
+	res_height,
+	res_params_num
+};
 
-	i = 0;
-	while (i < 
-/*
-void    free_2d_array(char ***arr)
+enum	e_sphere_parameters
 {
-        int             i;
+	sp_ID,
+	sp_center,
+	sp_radius,
+	sp_color,
+	sp_params_num
+};
 
-        i = 0;
-        while ((*arr)[i])
-        {
-                free((*arr)[i]);
-                (*arr)[i] = NULL;
-                i++;
-        }
-        free(*arr);
-        *arr = NULL;
-}
-*/
-}
-
-int	element_len(int	*element)
+enum	e_square_parameters
 {
-	int	i;
+	sq_ID,
+	sq_position,
+	sq_normal,
+	sq_side,
+	sq_color,
+	sq_params_num
+};
 
-	i = 0;
-	while (element[i] >= 0)
-		i++;
-	return (i);
+enum	e_plane_parameters
+{
+	pl_ID,
+	pl_position,
+	pl_normal,
+	pl_color,
+	pl_params_num
+};
+
+enum	e_cylinder_parameters
+{
+	cy_ID,
+	cy_position,
+	cy_axis,
+	cy_diameter,
+	cy_height,
+	cy_color,
+	cy_params_num
 }
-
 
 void elem_info_set(void)
 {
@@ -188,24 +182,12 @@ void elem_info_set(void)
 	triangle_info.params = triangle;
 	cylinder[cy_
 }
+typedef	int* (*t_info_set) (void);
+typedef	int (*t_typechecker)(char *);
 
-typedef	int (t_typechecker)(char *);
 
 
 
-int	is_str(char *str, int rt_type)
-{
-	t_typechecker	typechecker_arr[RT_TYPES_NUM];
-
-	typechecker_arr[rt_ID] = is_str_ID;
-	typechecker_arr[rt_vector] = is_str_vector;
-	typechecker_arr[rt_float] = is_str_float;
-	typechecker_arr[rt_rgb] = is_str_rgb;
-	typechecker_arr[rt_ratio] = is_str_ratio;
-	typechecker_arr[rt_angle] = is_str_angle;
-	typechecker_arr[rt_positive_int] = is_str_uint;;
-	return (typechecker_arr[rt_type](str));
-}
 
 typedef struct	s_scene
 {
