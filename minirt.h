@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/19 20:42:32 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:45:24 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-INT32_MIN
 // # define RT_TYPES_NUM 8
 // //# define RT_ELEMS_COUNT 10
 // # define SQ_PARAMS 5
@@ -30,23 +29,6 @@ INT32_MIN
 // # define PL_PARAMS 4
 // # define TRAN_PARAMS 3
 // # define ROT_PARAMS 5
-
-
-enum	e_rt_file_elements
-{
-	rt_camera,
-	rt_ambiant,
-	rt_resolution,
-	rt_light,
-	rt_square,
-	rt_trinagle,
-	rt_rotation,
-	rt_sphere,
-	rt_cylinder,
-	rt_plane,
-	rt_translation,
-	rt_elems_num
-};
 
 enum	e_rt_file_param_types
 {
@@ -66,7 +48,21 @@ enum	e_rt_file_param_types
 // 	t_square	square;
 // }				t_element_info;
 
-
+enum	e_rt_file_elements
+{
+	rt_camera,
+	rt_ambiant,
+	rt_resolution,
+	rt_light,
+	rt_square,
+	rt_triangle,
+	rt_sphere,
+	rt_cylinder,
+	rt_plane,
+	rt_translation,
+	rt_rotation,
+	rt_elems_num
+};
 
 enum	e_ambiant_parameters
 {
@@ -139,49 +135,36 @@ enum	e_cylinder_parameters
 	cy_height,
 	cy_color,
 	cy_params_num
-}
+};
 
-void elem_info_set(void)
+enum	e_triangle_parameters
 {
-	t_element_info	square_info;
-	t_element_info	sphere_info;
-	t_element_info	triangle_info;
-	t_element_info	cylinder_info;
-	t_element_info	plane_info;
-	t_element_info	tran_info;
-	t_element_info	rot_info;
-	int		*info[RT_ELEMS];
-	int		square[SQ_PARAMS + 1];
-	int		sphere[SP_PARAMS + 1];
-	int		triangle[TR_PARAMS + 1];
-	int		cylinder[CY_PARAMS + 1];
-	int		plane[PL_PARAMS + 1];
-	int		tran[TR_PARAMS + 1];
-	int		rot[ROT_PARAMS + 1];	
-	int		camera[C_PARAMS + 1];
-	int		res[RES_PARAMS + 1];
+	tr_ID,
+	tr_1st_pnt,
+	tr_2nd_pnt,
+	tr_3rd_pnt,
+	tr_color,
+	tr_params_num
+};
 
-	square[sq_ID] = rt_square;
-	square[sq_position] = vector_type;
-	square[sq_normal] = vector_type;
-	square[sq_side] = udecimal_type;
-	square[sq_color] = rgb_type;
-	square[SQ_PARAMS] = -1;
-	info[rt_square] = square;
-	square_info.params= square;
-	sphere[sp_ID] = rt_sphere;
-	sphere[sp_center] = vector_type;
-	sphere[sp_radius] = udecimal_type;
-	sphere[sp_color] = rgb_type;
-	sphere_info.params = sphere;
-	triangle[tr_ID] = rt_triangle;
-	triangle[tr_1st_pnt] = vector_type;
-	triangle[tr_2nd_pnt] = vector_type;
-	triangle[tr_3rd_pnt] = vector_type;
-	triangle[tr_color] = rgb_type;
-	triangle_info.params = triangle;
-	cylinder[cy_
-}
+enum	e_translation_parameters
+{
+	tran_ID,
+	tran_object,
+	tran_vect,
+	tran_params_num
+};
+
+enum	e_rotation_parameters
+{
+	rot_ID,
+	rot_object,
+	rot_pitch,
+	rot_yaw,
+	rot_roll,
+	rot_params_num
+};
+
 typedef	int* (*t_info_set) (void);
 typedef	int (*t_typechecker)(char *);
 
