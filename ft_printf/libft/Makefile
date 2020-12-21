@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+         #
+#    By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 15:24:42 by hlimouni          #+#    #+#              #
-#    Updated: 2020/12/10 11:22:27 by hlimouni         ###   ########.fr        #
+#    Updated: 2020/12/21 17:18:58 by hlimouni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,13 @@ ARFLAGS=rcs
 CFLAGS=-Wall -Wextra -Werror 
 NAME=libft.a
 
-HEADER=libft.h
+HEADER=.
 
 SRC=ft_atoi.c \
 	ft_itoa.c \
 	ft_bzero.c \
 	ft_isalnum.c \
+	ft_isspace.c \
 	ft_isalpha.c \
 	ft_isascii.c \
 	ft_isdigit.c \
@@ -54,6 +55,7 @@ SRC=ft_atoi.c \
 	ft_strncmp.c \
 	ft_strnstr.c \
 	ft_strrchr.c \
+	ft_getstr_sign.c \
 	ft_strchar_count.c \
 	ft_free_null.c \
 	ft_free_ret.c \

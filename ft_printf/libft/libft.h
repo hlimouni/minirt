@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 18:08:14 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/10 11:21:36 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/21 15:15:06 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int					ft_hexlen(int nb);
 int					ft_putccount(char c);
 int					ft_putss(char *str);
 void				ft_lstclear(t_list **lst, void (*del)(void*));
+int					ft_getstr_sign(char *str, int *index);
 void    			ft_free_null(void **ptr);
 int					ft_free_ret(void **ptr, int ret);
 t_list				*ft_lstlast(t_list *lst);
@@ -56,6 +57,7 @@ void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 void				ft_bzero(void *dest, size_t len);
 int					ft_isascii(int c);
+int					ft_isspace(int c);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
@@ -74,6 +76,7 @@ size_t				ft_strlen(const char *str);
 int					ft_tolower(int c);
 char				*ft_strnstr(const char *s1, const char *s2, size_t n);
 char				*ft_strrchr(const char *str, int c);
+
 size_t				ft_strnlen(const char *str, size_t maxlen);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 
