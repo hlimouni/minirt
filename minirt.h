@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/20 11:45:24 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/20 19:17:16 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <errno.h>
 # include <unistd.h>
 # include <fcntl.h>
+
+# define A_BIG_VALUE 1e14
+# define NEGATIVE_VALUE -1
 
 // # define RT_TYPES_NUM 8
 // //# define RT_ELEMS_COUNT 10
