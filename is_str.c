@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_str.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 17:01:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/20 12:07:08 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/22 19:58:24 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_str(char *str, int type)
 	t_typechecker	typechecker_arr[rt_types_num];
 	
 	if (type >= rt_types_num || type < 0)
-		return (-1);
+		return (NEGATIVE_VALUE);
 	typechecker_arr[rt_ID] = is_str_ID;
 	typechecker_arr[rt_vector] = is_str_vector;
 	typechecker_arr[rt_decimal] = is_str_float;

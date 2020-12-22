@@ -6,13 +6,14 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/20 19:17:16 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/22 18:17:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
-//# include "libft/libft.h"
+# include "ft_printf/libft/libft.h"
+# include "get_next_line/get_next_line.h"
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
@@ -177,7 +178,11 @@ typedef	int (*t_typechecker)(char *);
 
 typedef struct	s_scene
 {
-	/* scene data */
+	t_resolution	res;
+	t_amb			amb;
+	t_list			cams;
+	t_list			lights;
+	t_list			objs;
 }				t_scene;
 
 

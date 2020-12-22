@@ -6,22 +6,23 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:08:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/05 19:57:07 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/22 17:31:33 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include "ft_printf/ft_printf.h"
 #include <string.h>
 
 /*
 Note: the functions in "string" library should be replaced by theire libft equivalent
 */
 
-void    print_error_exit(const char* string)
+void    print_error_exit(const char *string)
 {
-    write(2, string, ft_strlen(string));
-    write(2, "\n", 1);
+    // write(2, string, ft_strlen(string));
+    ft_putstr_fd(string, 2);
+    ft_putchar_fd('\n', 2);
+    // write(2, "\n", 1);
     exit(1);
 }
 
