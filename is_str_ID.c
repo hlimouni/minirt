@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_str_ID.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 16:42:50 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/19 16:43:58 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/22 19:58:59 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_str_ID(char *str)
 {
 	if (!str)
-		return (0);
+		return (NEGATIVE_VALUE);
 	if (ft_strcmp(str, "sq") == 0)
 		return (rt_square);
 	if (ft_strcmp(str, "A") == 0)
@@ -36,5 +36,5 @@ int	is_str_ID(char *str)
 		return (rt_translation);
 	if (ft_strcmp(str, "rot") == 0)
 		return (rt_rotation);
-	return (0);
+	return (NEGATIVE_VALUE);
 }
