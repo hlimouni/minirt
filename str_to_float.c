@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   str_to_float.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 19:22:50 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/14 19:58:23 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/22 16:29:40 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
+#include "minirt.h"
+#include <math.h>
 #include <stdio.h>
 #include <string.h>
-#include <math.h>
 #include <limits.h>
 #define A_BIG_VALUE 1e14
+#define NEGATIVE_VALUE -1
 
 int		str_get_sign(char *str, int *index)
 {
@@ -35,7 +37,6 @@ int		str_get_sign(char *str, int *index)
 	return (sign);
 }
 
-//float	
 double	str_tof(char *str)
 {
 	double	res;
@@ -45,7 +46,7 @@ double	str_tof(char *str)
 
 	i = 0;
 	res = 0;
-	frac_pt = -1;
+	frac_pt = NEGATIVE_VALUE;
 	sign = str_get_sign(str, &i);
 	while (str[i])
 	{
@@ -58,19 +59,10 @@ double	str_tof(char *str)
 	}
 	frac_pt >= 0 ? res = res * __exp10(frac_pt - (int)strlen(str)) : 0;
 	if (res >= A_BIG_VALUE)
-		return (signbit(sign) ? -INFINITY : INFINITY);
-	return (signbit(sign) ? -res : res);
+		return (sign < 0 ? -INFINITY : INFINITY);
+	return (sign < 0 ? -res : res);
 }
-
-double	strfrac_tof(char *str)
-{
-	int		pwr;
-	double	res;
-
-	pwr = -1 * strlen(str);
-	res = str_tof(str) * __exp10(pwr);
-	return (res);
-}
+/*
 
 int	main(void)
 {
@@ -97,3 +89,4 @@ int	main(void)
 
 	return 0;
 }
+*/
