@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_str_vect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 19:01:50 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/14 10:29:59 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/20 17:45:56 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,23 +153,23 @@ int     is_str_vect(char *str)
 	return (i == 3 ? 1 : 0);
 }
 
-float   str_to_float(char *str)
-{
-	char    **arr;
-	double	f;
-	char	*prec;
-	int		pwr;
+// float   str_to_float(char *str)
+// {
+// 	char    **arr;
+// 	double	f;
+// 	char	*prec;
+// 	int		pwr;
 
-	arr = ft_split(str, '.');
-	f = ft_atoi(*arr);
-	if ((prec = arr[1]))
-	{
-		pwr = -1 * ft_strlen(prec);
-		f = fma((double)ft_atoi(prec), __exp10(pwr), f);
-	}	// f = f + (double)ft_atoi(prec) / pow(10.0, ft_strlen(prec));
-	free_2d_array(&arr);
-	return (f);
-}
+// 	arr = ft_split(str, '.');
+// 	f = ft_atoi(*arr);
+// 	if ((prec = arr[1]))
+// 	{
+// 		pwr = -1 * ft_strlen(prec);
+// 		f = fma((double)ft_atoi(prec), __exp10(pwr), f);
+// 	}	// f = f + (double)ft_atoi(prec) / pow(10.0, ft_strlen(prec));
+// 	free_2d_array(&arr);
+// 	return (f);
+// }
 
 // float	str_int_part(char *str)
 // {
