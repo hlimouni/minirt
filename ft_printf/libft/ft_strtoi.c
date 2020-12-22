@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:08:53 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/21 19:09:14 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/22 16:20:35 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,11 @@ int		ft_strtoi(char *str, int *num)
 	sign = ft_getstr_sign(str + i, &i);
 	while (ft_isdigit(str[i]))
 	{
-		if ((ret = check_flow(res, num, 0x7fffffff / 10,
-										0x80000000 / 10, sign)))
+		if ((ret = check_flow(res, num, MAXINT / 10, MININT / 10, sign)))
 			return (ret);
 		res = res * 10;
-		if ((ret = check_flow(res, num, 0x7fffffff - str[i] - '0',
-										0x80000000 - str[i] - '0', sign)))
+		if ((ret = check_flow(res, num, MAXINT - str[i] - '0',
+										MININT - str[i] - '0', sign)))
 			return (ret);
 		res = res + str[i] - '0';
 		i++;

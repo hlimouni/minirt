@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 18:08:14 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/21 15:15:06 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/22 16:18:58 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# define MAXINT 0x7fffffff
+# define MININT 0x80000000
 
 typedef struct		s_list
 {
