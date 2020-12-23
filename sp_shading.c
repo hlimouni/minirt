@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sp_shading.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 18:00:56 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/21 11:19:34 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/23 16:14:53 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ t_vect			itovect(int color)
 	unsigned char	*rgb;
 
 	rgb = (unsigned char *)(&color);
-	vect.x = (float)rgb[2];
-	vect.y = (float)rgb[1];
-	vect.z = (float)rgb[0];
+	vect.x = (double)rgb[2];
+	vect.y = (double)rgb[1];
+	vect.z = (double)rgb[0];
 	return (vect);
 }
 
@@ -31,9 +31,9 @@ int				vectoi(t_vect vect)
 	int 	green;
 	int 	blue;
 	int		color;
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 
 	if ((x = vect.x) > 255.0)
 		x = 255.0;

@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 22:40:04 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/10 12:55:42 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/23 15:26:15 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,18 +121,18 @@ int		is_str_float(char *str)
 	return (0);
 }
 
-t_vect	arr_to_vect(char *str)
-{
-	t_vect	vect;
-	char	**arr;
+// t_vect	arr_to_vect(char *str)
+// {
+// 	t_vect	vect;
+// 	char	**arr;
 
-	arr = ft_split(str, ',');
-	vect.x = ft_atoi(arr[0]);
-	vect.y = ft_atoi(arr[1]);
-	vect.z = ft_atoi(arr[2]);
-	free_2d_array(&arr);
-	return (vect);
-}
+// 	arr = ft_split(str, ',');
+// 	vect.x = ft_atoi(arr[0]);
+// 	vect.y = ft_atoi(arr[1]);
+// 	vect.z = ft_atoi(arr[2]);
+// 	free_2d_array(&arr);
+// 	return (vect);
+// }
 /*
 int		is_3x3vect(char *str)
 {

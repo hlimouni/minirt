@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 17:05:19 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/20 13:13:06 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/23 18:48:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		*sphere_info_set(void)
 	sphere_info = (int *)malloc(sizeof(int) * (sp_params_num + 1));
 	sphere_info[sp_ID] = rt_sphere;
 	sphere_info[sp_center] = vector_type;
-	sphere_info[sp_radius] = udecimal_type;
+	sphere_info[sp_diameter] = udecimal_type;
 	sphere_info[sp_color] = rgb_type;
 	sphere_info[sp_params_num] = -1;
 	return (sphere_info);

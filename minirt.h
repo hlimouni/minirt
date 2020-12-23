@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/22 18:17:49 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/23 18:48:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ enum	e_sphere_parameters
 {
 	sp_ID,
 	sp_center,
-	sp_radius,
+	sp_diameter,
 	sp_color,
 	sp_params_num
 };
@@ -169,28 +169,12 @@ enum	e_rotation_parameters
 	rot_params_num
 };
 
-typedef	int* (*t_info_set) (void);
-typedef	int (*t_typechecker)(char *);
-
-
-
-
-
-typedef struct	s_scene
-{
-	t_resolution	res;
-	t_amb			amb;
-	t_list			cams;
-	t_list			lights;
-	t_list			objs;
-}				t_scene;
-
 
 typedef	struct		s_vect
 {
-	float			x;
-	float			y;
-	float			z;
+	double			x;
+	double			y;
+	double			z;
 }					t_vect;
 
 typedef struct		s_mat3x3
@@ -202,7 +186,7 @@ typedef struct		s_mat3x3
 
 typedef struct		s_mat44
 {
-	float			element[4][4];
+	double			element[4][4];
 }					t_mat44;
 
 /*
@@ -215,7 +199,7 @@ typedef	struct		s_cam
 	t_vect			c;
 	t_vect			l;
 	t_vect			up;
-	float			fov;
+	double			fov;
 }					t_cam;
 
 typedef struct		s_plane
@@ -229,7 +213,7 @@ typedef struct		s_square
 {
 	t_vect			origin;
 	t_vect			normal;
-	float			side;
+	double			side;
 	int				color;
 }					t_square;
 
@@ -247,8 +231,8 @@ typedef struct		s_cylinder
 {
 	t_vect			origin;
 	t_vect			axis;
-	float			height;
-	float			diameter;
+	double			height;
+	double			diameter;
 	int				color;
 }					t_cylinder;
 
@@ -256,7 +240,7 @@ typedef struct		s_cylinder
 typedef struct		s_light
 {
 	t_vect			l;
-	float			intensity;
+	double			intensity;
 	int				color;
 }					t_light;
 
@@ -265,7 +249,7 @@ typedef struct		s_ray
 	t_vect			origin;
 	t_vect			screen;
 	t_vect			hit;
-	float			t;
+	double			t;
 }					t_ray;
 
 
@@ -275,22 +259,34 @@ typedef struct		s_ray
 
 typedef struct		s_amb
 {
-	float			intensity;
+	double			intensity;
 	int				color;
 }					t_amb;
 
 typedef	struct		s_sphere
 {
 	t_vect			o;
-	float			d;
+	double			r;
 	int				color;
 }					t_sphere;
 
 typedef	struct		s_resolution
 {
-	float			width;
-	float			height;
+	double			width;
+	double			height;
 }					t_resolution;
+
+typedef struct	s_scene
+{
+	t_resolution	res;
+	t_amb			amb;
+	t_list			cams;
+	t_list			lights;
+	t_list			objs;
+}				t_scene;
+
+typedef	int* (*t_info_set) (void);
+typedef	int (*t_typechecker)(char *);
 
 t_vect				cam_ray_build(int i, int j, t_cam *cam,
 		float width, float height);

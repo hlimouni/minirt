@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_str_vect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 19:01:50 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/20 17:45:56 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/23 18:48:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ int     is_str_rgb(char *str)
 	char	**arr;
 	char	*trimd_str;
 	char	comma_count;
+	int		color;
 
 	if (!str)
 		return (0);
@@ -206,7 +207,7 @@ int     is_str_rgb(char *str)
 	ft_free_null((void *)&trimd_str);
 	arr = ft_split(str, ',');
 	i = 0;
-	while (is_struint(arr[i]) && ft_atoi(arr[i]) <= 0xFF)
+	while (is_struint(arr[i]) && !ft_strtoi(arr[i], &color) && color <= 0xFF)
 		i++;
 	free_2d_array(&arr);
 	return (i == 3 ? 1 : 0);

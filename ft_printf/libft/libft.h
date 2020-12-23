@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 18:08:14 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/22 16:18:58 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/23 18:48:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 void				ft_lstdelone(t_list *lst, void (*del)(void*));
 char				*ft_strdup(const char *str);
 int					ft_atoi(const char *str);
+double				str_tof(char *str);
 char				*ft_itoa(int n);
 void				ft_putnbr_hex(int nbr);
 void				*ft_calloc(size_t count, size_t size);
@@ -78,7 +79,6 @@ size_t				ft_strlen(const char *str);
 int					ft_tolower(int c);
 char				*ft_strnstr(const char *s1, const char *s2, size_t n);
 char				*ft_strrchr(const char *str, int c);
-
 size_t				ft_strnlen(const char *str, size_t maxlen);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 

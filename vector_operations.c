@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_operations.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 18:51:07 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/14 20:04:20 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/23 18:48:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ t_vect  vect_cross(t_vect u, t_vect v)
     return (cross);
 }
 
-float   vect_dot(t_vect u, t_vect v)
+double   vect_dot(t_vect u, t_vect v)
 {
     return (u.x * v.x + u.y * v.y + u.z * v.z);
 }
 
-float   vect_norm(t_vect v)
+double   vect_norm(t_vect v)
 {
     return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
@@ -65,7 +65,7 @@ float   vect_norm(t_vect v)
 t_vect   vect_unit(t_vect v)
 {
     t_vect  unit;
-    float   norm;
+    double   norm;
     
     norm = vect_norm(v);
     if (norm != 0.0)
@@ -78,7 +78,7 @@ t_vect   vect_unit(t_vect v)
     return (v);
 }
 
-t_vect	vect_const_prod(float cst, t_vect v)
+t_vect	vect_const_prod(double cst, t_vect v)
 {
     t_vect  vect;
 
@@ -88,7 +88,7 @@ t_vect	vect_const_prod(float cst, t_vect v)
 	return (vect);
 }
 
-t_vect	vect_const_sum(float cst, t_vect v)
+t_vect	vect_const_sum(double cst, t_vect v)
 {
 	v.x = cst + v.x;
 	v.y = cst + v.y;

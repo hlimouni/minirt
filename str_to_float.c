@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_to_float.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 19:22:50 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/22 16:29:40 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/23 16:00:44 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #define A_BIG_VALUE 1e14
 #define NEGATIVE_VALUE -1
 
-int		str_get_sign(char *str, int *index)
+static int		str_get_sign(char *str, int *index)
 {
 	int		sign;
 

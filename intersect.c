@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 19:10:32 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/11/25 12:11:17 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/23 18:48:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ float  sp_intersect(t_vect ray, t_cam *cam, t_sphere sp)
     dir = vect_unit(vect_diff(ray, cam->c));
     ray_sp_O = vect_diff(cam->c, sp.o);
     b = 2 * vect_dot(dir, ray_sp_O);
-    c = vect_dot(ray_sp_O, ray_sp_O) - (sp.d / 2) * (sp.d / 2);
+    c = vect_dot(ray_sp_O, ray_sp_O) - sp.r * sp.r;
     delta = b * b - 4 * c;
     if (delta < 0)
         return (-1);
