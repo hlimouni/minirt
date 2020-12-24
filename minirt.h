@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/23 18:48:49 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/24 11:57:55 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,8 +296,8 @@ float				sp_intersect(t_vect ray, t_cam *cam, t_sphere sp);
 float				pl_intersect(t_vect ray, t_cam *cam, t_plane plane);
 t_vect				vect_diff(t_vect u, t_vect v);
 t_vect				vect_sum(t_vect u, t_vect v);
-float				vect_dot(t_vect u, t_vect v);
-float				vect_norm(t_vect v);
+double				vect_dot(t_vect u, t_vect v);
+double				vect_norm(t_vect v);
 t_vect				vect_unit(t_vect v);
 t_vect  			vect_prod(t_vect u, t_vect v);
 t_vect				vect_const_sum(float cst, t_vect v);
