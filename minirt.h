@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/24 11:57:55 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/24 18:14:24 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,7 @@ typedef struct		s_cylinder
 	t_vect			origin;
 	t_vect			axis;
 	double			height;
-	double			diameter;
+	double			radius;
 	int				color;
 }					t_cylinder;
 
@@ -275,6 +275,20 @@ typedef	struct		s_resolution
 	double			width;
 	double			height;
 }					t_resolution;
+
+typedef struct		s_translation
+{
+	int				obj_ID;
+	t_vect			vector;
+}					t_translation;
+
+typedef struct		s_rotation
+{
+	int				obj_ID;
+	double			pitch;
+	double			yaw;
+	double			roll;
+}					t_rotation;
 
 typedef struct	s_scene
 {

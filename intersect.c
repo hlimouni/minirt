@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 19:10:32 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/23 18:48:49 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/24 16:40:27 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ float  cy_intersect(t_vect ray_screen, t_cam *cam, t_cylinder cy)
     a = 1 - pow(vect_dot(d, u), 2);
     b = 2 * (vect_dot(d, u) * vect_dot(oc_c, u) - vect_dot(oc_c, d));
     tmp = vect_diff(oc_c, vect_const_prod(vect_dot(oc_c, u), u));
-    c = vect_dot(tmp, tmp) - (cy.diameter / 2) * (cy.diameter / 2);
+    c = vect_dot(tmp, tmp) - cy.radius * cy.radius;
     delta = b * b - 4 * a * c;
     if (delta < 0)
         return (-1);

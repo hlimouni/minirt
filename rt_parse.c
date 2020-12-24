@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 17:03:00 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/22 20:23:35 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/24 18:43:46 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	put_type_stder(int type)
 	type == uint_type ? ft_putstr_fd("a positive integer.\n", 2) : 0;
 }
 
-void	rt_stder_msg(int line, int type)
+void	rt_stder_type_msg(int line, int type)
 {
 	ft_putstr_fd("Error\nminiRT: Parameter in line ");
 	ft_putnbr_fd(line, 2);
@@ -36,14 +36,23 @@ void	rt_stder_msg(int line, int type)
 	exit(1);
 }
 
-t_scene		rt_parse(int fd)
+void	rt_free_exit(int line_ct, int type, char **line, int ***info, char ***line_arr)
+{
+	free_2d_array(line_arr);
+	free(*line);
+	free_info_arr(info);
+	rt_stder_type_msg(line_ct + 1, type);
+}
+
+void	rt_parse(int fd, t_scene *scene)
 {
 	char	*line;
 	int		line_ct;
 	int		elem;
+	int		elem_params;
 	int		param;
 	char	**line_arr;
-	char	**elems_info;
+	int		**elems_info;
 
 	elems_info = array_info_set();
 	line_ct = 0;
@@ -52,16 +61,19 @@ t_scene		rt_parse(int fd)
 		if (!(line_arr = ft_split(line, ' ')))
 		{
 			free_2d_array(&line_arr);
+			free(line);
 			continue ;
 		}
 		param = 0;
 		if ((elem = is_str(line_arr[param], ID_type) < 0)
-		{
-			free_2d_array(&line_arr);
-			free(line);
-			rt_stder_msg(line_ct + 1, ID_type);
-			param++;
-		}
+			rt_free_exit(line_ct, ID_type, &line, &elems_info, &line_arr);
+		// {
+		// 	free_2d_array(&line_arr);
+		// 	free(line);
+		// 	free_2d_array(&elems_info);
+		// 	rt_stder_type_msg(line_ct + 1, ID_type);
+		// }
+		param++;
 		while (is_str(line_arr[param], elems_info[elem][param]))
 		{
 			
