@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/24 18:14:24 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/25 12:41:41 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,8 +292,8 @@ typedef struct		s_rotation
 
 typedef struct	s_scene
 {
-	t_resolution	res;
-	t_amb			amb;
+	t_list			res;
+	t_list			amb;
 	t_list			cams;
 	t_list			lights;
 	t_list			objs;

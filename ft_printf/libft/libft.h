@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 18:08:14 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/23 18:48:49 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/25 09:18:16 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@
 
 typedef struct		s_list
 {
+	int				element;
 	void			*content;
 	struct s_list	*next;
 }					t_list;
 
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+int					ft_lstsize(t_list *lst);
+void				ft_lstadd_back(t_list **alst, t_list *new);
+void				ft_lstadd_front(t_list **alst, t_list *new);
 t_list				*ft_lstnew(void *content);
 int					ft_putdcount(int nbr);
 int					ft_nbrlen(int nbr);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 17:03:00 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/24 18:43:46 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/25 12:49:37 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,30 @@ void	rt_stder_type_msg(int line, int type)
 	exit(1);
 }
 
-void	rt_free_exit(int line_ct, int type, char **line, int ***info, char ***line_arr)
+void	rt_stder_num_msg(int line)
+{
+	ft_putstr_fd("Error\nminiRT: Wrong number of parameters in line ");
+	ft_putnbr_fd(line, 2);
+	ft_putstr_fd(".\n", 2);
+	exit(1);
+}
+
+void	free_aloc_prev(char **line, int ***info, char ***line_arr)
+{
+	free_2d_array(line_arr);
+	ft_free_null((void **)line);
+	free_info_arr(info);
+}
+
+void	rt_errnum_exit(int line_ct, char **line, int ***info, char ***line_arr)
+{
+	free_2d_array(line_arr);
+	free(*line);
+	free_info_arr(info);
+	rt_stder_num_msg(line_ct + 1);	
+}
+
+void	rt_errtype_exit(int line_ct, int type, char **line, int ***info, char ***line_arr)
 {
 	free_2d_array(line_arr);
 	free(*line);
@@ -66,21 +89,26 @@ void	rt_parse(int fd, t_scene *scene)
 		}
 		param = 0;
 		if ((elem = is_str(line_arr[param], ID_type) < 0)
-			rt_free_exit(line_ct, ID_type, &line, &elems_info, &line_arr);
+			rt_errtype_exit(line_ct, param, &line, &elems_info, &line_arr);
+		param++;
+		while (line_arr[param] && elems_info[elem][param] >= 0)
+		{
+			if (!is_str(line_arr[param], elems_info[elem][param]))
+				rt_errtype_exit(line_ct, param, &line, &elems_info, &line_arr);
+			param++;
+		}
+		if (line_arr[param] != NULL || elems_info[elem][param] != -1)
+			rt_errnum_exit(line_ct, &line, &elems_info, &line_arr);
+		add_elem_to_scene(elem, scene, line_arr);
+		free_2d_array(&line_arr);
+		free(line);
+		line_ct++;
+	}
+	free_info_arr(&elems_info);
+}
 		// {
 		// 	free_2d_array(&line_arr);
 		// 	free(line);
 		// 	free_2d_array(&elems_info);
 		// 	rt_stder_type_msg(line_ct + 1, ID_type);
 		// }
-		param++;
-		while (is_str(line_arr[param], elems_info[elem][param]))
-		{
-			
-		}
-		is_str(arr[line_ct]);
-		free(line);
-		line_ct++;
-	}
-	
-}

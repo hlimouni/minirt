@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 18:53:42 by hlimouni          #+#    #+#             */
-/*   Updated: 2019/11/12 00:20:36 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/25 12:53:11 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,10 @@ t_list	*ft_lstnew(void *content)
 		new->next = NULL;
 	}
 	return (new);
+}
+
+static void	ft_lstnew_node(void *content, t_list *new)
+{
+	new->content = content;
+	new-> next = NULL;
 }

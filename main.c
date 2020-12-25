@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:08:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/24 15:33:27 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/25 11:48:31 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ int     open_rt_file(int ac, char *av[])
 **  
 **      fd = open_rt_file(ac, av);
 **      rt_scene_initialize(t_scene *scene);
-**      rt_parse(fd, t_scene *scene);
-**      free_2d_array(&info_arr);
+**      rt_parse(fd, &scene);
 **      img = create_rt_image(scene);
 **      if (ac == 2)
 **          display_rt_image(img);
