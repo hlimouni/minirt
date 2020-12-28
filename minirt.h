@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/25 12:41:41 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/28 15:02:03 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ enum	e_light_parameters
 	l_params_num
 };
 
-enum 	e_resolution_parameters
+enum	e_resolution_parameters
 {
 	res_ID,
 	res_width,
@@ -219,10 +219,10 @@ typedef struct		s_square
 
 typedef struct 		s_triangle
 {
-	t_vect			A;
-	t_vect			B;
-	t_vect			C;
-	t_vect			noraml;
+	t_vect			pt_a;
+	t_vect			pt_b;
+	t_vect			pt_c;
+	t_vect			normal;
 	int				color;
 }					t_triangle;
 
@@ -292,15 +292,15 @@ typedef struct		s_rotation
 
 typedef struct	s_scene
 {
-	t_list			res;
-	t_list			amb;
-	t_list			cams;
-	t_list			lights;
-	t_list			objs;
+	t_list			*res;
+	t_list			*amb;
+	t_list			*cams;
+	t_list			*lights;
+	t_list			*objs;
 }				t_scene;
 
 typedef	int* (*t_info_set) (void);
-typedef	int (*t_typechecker)(char *);
+typedef	int		(*t_typechecker)(char *);
 
 t_vect				cam_ray_build(int i, int j, t_cam *cam,
 		float width, float height);

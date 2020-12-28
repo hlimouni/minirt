@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 17:03:00 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/25 12:49:37 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/28 16:02:18 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ void	put_type_stder(int type)
 	type == uint_type ? ft_putstr_fd("a positive integer.\n", 2) : 0;
 }
 
-void	rt_stder_type_msg(int line, int type)
+void	rt_stder_type_msg(int line_ct, int type)
 {
 	ft_putstr_fd("Error\nminiRT: Parameter in line ");
-	ft_putnbr_fd(line, 2);
+	ft_putnbr_fd(line_ct, 2);
 	ft_putstr_fd(" is not ", 2);
 	put_type_stder(type);
 	exit(1);
 }
 
-void	rt_stder_num_msg(int line)
+void	rt_stder_num_msg(int line_ct)
 {
 	ft_putstr_fd("Error\nminiRT: Wrong number of parameters in line ");
-	ft_putnbr_fd(line, 2);
+	ft_putnbr_fd(line_ct, 2);
 	ft_putstr_fd(".\n", 2);
 	exit(1);
 }
@@ -56,7 +56,7 @@ void	rt_errnum_exit(int line_ct, char **line, int ***info, char ***line_arr)
 	free_2d_array(line_arr);
 	free(*line);
 	free_info_arr(info);
-	rt_stder_num_msg(line_ct + 1);	
+	rt_stder_num_msg(line_ct);	
 }
 
 void	rt_errtype_exit(int line_ct, int type, char **line, int ***info, char ***line_arr)
@@ -64,7 +64,7 @@ void	rt_errtype_exit(int line_ct, int type, char **line, int ***info, char ***li
 	free_2d_array(line_arr);
 	free(*line);
 	free_info_arr(info);
-	rt_stder_type_msg(line_ct + 1, type);
+	rt_stder_type_msg(line_ct);
 }
 
 void	rt_parse(int fd, t_scene *scene)
@@ -78,7 +78,7 @@ void	rt_parse(int fd, t_scene *scene)
 	int		**elems_info;
 
 	elems_info = array_info_set();
-	line_ct = 0;
+	line_ct = 1;
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (!(line_arr = ft_split(line, ' ')))
@@ -106,9 +106,3 @@ void	rt_parse(int fd, t_scene *scene)
 	}
 	free_info_arr(&elems_info);
 }
-		// {
-		// 	free_2d_array(&line_arr);
-		// 	free(line);
-		// 	free_2d_array(&elems_info);
-		// 	rt_stder_type_msg(line_ct + 1, ID_type);
-		// }

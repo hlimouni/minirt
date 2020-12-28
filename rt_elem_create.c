@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_elem_create.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 15:12:46 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/24 17:48:04 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/28 16:57:42 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,19 @@ t_square    rt_square_create(char   **splitd_line)
 	square.normal = vect_unit(square.normal);
     square.side = str_tof(splitd_line[sq_side]);
     square.color = str_to_rgbint(splitd_line[sq_color]);
+	return (square);
+}
+
+void	*rt_square_create(char   **splitd_line)
+{
+    t_square    *square;
+
+	square = (t_square *)malloc(sizeof(square));
+    square->origin = str_to_vect(splitd_line[sq_position]);
+    square->normal = str_to_vect(splitd_line[sq_normal]);
+	square->normal = vect_unit(square.normal);
+    square->side = str_tof(splitd_line[sq_side]);
+    square->color = str_to_rgbint(splitd_line[sq_color]);
 	return (square);
 }
 
@@ -39,9 +52,9 @@ t_triangle	rt_triangle_create(char **splitd_line)
 {
 	t_triangle		triangle;
 
-	triangle.A = str_to_vect(splitd_line[tr_1st_pnt]);
-	triangle.B = str_to_vect(splitd_line[tr_2nd_pnt]);
-	triangle.C = str_to_vect(splitd_line[tr_3rd_pnt]);
+	triangle.pt_a = str_to_vect(splitd_line[tr_1st_pnt]);
+	triangle.pt_b = str_to_vect(splitd_line[tr_2nd_pnt]);
+	triangle.pt_c = str_to_vect(splitd_line[tr_3rd_pnt]);
 	triangle.color = str_to_rgbint(splitd_line[tr_color]);
 	return (triangle);
 }
