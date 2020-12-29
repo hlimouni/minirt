@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/28 15:02:03 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/29 11:46:55 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,8 @@ enum	e_cylinder_parameters
 	cy_diameter,
 	cy_height,
 	cy_color,
-	cy_params_num
+	cy_params_num,
+	max_params
 };
 
 enum	e_triangle_parameters
@@ -272,8 +273,8 @@ typedef	struct		s_sphere
 
 typedef	struct		s_resolution
 {
-	double			width;
-	double			height;
+	int			width;
+	int			height;
 }					t_resolution;
 
 typedef struct		s_translation
@@ -292,14 +293,20 @@ typedef struct		s_rotation
 
 typedef struct	s_scene
 {
-	t_list			*res;
-	t_list			*amb;
+	t_resolution	*res;
+	t_amb			*amb;
 	t_list			*cams;
 	t_list			*lights;
 	t_list			*objs;
 }				t_scene;
 
-typedef	int* (*t_info_set) (void);
+typedef	struct	s_info_arr
+{
+	int		arr[rt_elems_num + 1][max_params];
+}				t_info_arr;
+
+
+typedef	int*	(*t_info_set) (void);
 typedef	int		(*t_typechecker)(char *);
 
 t_vect				cam_ray_build(int i, int j, t_cam *cam,

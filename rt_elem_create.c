@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 15:12:46 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/28 16:57:42 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/29 08:55:14 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,73 @@ t_square    rt_square_create(char   **splitd_line)
 	return (square);
 }
 
-void	*rt_square_create(char   **splitd_line)
+int		rt_square_push(char   **splitd_line, t_scene *scene)
 {
     t_square    *square;
+	t_list		*new_node;
 
-	square = (t_square *)malloc(sizeof(square));
+	if (!(square = (t_square *)malloc(sizeof(t_square))))
+		return (0);
     square->origin = str_to_vect(splitd_line[sq_position]);
     square->normal = str_to_vect(splitd_line[sq_normal]);
 	square->normal = vect_unit(square.normal);
     square->side = str_tof(splitd_line[sq_side]);
     square->color = str_to_rgbint(splitd_line[sq_color]);
-	return (square);
+	if (!(new_node = ft_lstnew((void *)square)))
+		return (0);
+	new_node->element = rt_square;
+	ft_lstadd_front(&(scene->objs), new_node);
+	return (1);
 }
+
+int		rt_res_push(char **splitd_line, t_scene *scene)
+{
+	t_resolution		*resolution;
+
+	if (scene->res)
+		return (-1);
+	if (!(resolution = (t_resolution *)malloc(sizeof(t_resolution))))
+		return (0);
+	ft_strtoi(splitd_line[res_height], &(resolution->height));
+	ft_strtoi(splitd_line[res_width], &(resolution->width));
+	scene->res = resolution;
+	return (1);
+}
+int		rt_amb_push(char **splitd_line, t_scene *scene)
+{
+	t_amb		*amb;
+
+	if (scene->amb)
+		return (-1);
+	if (!(amb = (t_amb *)malloc(sizeof(t_amb))))
+		return (0);
+	amb->intensity = str_tof(splitd_line[amb_ratio]);
+	amb->color = str_to_rgbint(splitd_line[amb_color]);
+	scene->amb = amb;
+	return (1);
+}
+
+t_light	rt_light_create(char **splitd_line)
+{
+	t_light		light;
+
+	light.l = str_to_vect(splitd_line[l_position]);
+	light.intensity = str_tof(splitd_line[l_bright]);
+	light.color = str_to_rgbint(splitd_line[l_color]);
+	return (light);
+}
+// void	*rt_square_create(char   **splitd_line)
+// {
+//     t_square    *square;
+
+// 	square = (t_square *)malloc(sizeof(square));
+//     square->origin = str_to_vect(splitd_line[sq_position]);
+//     square->normal = str_to_vect(splitd_line[sq_normal]);
+// 	square->normal = vect_unit(square.normal);
+//     square->side = str_tof(splitd_line[sq_side]);
+//     square->color = str_to_rgbint(splitd_line[sq_color]);
+// 	return (square);
+// }
 
 t_sphere	rt_sphere_create(char **splitd_line)
 {
@@ -58,6 +113,7 @@ t_triangle	rt_triangle_create(char **splitd_line)
 	triangle.color = str_to_rgbint(splitd_line[tr_color]);
 	return (triangle);
 }
+
 t_cylinder	rt_cylinder_create(char **splitd_line)
 {
 	t_cylinder		cylinder;
@@ -71,6 +127,7 @@ t_cylinder	rt_cylinder_create(char **splitd_line)
 	cylinder.color = str_to_rgbint(splitd_line[cy_color]);
 	return (cylinder);
 }
+
 t_plane	rt_plane_create(char **splitd_line)
 {
 	t_plane		plane;
@@ -81,6 +138,7 @@ t_plane	rt_plane_create(char **splitd_line)
 	plane.color = str_to_rgbint(splitd_line[pl_color]);
 	return (plane);
 }
+
 t_cam	rt_cam_create(char **splitd_line)
 {
 	t_cam		cam;
@@ -90,31 +148,7 @@ t_cam	rt_cam_create(char **splitd_line)
 	cam.fov = str_tof(splitd_line[c_fov]);
 	return (cam);
 }
-t_resolution	rt_resolution_create(char **splitd_line)
-{
-	t_resolution		resolution;
 
-	ft_strtoi(splitd_line[res_height], &(resolution.height));
-	ft_strtoi(splitd_line[res_width], &(resolution.width));
-	return (resolution);
-}
-t_amb	rt_amb_create(char **splitd_line)
-{
-	t_amb		amb;
-
-	amb.intensity = str_tof(splitd_line[amb_ratio]);
-	amb.color = str_to_rgbint(splitd_line[amb_color]);
-	return (amb);
-}
-t_light	rt_light_create(char **splitd_line)
-{
-	t_light		light;
-
-	light.l = str_to_vect(splitd_line[l_position]);
-	light.intensity = str_tof(splitd_line[l_bright]);
-	light.color = str_to_rgbint(splitd_line[l_color]);
-	return (light);
-}
 
 t_translation	rt_translation_apply(char **splitd_line, t_list	*objs)
 {

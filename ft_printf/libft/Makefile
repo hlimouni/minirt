@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+         #
+#    By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 15:24:42 by hlimouni          #+#    #+#              #
-#    Updated: 2020/12/21 17:18:58 by hlimouni         ###   ########.fr        #
+#    Updated: 2020/12/29 09:45:25 by hlimouni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ NAME=libft.a
 HEADER=.
 
 SRC=ft_atoi.c \
+	ft_strtoi.c \
 	ft_itoa.c \
 	ft_bzero.c \
 	ft_isalnum.c \
