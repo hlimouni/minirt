@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/04 13:10:05 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/27 19:04:27 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ amb.color = 0xffffff;
 /*
 ** light coordintates
 */
-li.x = 0;
+li.x = 10;
 li.y = 10;
 li.z = 0;
 light.l = li;
@@ -141,7 +141,7 @@ pl.color = 0x8A2BE2;
 ** sphere Diameter
 */
 /**********************/
-	sp.d = 2;
+	sp.r = 1;
 /**********************/
 /*
 ** sphere Color
@@ -164,7 +164,7 @@ pl.color = 0x8A2BE2;
 ** cylinder Diameter
 */
 /**********************/
-	cy.diameter = 1;
+	cy.radius = 1;
 /**********************/
 /*
 ** cylinder Color
@@ -242,21 +242,21 @@ pl.color = 0x8A2BE2;
 			// 	color = pl_shading(t, &light, &cam, pl, amb, ray);
 			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			// }
-			// if ((t = cy_intersect(ray, &cam, cy)) >= 0.0)
-			// {
-			// 	//color = 0x8A2BE2;
-			// 	color = cy_shading(t, &light, &cam, cy, amb, ray);
-			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
-			// }
-			if ((t = tr_intersect(ray, &cam, &tr)) >= 0.0)
+			if ((t = cy_intersect(ray, &cam, cy)) >= 0.0)
 			{
 				//color = 0x8A2BE2;
-				tr_pl.n = tr.noraml;
-				tr_pl.p = tr.A;
-				tr_pl.color = tr.color;
-				color = pl_shading(t, &light, &cam, tr_pl, amb, ray);
+				color = cy_shading(t, &light, &cam, cy, amb, ray);
 				mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			}
+			// if ((t = tr_intersect(ray, &cam, &tr)) >= 0.0)
+			// {
+			// 	//color = 0x8A2BE2;
+			// 	tr_pl.n = tr.noraml;
+			// 	tr_pl.p = tr.A;
+			// 	tr_pl.color = tr.color;
+			// 	color = pl_shading(t, &light, &cam, tr_pl, amb, ray);
+			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
+			// }
 
 			// else
 			// 	mlx_pixel_put(mlx_ptr, win_ptr,i , j, 0x4a4a4a);

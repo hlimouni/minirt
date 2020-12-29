@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/25 12:41:41 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/27 16:03:45 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,8 +314,8 @@ double				vect_dot(t_vect u, t_vect v);
 double				vect_norm(t_vect v);
 t_vect				vect_unit(t_vect v);
 t_vect  			vect_prod(t_vect u, t_vect v);
-t_vect				vect_const_sum(float cst, t_vect v);
-t_vect				vect_const_prod(float cst, t_vect v);
+t_vect				vect_const_sum(double cst, t_vect v);
+t_vect				vect_const_prod(double cst, t_vect v);
 int					sp_shading(float t, t_light *light,
 		t_cam *cam, t_sphere sp, t_amb amb, t_vect ray_screen);
 int					pl_shading(float t, t_light *light, t_cam *cam, t_plane pl,
