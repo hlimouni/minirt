@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/29 14:01:20 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/29 17:52:09 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,7 +302,7 @@ typedef struct	s_scene
 
 typedef	struct	s_info_arr
 {
-	int		arr[rt_elems_num + 1][max_params];
+	int		**arr;
 }				t_info_arr;
 
 
