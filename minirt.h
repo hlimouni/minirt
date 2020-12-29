@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/27 16:03:45 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/29 14:01:20 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ enum	e_light_parameters
 	l_params_num
 };
 
-enum 	e_resolution_parameters
+enum	e_resolution_parameters
 {
 	res_ID,
 	res_width,
@@ -138,7 +138,8 @@ enum	e_cylinder_parameters
 	cy_diameter,
 	cy_height,
 	cy_color,
-	cy_params_num
+	cy_params_num,
+	max_params
 };
 
 enum	e_triangle_parameters
@@ -219,10 +220,10 @@ typedef struct		s_square
 
 typedef struct 		s_triangle
 {
-	t_vect			A;
-	t_vect			B;
-	t_vect			C;
-	t_vect			noraml;
+	t_vect			pt_a;
+	t_vect			pt_b;
+	t_vect			pt_c;
+	t_vect			normal;
 	int				color;
 }					t_triangle;
 
@@ -272,8 +273,8 @@ typedef	struct		s_sphere
 
 typedef	struct		s_resolution
 {
-	double			width;
-	double			height;
+	int			width;
+	int			height;
 }					t_resolution;
 
 typedef struct		s_translation
@@ -292,15 +293,21 @@ typedef struct		s_rotation
 
 typedef struct	s_scene
 {
-	t_list			res;
-	t_list			amb;
-	t_list			cams;
-	t_list			lights;
-	t_list			objs;
+	t_resolution	*res;
+	t_amb			*amb;
+	t_list			*cams;
+	t_list			*lights;
+	t_list			*objs;
 }				t_scene;
 
-typedef	int* (*t_info_set) (void);
-typedef	int (*t_typechecker)(char *);
+typedef	struct	s_info_arr
+{
+	int		arr[rt_elems_num + 1][max_params];
+}				t_info_arr;
+
+
+typedef	int*	(*t_info_set) (void);
+typedef	int		(*t_typechecker)(char *);
 
 t_vect				cam_ray_build(int i, int j, t_cam *cam,
 		float width, float height);

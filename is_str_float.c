@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 22:40:04 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/23 15:26:15 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/29 10:03:54 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int		is_strint(char *str)
 {
 	int		i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	if ((str[i] == '-' || str[i] == '+') && ft_strlen(str) > 1)
 		i++;
@@ -37,6 +39,8 @@ int		is_strsign(char *str)
 {
 	int		i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
@@ -50,7 +54,9 @@ int		is_strnint(char *str, size_t n)
 {
 	int		i;
 	int		snlen;
-	
+
+	if (!str)
+		return (0);	
 	i = 0;
 	//  if (n == 0)
 	//  	return (0);
@@ -69,9 +75,9 @@ int		is_strnsign(char *str, size_t n)
 	int		i;
 	int		snlen;
 	
+	if (!str)
+		return (0);
 	i = 0;
-	//  if (n == 0)
-	//  	return (0);
 	snlen = ft_strnlen(str, n);
 	if (str[i] == '-' || str[i] == '+')
 		i++;
@@ -86,6 +92,8 @@ int		is_struint(char *str)
 {
 	int		i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	while (ft_isdigit(str[i++]))
 	if (ft_strlen(str) == i)
