@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   params_count.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 16:57:18 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/30 17:59:20 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/19 16:57:35 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	rt_elemlen(char	*element)
+int	params_count(int	*element)
 {
 	int	i;
 

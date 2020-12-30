@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 17:03:00 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/29 09:07:09 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/30 18:20:54 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	rt_parse(int fd, t_scene *scene)
 	int		elem_params;
 	int		param;
 	char	**line_arr;
-	int		**elems_info;
+	char	**elems_info;
 
-	elems_info = array_info_set();
+	elems_info = array_info_set2();
 	line_ct = 1;
 	while (get_next_line(fd, &line) > 0)
 	{
