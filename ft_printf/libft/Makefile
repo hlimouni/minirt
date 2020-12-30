@@ -6,7 +6,7 @@
 #    By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 15:24:42 by hlimouni          #+#    #+#              #
-#    Updated: 2020/12/29 09:45:25 by hlimouni         ###   ########.fr        #
+#    Updated: 2020/12/30 11:07:58 by hlimouni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC=ft_atoi.c \
 	ft_isdigit.c \
 	ft_isprint.c \
 	ft_memccpy.c \
+	ft_datacpy.c \
 	ft_memchr.c \
 	ft_memcmp.c \
 	ft_memcpy.c \

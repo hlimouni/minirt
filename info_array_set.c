@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   info_array_set.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 17:05:19 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/24 16:41:45 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/30 09:31:18 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,12 +198,20 @@ int		*set_elem_info(int element)
 	// 	return (NULL);
 }
 
+
+
+
+
+
+
+
+
+
 int	**array_info_set(void)
 {
 	int	**info_arr;
 	int	element;
 
-	info_arr = (int **)malloc(sizeof(int *) * (rt_elems_num + 1));
 	element = 0;
 	while (element < rt_elems_num)
 	{
