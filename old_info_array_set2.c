@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 17:05:19 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/29 11:24:45 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/31 08:00:21 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,9 +212,4 @@ int	**array_info_set(void)
 	}
 	info[rt_elems_num] = NULL;
 	return (info_arr);
-}
-
-void	array_info_set2(int arr[rt_elems_num + 1][max_params])
-{
-	arr = { {}};
 }

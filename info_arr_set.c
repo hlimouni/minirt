@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test222.c                                          :+:      :+:    :+:   */
+/*   info_arr_set.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 11:25:10 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/30 17:19:47 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/31 08:49:56 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,11 @@ void	type_enum_print(int type)
 void	elem_enum_print(int	type)
 {
 	if (type == ID_type)
-	 	printf("cam");
+	 	printf("camera");
 	else if (type == vector_type)
-	 	printf("amb");
+	 	printf("ambiant");
 	else if (type == decimal_type)
-	 	printf("resol");
+	 	printf("resolution");
 	else if (type == udecimal_type)
 	 	printf("light");
 	else if (type == rgb_type)
@@ -121,29 +121,13 @@ void	elem_enum_print(int	type)
 	else if (type == uint_type + 1)
 	 	printf("plane");
 	else if (type == uint_type + 2)
-	 	printf("transl");
+	 	printf("translation");
 	else if (type == uint_type + 3)
 	 	printf("rotation");
 	else if (type == uint_type + 4)
 	 	printf("elem_num");
 	else
 		printf("not a valid type");
-}
-
-void		free_info_arr(char ***info)
-{
-
-	int		i;
-
-	i = 0;
-	while ((*info)[i])
-	{
-			free((*info)[i]);
-			(*info)[i] = NULL;
-			i++;
-	}
-	free(*info);
-	*info = NULL;
 }
 
 int			main(void)
@@ -169,4 +153,5 @@ int			main(void)
 		j++;
 		printf("\n");
 	}
+	free_2d_array(&array);
 }

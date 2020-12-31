@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 15:12:46 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/29 08:55:14 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/31 11:59:45 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,59 @@ t_square    rt_square_create(char   **splitd_line)
     square.color = str_to_rgbint(splitd_line[sq_color]);
 	return (square);
 }
+t_light	rt_light_create(char **splitd_line)
+{
+	t_light		light;
+
+	light.l = str_to_vect(splitd_line[l_position]);
+	light.intensity = str_tof(splitd_line[l_bright]);
+	light.color = str_to_rgbint(splitd_line[l_color]);
+	return (light);
+}
+int		rt_light_push(char **splitd_line)
+{
+	t_light		*light;
+	t_list		*new_node;
+	
+	if (!(light = malloc(sizeof(t_light))))
+		return (0);
+	light->l = str_to_vect(splitd_line[l_position]);
+	light->intensity = str_tof(splitd_line[l_bright]);
+	light->color = str_to_rgbint(splitd_line[l_color]);
+	if (!(new_node = ft_lstnew(light)))
+		return (0);
+	new_node->element = rt_light;
+	ft_lstadd_front(&(scene->objs), new_node);
+	return (1);
+}
+
+int		rt__push(char **splitd_line)
+{
+	t_		*;
+	t_list		*new_node;
+	
+	if (!( = malloc(sizeof(t_))))
+		return (0);
+	if (!(new_node = ft_lstnew()))
+		return (0);
+	new_node->element = rt_;
+	ft_lstadd_front(&(scene->objs), new_node);
+	return (1);
+}
 
 int		rt_square_push(char   **splitd_line, t_scene *scene)
 {
     t_square    *square;
 	t_list		*new_node;
 
-	if (!(square = (t_square *)malloc(sizeof(t_square))))
+	if (!(square = malloc(sizeof(t_square))))
 		return (0);
     square->origin = str_to_vect(splitd_line[sq_position]);
     square->normal = str_to_vect(splitd_line[sq_normal]);
 	square->normal = vect_unit(square.normal);
     square->side = str_tof(splitd_line[sq_side]);
     square->color = str_to_rgbint(splitd_line[sq_color]);
-	if (!(new_node = ft_lstnew((void *)square)))
+	if (!(new_node = ft_lstnew(square)))
 		return (0);
 	new_node->element = rt_square;
 	ft_lstadd_front(&(scene->objs), new_node);
@@ -70,15 +109,6 @@ int		rt_amb_push(char **splitd_line, t_scene *scene)
 	return (1);
 }
 
-t_light	rt_light_create(char **splitd_line)
-{
-	t_light		light;
-
-	light.l = str_to_vect(splitd_line[l_position]);
-	light.intensity = str_tof(splitd_line[l_bright]);
-	light.color = str_to_rgbint(splitd_line[l_color]);
-	return (light);
-}
 // void	*rt_square_create(char   **splitd_line)
 // {
 //     t_square    *square;

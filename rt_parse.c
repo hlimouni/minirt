@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 17:03:00 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/30 18:20:54 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/31 09:54:55 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,20 @@ void	rt_errtype_exit(int line_ct, int type, char **line, int ***info, char ***li
 	rt_stder_type_msg(line_ct);
 }
 
+int		is_line_empty(char **line, int	*line_ct)
+{
+	int	ret;
+
+	if (ft_strcmp(*line, "") == 0)
+	{
+		ft_free_null((void **)line);
+		(*line_ct)++;
+		ret = 1;
+	}
+	else
+		ret = 0;
+}
+
 void	rt_parse(int fd, t_scene *scene)
 {
 	char	*line;
@@ -81,16 +95,18 @@ void	rt_parse(int fd, t_scene *scene)
 	line_ct = 1;
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (!(line_arr = ft_split(line, ' ')))
-		{
-			free_2d_array(&line_arr);
-			free(line);
+		// if (!(line_arr = ft_split(line, ' ')))
+		// {
+		// 	free_2d_array(&line_arr);
+		// 	ft_free_null((void *)&line);
+		// 	continue ;
+		// }
+		if (is_line_empty(&line, &line_ct))
 			continue ;
-		}
-		param = 0;
-		if ((elem = is_str(line_arr[param], ID_type) < 0)
-			rt_errtype_exit(line_ct, param, &line, &elems_info, &line_arr);
-		param++;
+		line_arr = ft_split(line, ' ');
+		if ((elem = is_str(line_arr[0], ID_type) < 0)
+			rt_errtype_exit(line_ct, ID_type, &line, &elems_info, &line_arr);
+		param = 1;
 		while (line_arr[param] && elems_info[elem][param] >= 0)
 		{
 			if (!is_str(line_arr[param], elems_info[elem][param]))
@@ -99,7 +115,11 @@ void	rt_parse(int fd, t_scene *scene)
 		}
 		if (line_arr[param] != NULL || elems_info[elem][param] != -1)
 			rt_errnum_exit(line_ct, &line, &elems_info, &line_arr);
-		add_elem_to_scene(elem, scene, line_arr);
+		if (add_elem_to_scene(elem, scene, line_arr) < 0)
+		{
+			if (== 0)
+			if (== 1)
+		}
 		free_2d_array(&line_arr);
 		free(line);
 		line_ct++;

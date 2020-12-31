@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 18:08:14 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/30 11:12:52 by hlimouni         ###   ########.fr       */
+/*   Updated: 2020/12/31 08:59:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int					ft_putccount(char c);
 int					ft_putss(char *str);
 void				ft_lstclear(t_list **lst, void (*del)(void*));
 int					ft_getstr_sign(char *str, int *index);
-void    			ft_free_null(void **ptr);
+void				ft_free_null(void **ptr);
 int					ft_free_ret(void **ptr, int ret);
 t_list				*ft_lstlast(t_list *lst);
 void				ft_lstiter(t_list *lst, void (*f)(void *));
@@ -46,7 +46,6 @@ void				ft_lstdelone(t_list *lst, void (*del)(void*));
 char				*ft_strdup(const char *str);
 int					ft_atoi(const char *str);
 int					ft_strtoi(char *str, int *num);
-double				str_tof(char *str);
 char				*ft_itoa(int n);
 void				ft_putnbr_hex(int nbr);
 void				*ft_calloc(size_t count, size_t size);
