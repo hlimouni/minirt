@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/29 17:52:09 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/01 16:18:18 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,6 @@ enum	e_rotation_parameters
 	rot_params_num
 };
 
-
 typedef	struct		s_vect
 {
 	double			x;
@@ -305,8 +304,7 @@ typedef	struct	s_info_arr
 	int		**arr;
 }				t_info_arr;
 
-
-typedef	int*	(*t_info_set) (void);
+typedef int		(*t_elem_push)(t_scene *, char **);
 typedef	int		(*t_typechecker)(char *);
 
 t_vect				cam_ray_build(int i, int j, t_cam *cam,

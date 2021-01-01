@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_elem_create.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 15:12:46 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/01 12:10:43 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/01 16:26:22 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ int		rt_res_push(char **splitd_line, t_scene *scene)
 
 	if (scene->res)
 		return (-1);
-	if (!(resolution = (t_resolution *)malloc(sizeof(t_resolution))))
+	if (!(resolution = malloc(sizeof(t_resolution))))
 		return (0);
 	ft_strtoi(splitd_line[res_height], &(resolution->height));
 	ft_strtoi(splitd_line[res_width], &(resolution->width));
@@ -230,7 +230,7 @@ int		rt_amb_push(char **splitd_line, t_scene *scene)
 
 	if (scene->amb)
 		return (-1);
-	if (!(amb = (t_amb *)malloc(sizeof(t_amb))))
+	if (!(amb = malloc(sizeof(t_amb))))
 		return (0);
 	amb->intensity = str_tof(splitd_line[amb_ratio]);
 	amb->color = str_to_rgbint(splitd_line[amb_color]);
@@ -328,8 +328,20 @@ t_rotation		rt_rotation_apply(char **splitd_line, t_list *obj)
 	return (rotation);
 }
 
-int		add_ele_to_scene(int elem, t_scene *scene, char **splitd_line)
+int		add_elem_to_scene(int elem, t_scene *scene, char **splitd_line)
 {
-	if (elem = rt_ambiant)
-		
+	t_elem_push	elem_push_arr[rt_elems_num];
+
+	elem_push_arr[rt_camera] = rt_camera_push;
+	elem_push_arr[rt_ambiant] = rt_amb_push;
+	elem_push_arr[rt_resolution] = rt_res_push;
+	elem_push_arr[rt_light] = rt_light_push;
+	elem_push_arr[rt_square] = rt_square_push;
+	elem_push_arr[rt_triangle] = rt_triangle_push;
+	elem_push_arr[rt_sphere] = rt_sphere_push;
+	elem_push_arr[rt_cylinder] = rt_cylinder_push;
+	elem_push_arr[rt_plane] = rt_plane_push;
+	elem_push_arr[rt_rotation] = NULL;
+	elem_push_arr[rt_translation] = NULL;
+	return (elem_push_arr[elem](scene, splitd_line));
 }

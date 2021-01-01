@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:08:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/31 08:32:13 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/01 13:55:27 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int     open_rt_file(int ac, char *av[])
 **      void        *img;
 **  
 **      fd = open_rt_file(ac, av);
-**      rt_scene_initialize(t_scene *scene);
+**      rt_scene_initialize(&scene);
 **      rt_parse(fd, &scene);
 **      img = create_rt_image(scene);
 **      if (ac == 2)

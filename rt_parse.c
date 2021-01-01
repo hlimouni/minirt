@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 17:03:00 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/31 09:54:55 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/01 18:33:32 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	rt_errtype_exit(int line_ct, int type, char **line, int ***info, char ***li
 	rt_stder_type_msg(line_ct);
 }
 
+void	rt_errcall_exit(int line_ct, &line_ct, &elems_info, &line_arr)
+
 int		is_line_empty(char **line, int	*line_ct)
 {
 	int	ret;
@@ -81,12 +83,33 @@ int		is_line_empty(char **line, int	*line_ct)
 		ret = 0;
 }
 
+void	check_missing_elems(t_scene *scene)
+{
+	if (scene->res == NULL)
+	{
+		ft_putstr_fd("Error\nminiRT: Resolution is not specified.\n", 2);
+		exit(1);
+	}
+	if (scene->amb == NULL)
+	{
+		ft_putstr_fd("Error\nminiRT: Ambiant is not specified.\n"), 2);
+		exit(1);
+	}
+	if (scene->cams == NULL)
+	{
+		ft_putstr_fd("Error\nminiRT: Camera is not specified.\n", 2);
+		exit(1);
+	}
+	
+}
+
 void	rt_parse(int fd, t_scene *scene)
 {
 	char	*line;
 	int		line_ct;
 	int		elem;
 	int		elem_params;
+	int		ret;
 	int		param;
 	char	**line_arr;
 	char	**elems_info;
@@ -115,14 +138,17 @@ void	rt_parse(int fd, t_scene *scene)
 		}
 		if (line_arr[param] != NULL || elems_info[elem][param] != -1)
 			rt_errnum_exit(line_ct, &line, &elems_info, &line_arr);
-		if (add_elem_to_scene(elem, scene, line_arr) < 0)
+		if ((ret = add_elem_to_scene(elem, scene, line_arr)) < 0)
 		{
-			if (== 0)
-			if (== 1)
+			if (ret == 0)
+				rt_erraloc_exit(&line, &elems_info, &line_arr);
+			if (ret == -1)
+				rt_errcall_exit(line_ct, param, &elems_info, &line_arr);
 		}
 		free_2d_array(&line_arr);
 		free(line);
 		line_ct++;
 	}
 	free_info_arr(&elems_info);
+	check_missing_elems(scene);
 }
