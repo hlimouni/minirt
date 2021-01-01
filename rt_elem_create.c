@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 15:12:46 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/31 11:59:45 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/01 12:10:43 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,153 @@ t_light	rt_light_create(char **splitd_line)
 	light.color = str_to_rgbint(splitd_line[l_color]);
 	return (light);
 }
-int		rt_light_push(char **splitd_line)
+
+int		rt_light_push(char **splitd_line, t_scene *scene)
 {
 	t_light		*light;
 	t_list		*new_node;
 	
 	if (!(light = malloc(sizeof(t_light))))
 		return (0);
-	light->l = str_to_vect(splitd_line[l_position]);
+	light->l = vect_unit(str_to_vect(splitd_line[l_position]));
 	light->intensity = str_tof(splitd_line[l_bright]);
 	light->color = str_to_rgbint(splitd_line[l_color]);
 	if (!(new_node = ft_lstnew(light)))
 		return (0);
 	new_node->element = rt_light;
+	ft_lstadd_front(&(scene->lights), new_node);
+	return (1);
+}
+
+t_sphere	rt_sphere_create(char **splitd_line)
+{
+	t_sphere	sphere;
+
+	sphere.o = str_to_vect(splitd_line[sp_center]);
+	sphere.r = str_tof(splitd_line[sp_diameter]);
+	sphere.r /= 2;
+	sphere.color = str_to_rgbint(splitd_line[sp_color]);
+	return (sphere);
+}
+int		rt_sphere_push(char **splitd_line, t_scene *scene)
+{
+	t_sphere	*sphere;
+	t_list		*new_node;
+	
+	if (!(sphere = malloc(sizeof(t_sphere))))
+		return (0);
+	sphere->o = str_to_vect(splitd_line[sp_center]);
+	sphere->r = str_tof(splitd_line[sp_diameter]);
+	sphere->r /= 2;
+	sphere->color = str_to_rgbint(splitd_line[sp_color]);
+	if (!(new_node = ft_lstnew(sphere)))
+		return (0);
+	new_node->element = rt_sphere;
 	ft_lstadd_front(&(scene->objs), new_node);
 	return (1);
 }
 
-int		rt__push(char **splitd_line)
+t_triangle	rt_triangle_create(char **splitd_line)
+{
+	t_triangle		triangle;
+
+	return (triangle);
+}
+
+int		rt_triangle_push(char **splitd_line, t_scene *scene)
+{
+	t_triangle	*triangle;
+	t_list		*new_node;
+	
+	if (!(triangle = malloc(sizeof(t_triangle))))
+		return (0);
+	triangle->pt_a = str_to_vect(splitd_line[tr_1st_pnt]);
+	triangle->pt_b = str_to_vect(splitd_line[tr_2nd_pnt]);
+	triangle->pt_c = str_to_vect(splitd_line[tr_3rd_pnt]);
+	triangle->color = str_to_rgbint(splitd_line[tr_color]);
+	if (!(new_node = ft_lstnew(triangle)))
+		return (0);
+	new_node->element = rt_triangle;
+	ft_lstadd_front(&(scene->objs), new_node);
+	return (1);
+}
+
+t_cylinder	rt_cylinder_create(char **splitd_line)
+{
+	t_cylinder		cylinder;
+
+	return (cylinder);
+}
+
+int		rt_cylinder_push(char **splitd_line, t_scene *scene)
+{
+	t_cylinder	*cylinder;
+	t_list		*new_node;
+	
+	if (!(cylinder = malloc(sizeof(t_cylinder))))
+		return (0);
+	cylinder->origin = str_to_vect(splitd_line[cy_position]);
+	cylinder->axis = vect_unit(str_to_vect(splitd_line[cy_axis]));
+	cylinder->radius = str_to_(splitd_line[cy_diameter]);
+	cylinder->radius /= 2;
+	cylinder->height = str_tof(splitd_line[cy_height]);
+	cylinder->color = str_to_rgbint(splitd_line[cy_color]);
+	if (!(new_node = ft_lstnew(cylinder)))
+		return (0);
+	new_node->element = rt_cylinder;
+	ft_lstadd_front(&(scene->objs), new_node);
+	return (1);
+}
+
+t_plane	rt_plane_create(char **splitd_line)
+{
+	t_plane		plane;
+
+	return (plane);
+}
+
+int		rt_plane_push(char **splitd_line, t_scene *scene)
+{
+	t_plane		*plane;
+	t_list		*new_node;
+	
+	if (!(plane = malloc(sizeof(t_plane))))
+		return (0);
+	plane->p = str_to_vect(splitd_line[pl_position]);
+	plane->n = vect_unit(str_to_vect(splitd_line[pl_normal]));
+	plane->color = str_to_rgbint(splitd_line[pl_color]);
+	if (!(new_node = ft_lstnew(plane)))
+		return (0);
+	new_node->element = rt_plane;
+	ft_lstadd_front(&(scene->objs), new_node);
+	return (1);
+}
+
+t_cam	rt_cam_create(char **splitd_line)
+{
+	t_cam		cam;
+
+	return (cam);
+}
+
+int		rt_camera_push(char **splitd_line, t_scene *scene)
+{
+	t_cam		*camera;
+	t_list		*new_node;
+	
+	if (!(camera = malloc(sizeof(t_cam))))
+		return (0);
+	camera->c = str_to_vect(splitd_line[c_position]);
+	camera->l = vect_unit(str_to_vect(splitd_line[c_orientation]));
+	camera->fov = str_tof(splitd_line[c_fov]);
+	camera->fov = (cam->fov * M_PI) / 180.0;
+	if (!(new_node = ft_lstnew(camera)))
+		return (0);
+	new_node->element = rt_camera;
+	ft_lstadd_front(&(scene->cams), new_node);
+	return (1);
+}
+int		rt__push(char **splitd_line, t_scene *scene)
 {
 	t_		*;
 	t_list		*new_node;
@@ -197,4 +326,10 @@ t_rotation		rt_rotation_apply(char **splitd_line, t_list *obj)
 	rotation.yaw = str_tof(splitd_line[rot_yaw]);
 	rotation.roll = str_tof(splitd_line[rot_roll]);
 	return (rotation);
+}
+
+int		add_ele_to_scene(int elem, t_scene *scene, char **splitd_line)
+{
+	if (elem = rt_ambiant)
+		
 }
