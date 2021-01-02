@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 17:03:00 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/01 18:33:32 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/02 17:13:10 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,36 +44,54 @@ void	rt_stder_num_msg(int line_ct)
 	exit(1);
 }
 
-void	free_aloc_prev(char **line, int ***info, char ***line_arr)
+void	free_aloc_prev(char **line, int ***info, char ***splitd_line)
 {
-	free_2d_array(line_arr);
+	free_2d_array(splitd_line);
 	ft_free_null((void **)line);
 	free_info_arr(info);
 }
 
-void	rt_errnum_exit(int line_ct, char **line, int ***info, char ***line_arr)
+void	rt_errnum_exit(int line_ct, char **line, char ***info, char ***splitd_line)
 {
-	free_2d_array(line_arr);
+	free_2d_array(splitd_line);
 	free(*line);
 	free_info_arr(info);
 	rt_stder_num_msg(line_ct);	
 }
 
-void	rt_errtype_exit(int line_ct, int type, char **line, int ***info, char ***line_arr)
+void	rt_erraloc_exit(char **line, char ***info, char ***splitd_line)
 {
-	free_2d_array(line_arr);
+	free_2d_array(splitd_line);
+	free_2d_array(info);
+	ft_free_null((void **)line);
+	ft_putstr_fd("Error\nMalloc: failded to allocate memory.\n");
+	exit(1);
+}
+
+void	rt_errtype_exit(int line_ct, int type, char **line, int ***info, char ***splitd_line)
+{
+	free_2d_array(splitd_line);
 	free(*line);
 	free_info_arr(info);
 	rt_stder_type_msg(line_ct);
 }
 
-void	rt_errcall_exit(int line_ct, &line_ct, &elems_info, &line_arr)
+void	rt_errcall_exit(int line_ct, char **line, int ***info, char ***splitd_line)
+{
+	free_2d_array(splitd_line);
+	free(*line);
+	free_info_arr(info);
+	ft_putstr_fd("Error\nminiRT: Element in line ", 2);
+	ft_putnbr_fd(line_ct, 2);
+	ft_putstr_fd(" should not be called more than once.\n", 2);
+	exit(1);
+}
 
 int		is_line_empty(char **line, int	*line_ct)
 {
 	int	ret;
 
-	if (ft_strcmp(*line, "") == 0)
+	if (ft_strcmp(*line, "") == 0 || **line == '#')
 	{
 		ft_free_null((void **)line);
 		(*line_ct)++;
@@ -111,44 +129,45 @@ void	rt_parse(int fd, t_scene *scene)
 	int		elem_params;
 	int		ret;
 	int		param;
-	char	**line_arr;
-	char	**elems_info;
+	char	**splitd_line;
+	char	**info;
 
-	elems_info = array_info_set2();
+	info = array_info_set2();
 	line_ct = 1;
 	while (get_next_line(fd, &line) > 0)
 	{
-		// if (!(line_arr = ft_split(line, ' ')))
+		// if (!(splitd_line = ft_split(line, ' ')))
 		// {
-		// 	free_2d_array(&line_arr);
+		// 	free_2d_array(&splitd_line);
 		// 	ft_free_null((void *)&line);
 		// 	continue ;
 		// }
 		if (is_line_empty(&line, &line_ct))
 			continue ;
-		line_arr = ft_split(line, ' ');
-		if ((elem = is_str(line_arr[0], ID_type) < 0)
-			rt_errtype_exit(line_ct, ID_type, &line, &elems_info, &line_arr);
+		if (!(splitd_line = ft_split(line, ' ')))
+			rt_erraloc_exit(&line, &info, &splitd_line);
+		if ((elem = is_str(splitd_line[0], ID_type) < 0)
+			rt_errtype_exit(line_ct, ID_type, &line, &info, &splitd_line);
 		param = 1;
-		while (line_arr[param] && elems_info[elem][param] >= 0)
+		while (splitd_line[param] && info[elem][param] >= 0)
 		{
-			if (!is_str(line_arr[param], elems_info[elem][param]))
-				rt_errtype_exit(line_ct, param, &line, &elems_info, &line_arr);
+			if (!is_str(splitd_line[param], info[elem][param]))
+				rt_errtype_exit(line_ct, param, &line, &info, &splitd_line);
 			param++;
 		}
-		if (line_arr[param] != NULL || elems_info[elem][param] != -1)
-			rt_errnum_exit(line_ct, &line, &elems_info, &line_arr);
-		if ((ret = add_elem_to_scene(elem, scene, line_arr)) < 0)
+		if (splitd_line[param] != NULL || info[elem][param] != -1)
+			rt_errnum_exit(line_ct, &line, &info, &splitd_line);
+		if ((ret = add_elem_to_scene(elem, scene, splitd_line)) < 0)
 		{
 			if (ret == 0)
-				rt_erraloc_exit(&line, &elems_info, &line_arr);
+				rt_erraloc_exit(&line, &info, &splitd_line);
 			if (ret == -1)
-				rt_errcall_exit(line_ct, param, &elems_info, &line_arr);
+				rt_errcall_exit(line_ct, &line, &info, &splitd_line);
 		}
-		free_2d_array(&line_arr);
-		free(line);
+		free_2d_array(&splitd_line);
+		ft_free_null(&(void *)line);
 		line_ct++;
 	}
-	free_info_arr(&elems_info);
+	free_2d_array(&info);
 	check_missing_elems(scene);
 }

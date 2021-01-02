@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_2d_array.c                                    :+:      :+:    :+:   */
+/*   is_str_uint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/10 11:25:01 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/02 16:08:54 by hlimouni         ###   ########.fr       */
+/*   Created: 2021/01/02 18:59:15 by hlimouni          #+#    #+#             */
+/*   Updated: 2021/01/02 18:59:38 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minirt.h"
 
-void	free_2d_array(char ***arr)
+int		is_struint(char *str)
 {
 	int		i;
 
+	if (!str)
+		return (0);
 	i = 0;
-	if (*arr == NULL)
-		return ;
-	while ((*arr)[i])
-	{
-		free((*arr)[i]);
-		(*arr)[i] = NULL;
-		i++;
-	}
-	free(*arr);
-	*arr = NULL;
+	while (ft_isdigit(str[i++]))
+	if (ft_strlen(str) == i)
+		return (i);
+	return (0);
 }

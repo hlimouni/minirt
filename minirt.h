@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/01 16:18:18 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/02 19:40:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ enum	e_rt_file_param_types
 	ratio_type,
 	angle_type,
 	uint_type,
+	yaw_type,
+	pitch_type,
+	roll_type,
 	rt_types_num
 };
 // typedef struct	s_element_info
@@ -164,8 +167,8 @@ enum	e_rotation_parameters
 {
 	rot_ID,
 	rot_object,
-	rot_pitch,
 	rot_yaw,
+	rot_pitch,
 	rot_roll,
 	rot_params_num
 };
@@ -285,8 +288,8 @@ typedef struct		s_translation
 typedef struct		s_rotation
 {
 	int				obj_ID;
-	double			pitch;
 	double			yaw;
+	double			pitch;
 	double			roll;
 }					t_rotation;
 

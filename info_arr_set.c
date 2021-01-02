@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 11:25:10 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/31 08:49:56 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/02 19:36:46 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char		**info_arr_set2(void)
 			udecimal_type, rgb_type, -1},
 		(char[]){rt_plane, vector_type, vector_type, rgb_type, -1},
 		(char[]){rt_translation, ID_type, vector_type, -1},
-		(char[]){rt_rotation, ID_type, angle_type, angle_type, angle_type, -1}
+		(char[]){rt_rotation, ID_type, yaw_type, pitch_type, roll_type, -1}
 	};
 	info_arr = info_arr_dup(data);
 	return (info_arr);

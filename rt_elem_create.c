@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_elem_create.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 15:12:46 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/01 16:26:22 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/02 19:39:26 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,8 +322,8 @@ t_rotation		rt_rotation_apply(char **splitd_line, t_list *obj)
 	t_rotation		rotation;
 
 	rotation.obj_ID = is_str_ID(splitd_line[rot_object]);
-	rotation.pitch = str_tof(splitd_line[rot_pitch]);
 	rotation.yaw = str_tof(splitd_line[rot_yaw]);
+	rotation.pitch = str_tof(splitd_line[rot_pitch]);
 	rotation.roll = str_tof(splitd_line[rot_roll]);
 	return (rotation);
 }
