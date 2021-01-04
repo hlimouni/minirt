@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:08:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/01 13:55:27 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/04 17:17:38 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int     open_rt_file(int ac, char *av[])
         print_error_exit("Error\nminiRT: Too many arguments");
     if ((fd = open(av[1], O_RDONLY)) < 0 || read(fd, NULL, 0) < 0)
     {
-        write(2, "Error\nminiRT: ", 15);
+        write(2, "Error\nRT file: ", 15);
         print_error_exit(strerror(errno));
     }
     if (!ft_strchr(av[1], '.') || ft_strcmp(ft_strrchr(av[1], '.'), ".rt"))

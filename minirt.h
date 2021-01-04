@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/02 19:40:49 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/04 18:57:33 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,18 @@ enum	e_rt_file_elements
 	rt_translation,
 	rt_rotation,
 	rt_elems_num
+};
+
+enum	e_errors
+{
+	nofile_err = -255,
+	many_args_err,
+	format_err,
+	wrong_arg_err,
+	alloc_err,
+	type_err,
+	num_params_err,
+	multicall_err,
 };
 
 enum	e_ambiant_parameters
