@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_null.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 10:29:49 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/10 10:38:30 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/05 22:34:02 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void    ft_free_null(void   **ptr)
 {
+    if (!ptr)
+        return ;
     free(*ptr);
     *ptr = NULL;
 }

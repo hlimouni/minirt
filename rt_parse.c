@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 17:03:00 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/05 19:20:11 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/05 23:38:32 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	check_missing_elems(t_scene *scene)
 	if (scene->amb == NULL)
 		ft_putstr_fd("Error\nminiRT: Ambiant is not specified.\n"), 2);
 	if (scene->cams == NULL)
-		ft_putstr_fd("Error\nminiRT: Camera is not specified.\n", 2);
+		ft_putstr_fd("Error\nminiRT: No camera specified.\n", 2);
 	if (!(scene->res) || !(scene->amb) || !(scene->cams))
 	{
 		free_scene(scene);
@@ -145,8 +145,9 @@ void	free_ptrs(void *ptrs[])
 	free_2d_array((char ***)ptrs[2]);
 }
 
-void	exit_error(int rt_error_num, int line, int param, void *ptrs[])
+void	rt_exit(int rt_error_num, int line, int param, void *ptrs[])
 {
+	free_ptrs(ptrs);
 	if (rt_error_num == alloc_err)
 		ft_putstr_fd("Error\nMalloc: failed to allocate memory.\n", 2);
 	else if (rt_error_num == type_err)
@@ -165,81 +166,73 @@ void	exit_error(int rt_error_num, int line, int param, void *ptrs[])
 		multicall_err_msg(line);
 	else
 		return ;
-	free_ptrs(ptrs);
 	exit(1);
 }
 
-void		check_line(char **line, int line_ct)
+char		**check_line(char **line, int line_ct)
 {
 	char	**splitd_line;
-	char	**info;
-	void	**ptrs_tofree;
+	char	info[cy_params_num + 1];
+	void	**ptrs;
 	int		param;
 	int		elem;
 
-	ptrs_tofree = (void *[]){line, &splitd_line, &info};
-	info = NULL;
+	ptrs = (void *[]){line, &splitd_line, NULL};
 	if (!(splitd_line = ft_split(*line, ' ')))
-		exit_error(alloc_err, line_ct, param, ptrs_tofree);
-	if (!(info = info_arr_set()))
-		exit_error(alloc_err, line_ct, param, ptrs_tofree);
+		rt_exit(alloc_err, line_ct, param, ptrs);
 	if ((elem = is_str(splitd_line[0], ID_type) < 0)
-		exit_error(type_err, line_ct, ID_type, ptrs_tofree);
+		rt_exit(type_err, line_ct, ID_type, ptrs);
+	info_arr_set3(elem, info);
 	param = 1;
-	while (splitd_line[param] && info[elem][param] >= 0)
+	while (splitd_line[param] && info[param] >= 0)
 	{
-		if (is_str(splitd_line[param], info[elem][param]) < 0)
-			exit_error(alloc_err, line_ct, param, ptrs_tofree);
-		if (!is_str(splitd_line[param], info[elem][param]))
-			exit_error(type_err, line_ct, param, ptrs_tofree);
+		if (is_str(splitd_line[param], info[param]) < 1)
+			rt_exit(type_err, line_ct, param, ptrs);
 		param++;
 	}
-	if (splitd_line[param] != NULL || info[elem][param] != -1)
-		exit_error(num_params_err, line_ct, param, ptrs_tofree)
+	if (splitd_line[param] != NULL || info[param] != -1)
+		rt_exit(num_params_err, line_ct, param, ptrs);
+	return (splitd_line);
 }
 
+		// if (!(splitd_line = ft_split(line, ' ')))
+		// 	rt_erraloc_exit(&line, &info, &splitd_line);
+		// if ((elem = is_str(splitd_line[0], ID_type) < 0)
+		// 	rt_errtype_exit(line_ct, ID_type, &line, &info, &splitd_line);
+		// param = 1;
+		// while (splitd_line[param] && info[elem][param] >= 0)
+		// {
+		// 	if (!is_str(splitd_line[param], info[elem][param]))
+		// 		rt_errtype_exit(line_ct, param, &line, &info, &splitd_line);
+		// 	param++;
+		// }
+		// if (splitd_line[param] != NULL || info[elem][param] != -1)
+		// 	rt_errnum_exit(line_ct, &line, &info, &splitd_line);
+			// if (ret == 0)
+			// 	rt_erraloc_exit(&line, &info, &splitd_line);
+			// if (ret == -1)
+			// 	rt_errcall_exit(line_ct, &line, &info, &splitd_line);
 void	rt_parse(int fd, t_scene *scene)
 {
 	char	*line;
 	int		line_ct;
-	int		elem;
-	int		elem_params;
+	void	**ptrs;
 	int		ret;
-	int		param;
 	char	**splitd_line;
-	char	**info;
 
 	line = NULL;
 	line_ct = 1;
+	ptrs = (void *[]) {&line, &splitd_line, NULL}
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (is_line_empty(&line, &line_ct))
 			continue ;
-		if (!(splitd_line = ft_split(line, ' ')))
-			rt_erraloc_exit(&line, &info, &splitd_line);
-		if ((elem = is_str(splitd_line[0], ID_type) < 0)
-			rt_errtype_exit(line_ct, ID_type, &line, &info, &splitd_line);
-		param = 1;
-		while (splitd_line[param] && info[elem][param] >= 0)
-		{
-			if (!is_str(splitd_line[param], info[elem][param]))
-				rt_errtype_exit(line_ct, param, &line, &info, &splitd_line);
-			param++;
-		}
-		if (splitd_line[param] != NULL || info[elem][param] != -1)
-			rt_errnum_exit(line_ct, &line, &info, &splitd_line);
-		if ((ret = add_elem_to_scene(elem, scene, splitd_line)) < 0)
-		{
-			if (ret == 0)
-				rt_erraloc_exit(&line, &info, &splitd_line);
-			if (ret == -1)
-				rt_errcall_exit(line_ct, &line, &info, &splitd_line);
-		}
+		splitd_line = check_line(&line, line_ct);
+		if ((ret = add_elem_to_scene(scene, splitd_line)) < 0)
+			rt_exit(ret == -1 ? multicall_err : alloc_err, line_ct, 0, ptrs);
 		free_2d_array(&splitd_line);
 		ft_free_null(&(void *)line);
 		line_ct++;
 	}
-	if ()
-	free_2d_array(&info);
 	check_missing_elems(scene);
 }

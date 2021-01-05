@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   info_arr_set.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 11:25:10 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/02 19:36:46 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/05 23:35:15 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,31 @@ char		**info_arr_set2(void)
 	};
 	info_arr = info_arr_dup(data);
 	return (info_arr);
+}
+
+void	info_arr_set3(int elem, char info[])
+{
+	char			**data;
+
+	ft_memset(info, -1, cy_params_num + 1);
+	data = (char*[])
+	{
+		(char[]){rt_camera, vector_type, vector_type, angle_type, -1},
+		(char[]){rt_ambiant, ratio_type, rgb_type, -1},
+		(char[]){rt_resolution, uint_type, uint_type, -1},
+		(char[]){rt_light, vector_type, ratio_type, rgb_type, -1},
+		(char[]){rt_square,
+			vector_type, vector_type, udecimal_type, rgb_type, -1},
+		(char[]){rt_triangle,
+			vector_type, vector_type, vector_type, rgb_type, -1},
+		(char[]){rt_sphere, vector_type, udecimal_type, rgb_type, -1},
+		(char[]){rt_cylinder, vector_type, vector_type, udecimal_type,
+			udecimal_type, rgb_type, -1},
+		(char[]){rt_plane, vector_type, vector_type, rgb_type, -1},
+		(char[]){rt_translation, ID_type, vector_type, -1},
+		(char[]){rt_rotation, ID_type, yaw_type, pitch_type, roll_type, -1}
+	};
+	ft_memmove(info, data[elem], rt_elemlen(data[elem]));
 }
 
 void	type_enum_print(int type)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_2d_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 11:25:01 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/02 16:08:54 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/05 22:35:15 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_2d_array(char ***arr)
 	int		i;
 
 	i = 0;
-	if (*arr == NULL)
+	if (arr == NULL || *arr == NULL)
 		return ;
 	while ((*arr)[i])
 	{

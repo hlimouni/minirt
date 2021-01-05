@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_elem_create.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 15:12:46 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/02 19:39:26 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/05 22:20:19 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,10 +328,12 @@ t_rotation		rt_rotation_apply(char **splitd_line, t_list *obj)
 	return (rotation);
 }
 
-int		add_elem_to_scene(int elem, t_scene *scene, char **splitd_line)
+int		add_elem_to_scene(t_scene *scene, char **splitd_line)
 {
 	t_elem_push	elem_push_arr[rt_elems_num];
+	int			elem;
 
+	elem = is_str_ID(splitd_line[0]);
 	elem_push_arr[rt_camera] = rt_camera_push;
 	elem_push_arr[rt_ambiant] = rt_amb_push;
 	elem_push_arr[rt_resolution] = rt_res_push;
