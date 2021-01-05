@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 17:03:00 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/04 19:37:04 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/05 19:20:11 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void	put_type_stder(int type)
 {
-	type == ID_type ? ft_putstr_fd("an identifier.\n", 2) : 0;
+	type == ID_type ? ft_putstr_fd("a minirt identifier.\n", 2) : 0;
 	type == vector_type ? ft_putstr_fd("a vector.\n", 2) : 0;
 	type == decimal_type ? ft_putstr_fd("a decimal.\n", 2) : 0;
 	type == udecimal_type ? ft_putstr_fd("a positive decimal.\n", 2) : 0;
@@ -125,7 +125,10 @@ void	check_missing_elems(t_scene *scene)
 	if (scene->cams == NULL)
 		ft_putstr_fd("Error\nminiRT: Camera is not specified.\n", 2);
 	if (!(scene->res) || !(scene->amb) || !(scene->cams))
+	{
+		free_scene(scene);
 		exit(1);
+	}
 }
 
 void	init_ptrs(char **line, char ***splitd_line, char ***info)
@@ -135,14 +138,14 @@ void	init_ptrs(char **line, char ***splitd_line, char ***info)
 	*info = NULL;
 }
 
-void	free_ptrs(char **line, char ***splitd_line, char ***info)
+void	free_ptrs(void *ptrs[])
 {
-	ft_free_null((void **)line);
-	free_2d_array(info);
-	free_2d_array(splitd_line);
+	ft_free_null((void **)ptrs[0]);
+	free_2d_array((char ***)ptrs[1]);
+	free_2d_array((char ***)ptrs[2]);
 }
 
-void	exit_error(int rt_error_num, int line, int param)
+void	exit_error(int rt_error_num, int line, int param, void *ptrs[])
 {
 	if (rt_error_num == alloc_err)
 		ft_putstr_fd("Error\nMalloc: failed to allocate memory.\n", 2);
@@ -162,34 +165,37 @@ void	exit_error(int rt_error_num, int line, int param)
 		multicall_err_msg(line);
 	else
 		return ;
+	free_ptrs(ptrs);
 	exit(1);
 }
 
-int		check_line(char **line, int line_ct)
+void		check_line(char **line, int line_ct)
 {
 	char	**splitd_line;
 	char	**info;
+	void	**ptrs_tofree;
 	int		param;
+	int		elem;
 
-	info = info_arr_set();
+	ptrs_tofree = (void *[]){line, &splitd_line, &info};
+	info = NULL;
 	if (!(splitd_line = ft_split(*line, ' ')))
-	{
-		free_ptrs
-		exit_error(alloc_err, -1, -1);
-	}
-		rt_erraloc_exit(&line, &info, &splitd_line);
+		exit_error(alloc_err, line_ct, param, ptrs_tofree);
+	if (!(info = info_arr_set()))
+		exit_error(alloc_err, line_ct, param, ptrs_tofree);
 	if ((elem = is_str(splitd_line[0], ID_type) < 0)
-		rt_errtype_exit(line_ct, ID_type, &line, &info, &splitd_line);
+		exit_error(type_err, line_ct, ID_type, ptrs_tofree);
 	param = 1;
 	while (splitd_line[param] && info[elem][param] >= 0)
 	{
+		if (is_str(splitd_line[param], info[elem][param]) < 0)
+			exit_error(alloc_err, line_ct, param, ptrs_tofree);
 		if (!is_str(splitd_line[param], info[elem][param]))
-			rt_errtype_exit(line_ct, param, &line, &info, &splitd_line);
+			exit_error(type_err, line_ct, param, ptrs_tofree);
 		param++;
 	}
 	if (splitd_line[param] != NULL || info[elem][param] != -1)
-		rt_errnum_exit(line_ct, &line, &info, &splitd_line);
-
+		exit_error(num_params_err, line_ct, param, ptrs_tofree)
 }
 
 void	rt_parse(int fd, t_scene *scene)
@@ -233,6 +239,7 @@ void	rt_parse(int fd, t_scene *scene)
 		ft_free_null(&(void *)line);
 		line_ct++;
 	}
+	if ()
 	free_2d_array(&info);
 	check_missing_elems(scene);
 }
