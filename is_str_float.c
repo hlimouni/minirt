@@ -6,13 +6,13 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 19:04:02 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/02 19:05:46 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/06 17:27:34 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int		is_strint(char *str)
+static int		is_strint(char *str)
 {
 	int		i;
 
@@ -33,7 +33,7 @@ int		is_strint(char *str)
 ** is_strsign returns them as true
 */
 
-int		is_strsign(char *str)
+static int		is_strsign(char *str)
 {
 	int		i;
 
@@ -48,7 +48,7 @@ int		is_strsign(char *str)
 	return (0);
 }
 
-int		is_strnint(char *str, size_t n)
+static int		is_strnint(char *str, size_t n)
 {
 	int		i;
 	int		snlen;
@@ -66,7 +66,7 @@ int		is_strnint(char *str, size_t n)
 	return (0);
 }
 
-int		is_strnsign(char *str, size_t n)
+static int		is_strnsign(char *str, size_t n)
 {
 	int		i;
 	int		snlen;
@@ -83,6 +83,7 @@ int		is_strnsign(char *str, size_t n)
 		return (i);
 	return (0);
 }
+
 /*
 ** is_str_float tests if the given string can be defined as a float or not
 ** it checks for the precison '.' so it exists only once in the string and

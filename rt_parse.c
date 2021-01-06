@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 11:00:31 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/06 11:06:25 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/06 18:16:51 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char		**check_line(char **line, int line_ct)
 	ptrs = (void *[]){line, &splitd_line};
 	if (!(splitd_line = ft_split(*line, ' ')))
 		rt_exit(alloc_err, line_ct, param, ptrs);
-	if ((elem = is_str(splitd_line[0], ID_type) < 0)
+	if ((elem = is_str(splitd_line[0], ID_type)) < 0)
 		rt_exit(type_err, line_ct, ID_type, ptrs);
 	info_arr_set3(elem, info);
 	param = 1;
@@ -102,7 +102,7 @@ void	rt_parse(int fd, t_scene *scene)
 
 	line = NULL;
 	line_ct = 1;
-	ptrs = (void *[]) {&line, &splitd_line, NULL}
+	ptrs = (void *[]) {&line, &splitd_line, NULL};
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (is_line_empty(&line, &line_ct))

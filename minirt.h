@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/04 18:57:33 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/06 18:13:04 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,6 +322,34 @@ typedef	struct	s_info_arr
 typedef int		(*t_elem_push)(t_scene *, char **);
 typedef	int		(*t_typechecker)(char *);
 
+double				str_tof(char *str);
+t_vect 				str_to_vect(char *str);
+int					str_to_rgbint(char *str);
+int					is_str_ID(char *str);
+int					is_str_vect(char *str);
+int					is_str_float(char *str);
+int					is_str_ufloat(char *str);
+int					is_str_rgb(char *str);
+int					is_str_ratio(char *str);
+int					is_str_angle(char *str);
+int					is_str_uint(char *str);
+int					is_str_yaw(char *str);
+int					is_str_pitch(char *str);
+int					is_str(char *str, int type);
+int					rt_elemlen(char *arr);
+int					rt_camera_push(char **splt_line, t_scene *scene);
+int					rt_amb_push(char **splitd_line, t_scene *scene);
+int					rt_res_push(char **splt_line, t_scene *scene);
+int					rt_light_push(char **splt_line, t_scene *scene);
+int					rt_square_push(char **splt_line, t_scene *scene);
+int					rt_triangle_push(char **splt_line, t_scene *scene);
+int					rt_sphere_push(char **splt_line, t_scene *scene);
+int					rt_cylinder_push(char **splt_line, t_scene *scene);
+int					rt_plane_push(char **splt_line, t_scene *scene);
+int					add_elem_to_scene(t_scene *scene, char **splt_line);
+void				rt_free_scene(t_scene *scene);
+void				rt_exit(int rt_error_num, int line, int param, void *ptrs[]);
+void				rt_parse(int fd, t_scene *scene);
 t_vect				cam_ray_build(int i, int j, t_cam *cam,
 		float width, float height);
 t_vect				cam_ray_build2(int i, int j, t_cam *cam,
