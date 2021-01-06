@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 18:08:14 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/31 08:59:49 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/06 08:40:58 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void				ft_lstdelone(t_list *lst, void (*del)(void*));
 char				*ft_strdup(const char *str);
 int					ft_atoi(const char *str);
 int					ft_strtoi(char *str, int *num);
+char				*ft_skip_spaces(const char *str);
 char				*ft_itoa(int n);
 void				ft_putnbr_hex(int nbr);
 void				*ft_calloc(size_t count, size_t size);

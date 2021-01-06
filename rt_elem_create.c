@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_elem_create.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 15:12:46 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/05 22:20:19 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/06 12:51:43 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ int		rt_camera_push(char **splitd_line, t_scene *scene)
 	ft_lstadd_front(&(scene->cams), new_node);
 	return (1);
 }
+
 int		rt__push(char **splitd_line, t_scene *scene)
 {
 	t_		*;

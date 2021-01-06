@@ -6,7 +6,7 @@
 #    By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 15:24:42 by hlimouni          #+#    #+#              #
-#    Updated: 2020/12/30 11:07:58 by hlimouni         ###   ########.fr        #
+#    Updated: 2021/01/06 08:41:22 by hlimouni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC=ft_atoi.c \
 	ft_strtoi.c \
 	ft_itoa.c \
 	ft_bzero.c \
+	ft_skip_spaces.c \
 	ft_isalnum.c \
 	ft_isspace.c \
 	ft_isalpha.c \

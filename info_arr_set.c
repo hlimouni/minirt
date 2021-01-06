@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   info_arr_set.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 11:25:10 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/05 23:35:15 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/06 08:06:54 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,12 @@ void	type_enum_print(int type)
 		printf("angle");
 	else if (type == uint_type)
 		printf("uint");
+	else if (type == yaw_type)
+		printf("yaw");
+	else if (type == pitch_type)
+		printf("pitch");
+	else if (type == roll_type)
+		printf("roll");
 	else
 		printf("not a valid type");
 }
@@ -155,28 +161,46 @@ void	elem_enum_print(int	type)
 		printf("not a valid type");
 }
 
-int			main(void)
-{
-	int		i, j;
-	char	**array;
+// int			main(void)
+// {
+// 	int		i, j;
+// 	char	**array;
 
-	if (!(array = info_arr_set2()))
-		return (-1);
-	j = 0;
-	while (array[j])
+// 	if (!(array = info_arr_set2()))
+// 		return (-1);
+// 	j = 0;
+// 	while (array[j])
+// 	{
+// 		i = 0;
+// 		elem_enum_print(array[j][i]);
+// 		i++;
+// 		printf(" ");
+// 		while (array[j][i] >= 0)
+// 		{
+// 			type_enum_print(array[j][i]);
+// 			printf(" ");
+// 			i++;
+// 		}
+// 		j++;
+// 		printf("\n");
+// 	}
+// 	free_2d_array(&array);
+// }
+
+int		main(void)
+{
+	int		i;
+	char	arr[cy_params_num + 1];
+
+	info_arr_set3(rt_square, arr);
+	i = 0;
+	elem_enum_print(arr[i++]);
+	printf(" ");
+	while (i < cy_params_num + 1)
 	{
-		i = 0;
-		elem_enum_print(array[j][i]);
-		i++;
+		type_enum_print(arr[i]);
 		printf(" ");
-		while (array[j][i] >= 0)
-		{
-			type_enum_print(array[j][i]);
-			printf(" ");
-			i++;
-		}
-		j++;
-		printf("\n");
+		i++;
 	}
-	free_2d_array(&array);
+	printf("\n");
 }

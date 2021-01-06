@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_elemlen.c                                       :+:      :+:    :+:   */
+/*   ft_skip_spaces.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/19 16:57:18 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/06 11:11:18 by hlimouni         ###   ########.fr       */
+/*   Created: 2021/01/06 08:23:40 by hlimouni          #+#    #+#             */
+/*   Updated: 2021/01/06 08:40:07 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	rt_elemlen(int	*element)
+char	*ft_skip_spaces(const char *str)
 {
-	int	i;
-
-	i = 0;
-	if (element)
+	if (str)
 	{
-		while (element[i] >= 0)
-			i++;
+		while (ft_isspace(*str))
+			str++;
 	}
-	return (i);
+	return ((char *)str);
 }
