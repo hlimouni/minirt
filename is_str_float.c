@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 19:04:02 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/06 17:27:34 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/07 12:46:40 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,11 @@ int		is_str_float(char *str)
 	{
 		prec_pt = ft_strchr(str, '.');
 		if (prec_pt == str)
-			return (is_struint(prec_pt + 1));
+			return (is_str_uint(prec_pt + 1));
 		slen = ft_strlen(str);
 		if (prec_pt == str + (slen - 1))
 			return (is_strnint(str, slen - 1));
-		return (is_strnsign(str, prec_pt - str) && is_struint(prec_pt + 1));
+		return (is_strnsign(str, prec_pt - str) && is_str_uint(prec_pt + 1));
 	}
 	return (0);
 }

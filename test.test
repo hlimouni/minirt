@@ -1,0 +1,1 @@
+❯ gcc main_test.c open_rt_file.c rt_scene_initialize.c rt_parse.c rt_exit.c rt_elemlen.c add_elem_to_scene.c is_str*.c str_to*.c get_next_line/*.c -D BUFFER_SIZE=36 -L ft_printf/libft -lft

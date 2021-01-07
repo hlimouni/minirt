@@ -6,13 +6,13 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:11:56 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/06 19:14:03 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/07 12:43:55 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-nt		rt_plane_push(char **splitd_line, t_scene *scene)
+int		rt_plane_push(char **splitd_line, t_scene *scene)
 {
 	t_plane		*plane;
 	t_list		*new_node;

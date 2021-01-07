@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 10:33:44 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/06 10:56:46 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/07 12:32:50 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 static void	free_ptrs(void *ptrs[])
 {
+	if (!ptrs)
+		return ;
 	ft_free_null((void **)ptrs[0]);
 	free_2d_array((char ***)ptrs[1]);
 }
 
 static void	type_err_msg(int line_ct, int type)
 {
-	ft_putstr_fd("Error\nminiRT: Parameter in line ");
+	ft_putstr_fd("Error\nminiRT: Parameter in line ", 2);
 	ft_putnbr_fd(line_ct, 2);
 	ft_putstr_fd(" is not ", 2);
 	if (type == ID_type)
@@ -44,7 +46,7 @@ static void	type_err_msg(int line_ct, int type)
 
 static void	num_err_msg(int line_ct)
 {
-	ft_putstr_fd("Error\nminiRT: Wrong number of parameters in line ");
+	ft_putstr_fd("Error\nminiRT: Wrong number of parameters in line ", 2);
 	ft_putnbr_fd(line_ct, 2);
 	ft_putstr_fd(".\n", 2);
 }
@@ -75,5 +77,9 @@ void	rt_exit(int rt_error_num, int line, int param, void *ptrs[])
 		num_err_msg(line);
 	else if (rt_error_num == multicall_err)
 		multicall_err_msg(line);
+	else if (rt_error_num == open_err)
+		perror("Open");
+	else if (rt_error_num == read_err)
+		perror("Read");
 	exit(1);
 }

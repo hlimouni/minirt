@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/06 18:13:04 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/07 12:55:47 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ enum	e_rt_file_elements
 enum	e_errors
 {
 	nofile_err = -255,
+	open_err,
+	read_err,
 	many_args_err,
 	format_err,
 	wrong_arg_err,
@@ -319,9 +321,10 @@ typedef	struct	s_info_arr
 	int		**arr;
 }				t_info_arr;
 
-typedef int		(*t_elem_push)(t_scene *, char **);
+typedef int		(*t_elem_push)(char **, t_scene *scene);
 typedef	int		(*t_typechecker)(char *);
 
+int					vectoi(t_vect vect);
 double				str_tof(char *str);
 t_vect 				str_to_vect(char *str);
 int					str_to_rgbint(char *str);
@@ -349,7 +352,9 @@ int					rt_plane_push(char **splt_line, t_scene *scene);
 int					add_elem_to_scene(t_scene *scene, char **splt_line);
 void				rt_free_scene(t_scene *scene);
 void				rt_exit(int rt_error_num, int line, int param, void *ptrs[]);
+int     			open_rt_file(int ac, char *av[]);
 void				rt_parse(int fd, t_scene *scene);
+void				rt_scene_initialize(t_scene *scene);
 t_vect				cam_ray_build(int i, int j, t_cam *cam,
 		float width, float height);
 t_vect				cam_ray_build2(int i, int j, t_cam *cam,

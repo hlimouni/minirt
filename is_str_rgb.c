@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:20:36 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/29 10:24:29 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/07 12:53:20 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int     is_str_rgb(char *str)
 	if (!(arr = ft_split(str, ',')))
 		return (-1);
 	i = 0;
-	while (is_struint(arr[i]) && !ft_strtoi(arr[i], &color) && color <= 0xFF)
+	while (is_str_uint(arr[i]) && !ft_strtoi(arr[i], &color) && color <= 0xFF)
 		i++;
 	free_2d_array(&arr);
 	return (i == 3 ? 1 : 0);

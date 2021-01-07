@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 18:19:40 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/02 18:56:15 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/07 12:54:46 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int     is_str_vect(char *str)
 		return (-1);
 	if (ft_strcmp(str, trimd_str) != 0)
 	{
-		ft_free_null(&(void *)trimd_str);
+		ft_free_null((void **)&trimd_str);
 		return (0);
 	}
-	ft_free_null(&(void *)trimd_str);
+	ft_free_null((void **)&trimd_str);
 	if (!(arr = ft_split(str, ',')))
 		return (-1);
 	i = 0;

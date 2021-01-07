@@ -6,13 +6,13 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 11:00:31 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/06 18:16:51 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/07 12:34:30 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	info_arr_set3(int elem, char info[])
+static void	info_arr_set(int elem, char info[])
 {
 	char			**data;
 
@@ -49,6 +49,7 @@ static int		is_line_empty(char **line, int	*line_ct)
 	}
 	else
 		ret = 0;
+	return (ret);
 }
 
 static char		**check_line(char **line, int line_ct)
@@ -64,7 +65,7 @@ static char		**check_line(char **line, int line_ct)
 		rt_exit(alloc_err, line_ct, param, ptrs);
 	if ((elem = is_str(splitd_line[0], ID_type)) < 0)
 		rt_exit(type_err, line_ct, ID_type, ptrs);
-	info_arr_set3(elem, info);
+	info_arr_set(elem, info);
 	param = 1;
 	while (splitd_line[param] && info[param] != -1)
 	{
@@ -82,7 +83,7 @@ static void	check_missing_elems(t_scene *scene)
 	if (scene->res == NULL)
 		ft_putstr_fd("Error\nminiRT: Resolution is not specified.\n", 2);
 	if (scene->amb == NULL)
-		ft_putstr_fd("Error\nminiRT: Ambiant is not specified.\n"), 2);
+		ft_putstr_fd("Error\nminiRT: Ambiant is not specified.\n", 2);
 	if (scene->cams == NULL)
 		ft_putstr_fd("Error\nminiRT: No camera specified.\n", 2);
 	if (!(scene->res) || !(scene->amb) || !(scene->cams))
@@ -102,7 +103,7 @@ void	rt_parse(int fd, t_scene *scene)
 
 	line = NULL;
 	line_ct = 1;
-	ptrs = (void *[]) {&line, &splitd_line, NULL};
+	ptrs = (void *[]) {&line, &splitd_line};
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (is_line_empty(&line, &line_ct))
@@ -111,7 +112,7 @@ void	rt_parse(int fd, t_scene *scene)
 		if ((ret = add_elem_to_scene(scene, splitd_line)) < 0)
 			rt_exit(ret == -1 ? multicall_err : alloc_err, line_ct, 0, ptrs);
 		free_2d_array(&splitd_line);
-		ft_free_null(&(void *)line);
+		ft_free_null((void **)&line);
 		line_ct++;
 	}
 	check_missing_elems(scene);

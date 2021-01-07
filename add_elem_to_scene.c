@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 12:51:30 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/06 17:33:12 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/07 12:51:52 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ int		add_elem_to_scene(t_scene *scene, char **splitd_line)
 	elem_push_arr[rt_plane] = rt_plane_push;
 	elem_push_arr[rt_rotation] = NULL;
 	elem_push_arr[rt_translation] = NULL;
-	return (elem_push_arr[elem](scene, splitd_line));
+	return (elem_push_arr[elem](splitd_line, scene));
 }

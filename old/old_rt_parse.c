@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 17:03:00 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/06 11:02:08 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/07 12:22:37 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,7 +211,7 @@ char		**check_line(char **line, int line_ct)
 			// 	rt_erraloc_exit(&line, &info, &splitd_line);
 			// if (ret == -1)
 			// 	rt_errcall_exit(line_ct, &line, &info, &splitd_line);
-void	rt_parse(int fd, t_scene *scene)
+void	rt_parse2(int fd, t_scene *scene)
 {
 	char	*line;
 	int		line_ct;
