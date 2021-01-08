@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 10:55:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/08 07:53:43 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/08 16:10:45 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,44 +100,48 @@ void	print_scene(t_scene *scene)
 	t_cam	*cam;
 	t_light	*light;
 	int		count;
+	t_list *lst;
 
 	printf("ambiant color == %X\n", scene->amb->color);
 	printf("ambiant intensity == %f\n", scene->amb->intensity);
 	printf("resolution height == %d\n", scene->res->height);
 	printf("resolution width == %d\n", scene->res->width);
 	count = 0;
-	while (scene->cams)
+	lst = scene->cams;
+	while (lst)
 	{
 		count++;
-		cam = (t_cam *)(scene->cams->content);
+		cam = (t_cam *)(lst->content);
 		printf("cam Number: %d\n", count);
 		printf("cam position == ");
 		print_vect(cam->c);
 		printf("cam fov == %f\n", cam->fov);
 		printf("cam direction == ");
 		print_vect(cam->l);
-		scene->cams = scene->cams->next;
+		lst = lst->next;
 	}
 	count = 0;
-	while (scene->lights)
+	lst = scene->lights;
+	while (lst)
 	{
 		count++;
-		light = (t_light *)(scene->lights->content);
+		light = (t_light *)(lst->content);
 		printf("Light Number: %d\n", count);
 		printf("Light position == ");
 		print_vect(light->l);
 		printf("Light color == %X\n", light->color);
 		printf("Light intensity == %f\n", light->intensity);
-		scene->lights = scene->lights->next;
+		lst = lst->next;
 	}
 	count = 0;
-	while (scene->objs)
+	lst = scene->objs;
+	while (lst)
 	{
 		count++;
 		printf("object Number: %d\n", count);
-		print_elem_name(scene->objs->element);
-		print_elem(scene->objs->element, scene->objs->content);
-		scene->objs = scene->objs->next;
+		print_elem_name(lst->element);
+		print_elem(lst->element, lst->content);
+		lst = lst->next;
 	}
 }
 
