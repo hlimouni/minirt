@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:11:56 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/07 12:43:55 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/08 07:29:10 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		rt_cylinder_push(char **splitd_line, t_scene *scene)
 		return (0);
 	cylinder->origin = str_to_vect(splitd_line[cy_position]);
 	cylinder->axis = vect_unit(str_to_vect(splitd_line[cy_axis]));
-	cylinder->radius = str_to_(splitd_line[cy_diameter]);
+	cylinder->radius = str_tof(splitd_line[cy_diameter]);
 	cylinder->radius /= 2;
 	cylinder->height = str_tof(splitd_line[cy_height]);
 	cylinder->color = str_to_rgbint(splitd_line[cy_color]);
@@ -94,7 +94,7 @@ int		rt_square_push(char   **splitd_line, t_scene *scene)
 		return (0);
     square->origin = str_to_vect(splitd_line[sq_position]);
     square->normal = str_to_vect(splitd_line[sq_normal]);
-	square->normal = vect_unit(square.normal);
+	square->normal = vect_unit(square->normal);
     square->side = str_tof(splitd_line[sq_side]);
     square->color = str_to_rgbint(splitd_line[sq_color]);
 	if (!(new_node = ft_lstnew(square)))

@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 10:55:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/07 12:27:09 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/08 07:53:43 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	print_sq(t_square *sq)
 	printf("square normal == ");
 	print_vect(sq->normal);
 	printf("square side == %f\n", sq->side);
-	printf("square color == %x\n", sq->color);
+	printf("square color == %X\n", sq->color);
 }
 
 void	print_sphere(t_sphere *sp)
@@ -47,7 +47,7 @@ void	print_sphere(t_sphere *sp)
 	printf("sphere origin == ");
 	print_vect(sp->o);
 	printf("sphere radius == %f\n", sp->r);
-	printf("sphere color == %d\n", sp->color);
+	printf("sphere color == %X\n", sp->color);
 }
 
 void	print_cylinder(t_cylinder *cy)
@@ -58,7 +58,7 @@ void	print_cylinder(t_cylinder *cy)
 	print_vect(cy->axis);
 	printf("cylinder radius == %f\n", cy->radius);
 	printf("cylinder height == %f\n", cy->height);
-	printf("cylinder color == %x\n", cy_color);
+	printf("cylinder color == %X\n", cy->color);
 }
 
 void	print_triangle(t_triangle *tr)
@@ -69,7 +69,7 @@ void	print_triangle(t_triangle *tr)
 	print_vect(tr->pt_b);
 	printf("triangle point c ");
 	print_vect(tr->pt_c);
-	printf("triangle color %d\n", tr->color);
+	printf("triangle color %X\n", tr->color);
 }
 
 void	print_plane(t_plane *pl)
@@ -78,7 +78,7 @@ void	print_plane(t_plane *pl)
 	print_vect(pl->p);
 	printf("plane normal ");
 	print_vect(pl->n);
-	printf("plane color %d\n", pl->color);
+	printf("plane color %X\n", pl->color);
 }
 
 void	print_elem(int elem, void *content)
@@ -101,10 +101,10 @@ void	print_scene(t_scene *scene)
 	t_light	*light;
 	int		count;
 
-	printf("ambiant color == %d\n", scene->amb->color);
+	printf("ambiant color == %X\n", scene->amb->color);
 	printf("ambiant intensity == %f\n", scene->amb->intensity);
 	printf("resolution height == %d\n", scene->res->height);
-	printf("resolution width == %d\n", scene->res->height);
+	printf("resolution width == %d\n", scene->res->width);
 	count = 0;
 	while (scene->cams)
 	{
@@ -116,7 +116,7 @@ void	print_scene(t_scene *scene)
 		printf("cam fov == %f\n", cam->fov);
 		printf("cam direction == ");
 		print_vect(cam->l);
-		scene->cams->next = scene->cams;
+		scene->cams = scene->cams->next;
 	}
 	count = 0;
 	while (scene->lights)
@@ -128,7 +128,7 @@ void	print_scene(t_scene *scene)
 		print_vect(light->l);
 		printf("Light color == %X\n", light->color);
 		printf("Light intensity == %f\n", light->intensity);
-		scene->lights->next = scene->lights;
+		scene->lights = scene->lights->next;
 	}
 	count = 0;
 	while (scene->objs)
@@ -137,7 +137,7 @@ void	print_scene(t_scene *scene)
 		printf("object Number: %d\n", count);
 		print_elem_name(scene->objs->element);
 		print_elem(scene->objs->element, scene->objs->content);
-		scene->objs->next = scene->objs;
+		scene->objs = scene->objs->next;
 	}
 }
 

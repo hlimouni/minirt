@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 16:42:50 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/06 17:26:16 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/08 07:38:54 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	is_str_ID(char *str)
 		return (rt_camera);
 	if (ft_strcmp(str, "tr") == 0)
 		return (rt_triangle);
+	if (ft_strcmp(str, "l") == 0)
+		return (rt_light);
 	if (ft_strcmp(str, "pl") == 0)
 		return (rt_plane);
 	if (ft_strcmp(str, "sp") == 0)

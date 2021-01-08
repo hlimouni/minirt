@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 11:00:31 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/07 12:34:30 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/08 11:10:48 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,26 @@ static int		is_line_empty(char **line, int	*line_ct)
 	return (ret);
 }
 
+static int		is_line_empty2(char **line, int	*line_ct)
+{
+	int	ret;
+	char *trimd_line;
+
+	if (!(trimd_line = ft_strtrim(*line, " \t\v\f\r")))
+		rt_exit(alloc_err, 0, 0, (void *[]){line, NULL});
+	ft_free_null((void **)line);
+	*line = trimd_line;
+	if (ft_strcmp(*line, "") == 0 || **line == '#')
+	{
+		ft_free_null((void **)line);
+		(*line_ct)++;
+		ret = 1;
+	}
+	else
+		ret = 0;
+	return (ret);
+}
+
 static char		**check_line(char **line, int line_ct)
 {
 	char	**splitd_line;
@@ -70,22 +90,22 @@ static char		**check_line(char **line, int line_ct)
 	while (splitd_line[param] && info[param] != -1)
 	{
 		if (is_str(splitd_line[param], info[param]) < 1)
-			rt_exit(type_err, line_ct, param, ptrs);
+			rt_exit(type_err, line_ct, info[param], ptrs);
 		param++;
 	}
 	if (splitd_line[param] != NULL || info[param] != -1)
-		rt_exit(num_params_err, line_ct, param, ptrs);
+		rt_exit(num_params_err, line_ct, info[param], ptrs);
 	return (splitd_line);
 }
 
 static void	check_missing_elems(t_scene *scene)
 {
 	if (scene->res == NULL)
-		ft_putstr_fd("Error\nminiRT: Resolution is not specified.\n", 2);
-	if (scene->amb == NULL)
-		ft_putstr_fd("Error\nminiRT: Ambiant is not specified.\n", 2);
-	if (scene->cams == NULL)
-		ft_putstr_fd("Error\nminiRT: No camera specified.\n", 2);
+		ft_putstr_fd("Error\nminiRT: Resolution is not specified\n", 2);
+	else if (scene->amb == NULL)
+		ft_putstr_fd("Error\nminiRT: Ambiant is not specified\n", 2);
+	else if (scene->cams == NULL)
+		ft_putstr_fd("Error\nminiRT: No camera specified\n", 2);
 	if (!(scene->res) || !(scene->amb) || !(scene->cams))
 	{
 		rt_free_scene(scene);
@@ -98,19 +118,21 @@ void	rt_parse(int fd, t_scene *scene)
 	char	*line;
 	int		line_ct;
 	void	**ptrs;
-	int		ret;
+	int		gnl_ret;
 	char	**splitd_line;
 
 	line = NULL;
 	line_ct = 1;
-	ptrs = (void *[]) {&line, &splitd_line};
-	while (get_next_line(fd, &line) > 0)
+	ptrs = (void *[]){&line, &splitd_line};
+	gnl_ret = 1;
+	while (gnl_ret > 0)
 	{
-		if (is_line_empty(&line, &line_ct))
+		gnl_ret = get_next_line(fd, &line);
+		if (is_line_empty2(&line, &line_ct))
 			continue ;
 		splitd_line = check_line(&line, line_ct);
-		if ((ret = add_elem_to_scene(scene, splitd_line)) < 0)
-			rt_exit(ret == -1 ? multicall_err : alloc_err, line_ct, 0, ptrs);
+		if (add_elem_to_scene(scene, splitd_line) < 0)
+			rt_exit(multicall_err, line_ct, 0, ptrs);
 		free_2d_array(&splitd_line);
 		ft_free_null((void **)&line);
 		line_ct++;
