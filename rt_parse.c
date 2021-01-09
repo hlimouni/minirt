@@ -6,15 +6,15 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 11:00:31 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/08 11:10:48 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/09 08:16:08 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	info_arr_set(int elem, char info[])
+static void		info_arr_set(int elem, char info[])
 {
-	char			**data;
+	char		**data;
 
 	ft_memset(info, -1, cy_params_num + 1);
 	data = (char*[])
@@ -37,25 +37,27 @@ static void	info_arr_set(int elem, char info[])
 	ft_memmove(info, data[elem], rt_elemlen(data[elem]));
 }
 
-static int		is_line_empty(char **line, int	*line_ct)
-{
-	int	ret;
+/*
+**	static int		is_line_empty(char **line, int	*line_ct)
+**	{
+**		int	ret;
+**
+**		if (ft_strcmp(*line, "") == 0 || *(ft_skip_spaces(*line)) == '#')
+**		{
+**			ft_free_null((void **)line);
+**			(*line_ct)++;
+**			ret = 1;
+**		}
+**		else
+**			ret = 0;
+**		return (ret);
+**	}
+*/
 
-	if (ft_strcmp(*line, "") == 0 || *(ft_skip_spaces(*line)) == '#')
-	{
-		ft_free_null((void **)line);
-		(*line_ct)++;
-		ret = 1;
-	}
-	else
-		ret = 0;
-	return (ret);
-}
-
-static int		is_line_empty2(char **line, int	*line_ct)
+static int		is_line_empty(char **line, int *line_ct)
 {
-	int	ret;
-	char *trimd_line;
+	int			ret;
+	char		*trimd_line;
 
 	if (!(trimd_line = ft_strtrim(*line, " \t\v\f\r")))
 		rt_exit(alloc_err, 0, 0, (void *[]){line, NULL});
@@ -74,11 +76,11 @@ static int		is_line_empty2(char **line, int	*line_ct)
 
 static char		**check_line(char **line, int line_ct)
 {
-	char	**splitd_line;
-	char	info[cy_params_num + 1];
-	void	**ptrs;
-	int		param;
-	int		elem;
+	char		**splitd_line;
+	char		info[cy_params_num + 1];
+	void		**ptrs;
+	int			param;
+	int			elem;
 
 	ptrs = (void *[]){line, &splitd_line};
 	if (!(splitd_line = ft_split(*line, ' ')))
@@ -98,7 +100,7 @@ static char		**check_line(char **line, int line_ct)
 	return (splitd_line);
 }
 
-static void	check_missing_elems(t_scene *scene)
+static void		check_missing_elems(t_scene *scene)
 {
 	if (scene->res == NULL)
 		ft_putstr_fd("Error\nminiRT: Resolution is not specified\n", 2);
@@ -113,29 +115,28 @@ static void	check_missing_elems(t_scene *scene)
 	}
 }
 
-void	rt_parse(int fd, t_scene *scene)
+void			rt_parse(int fd, t_scene *scene)
 {
-	char	*line;
-	int		line_ct;
-	void	**ptrs;
-	int		gnl_ret;
-	char	**splitd_line;
+	char		*line;
+	int			line_ct;
+	int			gnl_ret;
+	char		**splitd_line;
 
 	line = NULL;
 	line_ct = 1;
-	ptrs = (void *[]){&line, &splitd_line};
 	gnl_ret = 1;
 	while (gnl_ret > 0)
 	{
 		gnl_ret = get_next_line(fd, &line);
-		if (is_line_empty2(&line, &line_ct))
+		if (is_line_empty(&line, &line_ct))
 			continue ;
 		splitd_line = check_line(&line, line_ct);
 		if (add_elem_to_scene(scene, splitd_line) < 0)
-			rt_exit(multicall_err, line_ct, 0, ptrs);
+			rt_exit(multicall_err, line_ct, 0, (void *[]){&line, &splitd_line});
 		free_2d_array(&splitd_line);
 		ft_free_null((void **)&line);
 		line_ct++;
 	}
+	close(fd);
 	check_missing_elems(scene);
 }

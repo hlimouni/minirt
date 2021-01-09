@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/07 12:55:47 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/09 07:43:03 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,12 +316,7 @@ typedef struct	s_scene
 	t_list			*objs;
 }				t_scene;
 
-typedef	struct	s_info_arr
-{
-	int		**arr;
-}				t_info_arr;
-
-typedef int		(*t_elem_push)(char **, t_scene *scene);
+typedef int		(*t_elem_push)(char **, t_scene *);
 typedef	int		(*t_typechecker)(char *);
 
 int					vectoi(t_vect vect);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/08 16:32:18 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/09 11:09:38 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,21 +242,21 @@ pl.color = 0x8A2BE2;
 			// 	color = pl_shading(t, &light, &cam, pl, amb, ray);
 			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			// }
-			if ((t = cy_intersect(ray, &cam, cy)) >= 0.0)
-			{
-				//color = 0x8A2BE2;
-				color = cy_shading(t, &light, &cam, cy, amb, ray);
-				mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
-			}
-			// if ((t = tr_intersect(ray, &cam, &tr)) >= 0.0)
+			// if ((t = cy_intersect(ray, &cam, cy)) >= 0.0)
 			// {
 			// 	//color = 0x8A2BE2;
-			// 	tr_pl.n = tr.noraml;
-			// 	tr_pl.p = tr.pt_a;
-			// 	tr_pl.color = tr.color;
-			// 	color = pl_shading(t, &light, &cam, tr_pl, amb, ray);
+			// 	color = cy_shading(t, &light, &cam, cy, amb, ray);
 			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			// }
+			if ((t = tr_intersect(ray, &cam, &tr)) >= 0.0)
+			{
+				//color = 0x8A2BE2;
+				tr_pl.n = tr.normal;
+				tr_pl.p = tr.pt_a;
+				tr_pl.color = tr.color;
+				color = pl_shading(t, &light, &cam, tr_pl, amb, ray);
+				mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
+			}
 
 			// else
 			// 	mlx_pixel_put(mlx_ptr, win_ptr,i , j, 0x4a4a4a);
