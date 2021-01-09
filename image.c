@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/27 19:04:27 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/08 16:32:18 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,19 +192,19 @@ pl.color = 0x8A2BE2;
 	A.y = 0;
 	A.z = 0;
 /****************/
-	tr.A = A;
+	tr.pt_a = A;
 /****************/
 	B.x = 1;
 	B.y = 0;
 	B.z = 0;
 /***************/
-	tr.B = B;
+	tr.pt_b = B;
 /***************/
 	C.x = 0;
 	C.y = 0;
 	C.z = 1;
 /***************/
-	tr.C = C;
+	tr.pt_c = C;
 /***************/
 	tr.color = 0x8A2BE2;
 /*************************
@@ -252,7 +252,7 @@ pl.color = 0x8A2BE2;
 			// {
 			// 	//color = 0x8A2BE2;
 			// 	tr_pl.n = tr.noraml;
-			// 	tr_pl.p = tr.A;
+			// 	tr_pl.p = tr.pt_a;
 			// 	tr_pl.color = tr.color;
 			// 	color = pl_shading(t, &light, &cam, tr_pl, amb, ray);
 			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);

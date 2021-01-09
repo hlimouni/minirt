@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 19:10:32 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/24 16:40:27 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/08 16:34:42 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,19 +229,19 @@ float  cy_intersect(t_vect ray_screen, t_cam *cam, t_cylinder cy)
      t_plane     plane;
      float       t;
      t_vect      origin_to_hit;
-     plane.n = vect_cross(vect_diff(tr->B, tr->A), vect_diff(tr->C, tr->A));
+     plane.n = vect_cross(vect_diff(tr->pt_b, tr->pt_a), vect_diff(tr->pt_c, tr->pt_a));
      plane.n = vect_unit(plane.n);
-     tr->noraml = plane.n;
-     plane.p = tr->A;
+     tr->normal = plane.n;
+     plane.p = tr->pt_a;
      //t = pl_intersect(ray_screen, cam, plane);
      if ((t = pl_intersect(ray_screen, cam, plane)) >= 0.0)
      {    
  	    ray_object = vect_unit(vect_diff(ray_screen, cam->c));
  	    ray_object = vect_const_prod(t, ray_object);
  	    ray_object = vect_sum(cam->c, ray_object);
-         if (vect_dot(plane.n, vect_cross(vect_diff(tr->B, tr->A), vect_diff(ray_object, tr->A))) >= 0.0 &&
-         vect_dot(plane.n, vect_cross(vect_diff(tr->C, tr->B), vect_diff(ray_object, tr->B))) >= 0.0
-         && vect_dot(plane.n, vect_cross(vect_diff(tr->A, tr->C), vect_diff(ray_object, tr->C))) >= 0.0)
+         if (vect_dot(plane.n, vect_cross(vect_diff(tr->pt_b, tr->pt_a), vect_diff(ray_object, tr->pt_a))) >= 0.0 &&
+         vect_dot(plane.n, vect_cross(vect_diff(tr->pt_c, tr->pt_b), vect_diff(ray_object, tr->pt_b))) >= 0.0
+         && vect_dot(plane.n, vect_cross(vect_diff(tr->pt_a, tr->pt_c), vect_diff(ray_object, tr->pt_c))) >= 0.0)
             return (t);
     }
     return(-1.0);
