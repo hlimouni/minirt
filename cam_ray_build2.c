@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 20:32:27 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/11 12:33:36 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/11 16:12:29 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,6 @@ t_ray	cam_ray_build3(int i, int j, t_cam *cam, t_resolution *res)
 	mat.line3 = (t_vect){.x = right.z, .y = up.z, .z = forward.z};
 	ray.screen = vect_sum(cam->c, mat_vect_prod(mat, pixel));
 	ray.origin = cam->c;
+	ray.dir = vect_unit(vect_diff(ray.screen, ray.origin));
 	return (ray);
 }

@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 18:00:56 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/23 16:14:53 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/11 16:20:06 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ int				vectoi(t_vect vect)
 	return (color);
 }
 
-t_vect	amb_shading(t_amb amb, int obj_color)
+t_vect	amb_shading(t_amb *amb, int obj_color)
 {
 	t_vect		ambience;
 	t_vect		amb_light_ratio;
 	t_vect		intensity;
 
-	amb_light_ratio = vect_const_prod(1.0/255.0, itovect(amb.color));
-	intensity = vect_const_prod(amb.intensity, amb_light_ratio);
+	amb_light_ratio = vect_const_prod(1.0/255.0, itovect(amb->color));
+	intensity = vect_const_prod(amb->intensity, amb_light_ratio);
 	ambience = vect_prod(itovect(obj_color), intensity);
 	return (ambience);
 }
@@ -85,14 +85,13 @@ t_vect	amb_shading(t_amb amb, int obj_color)
 // 	return (ray);
 // }
 
-t_vect	ray_hit_point(float t, t_vect ray_screen, t_cam *cam)
+t_vect	hit_point(float t, t_ray *ray)
 {
-	t_vect	ray;
+	t_vect	hit;
 
-	ray = vect_diff(ray_screen, cam->c);
-	ray = vect_const_prod(t, ray);
-	ray = vect_sum(cam->c, ray);
-	return (ray);
+	hit = vect_const_prod(t, ray->dir);
+	hit = vect_sum(ray->origin, hit);
+	return (hit);
 }
 
 int	sp_shading(float t, t_light *light, t_cam *cam, t_sphere sp,

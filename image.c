@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/09 11:09:38 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/11 09:36:54 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ pl.p = p;
 /*
 ** Plane's normal
 */
-n.x = 0;
-n.y = -0.8;
+n.x = 2;
+n.y = 1;
 n.z = 0.0;
 pl.n = n;
 /*
@@ -230,11 +230,11 @@ pl.color = 0x8A2BE2;
 			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			// }
 
-			// if ((t = pl_intersect(ray, &cam, pl)) >= 0.0)
-			// {
-			// 	color = pl_shading(t, &light, &cam, pl, amb, ray);
-			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
-			// }
+			if ((t = pl_intersect(ray, &cam, pl)) >= 0.0)
+			{
+				color = pl_shading(t, &light, &cam, pl, amb, ray);
+				mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
+			}
 
 			// if ((t = sq_intersect(ray, &cam, sq)) >= 0.0)
 			// {
@@ -248,15 +248,15 @@ pl.color = 0x8A2BE2;
 			// 	color = cy_shading(t, &light, &cam, cy, amb, ray);
 			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			// }
-			if ((t = tr_intersect(ray, &cam, &tr)) >= 0.0)
-			{
-				//color = 0x8A2BE2;
-				tr_pl.n = tr.normal;
-				tr_pl.p = tr.pt_a;
-				tr_pl.color = tr.color;
-				color = pl_shading(t, &light, &cam, tr_pl, amb, ray);
-				mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
-			}
+			// if ((t = tr_intersect(ray, &cam, &tr)) >= 0.0)
+			// {
+			// 	//color = 0x8A2BE2;
+			// 	tr_pl.n = tr.normal;
+			// 	tr_pl.p = tr.pt_a;
+			// 	tr_pl.color = tr.color;
+			// 	color = pl_shading(t, &light, &cam, tr_pl, amb, ray);
+			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
+			// }
 
 			// else
 			// 	mlx_pixel_put(mlx_ptr, win_ptr,i , j, 0x4a4a4a);

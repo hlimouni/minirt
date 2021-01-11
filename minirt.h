@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/11 09:57:35 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/11 16:11:35 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,7 @@ typedef struct		s_ray
 {
 	t_vect			origin;
 	t_vect			screen;
-	double			t;
+	t_vect			dir;
 }					t_ray;
 
 

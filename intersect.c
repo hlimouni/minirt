@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 19:10:32 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/11 09:54:44 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/11 19:40:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,18 @@ float  sp_intersect(t_vect ray, t_cam *cam, t_sphere sp)
         return (t1 < t2 ? t1 : t2);
 }
 
+double	sp_intersect2(t_ray *ray, t_sphere *sphere)
+{
+	double	b;
+    double	c;
+    t_vect  ray_sp_o;
+
+	ray_sp_o = vect_diff(ray->origin, sphere->o);
+	b = 2 * vect_dot(ray->dir, ray_sp_o);
+	c = vect_dot(ray_sp_o, ray_sp_o) - sphere->r * sphere->r;
+	return (solve_rt_quadratic(1, b, c));
+}
+
 float   pl_intersect(t_vect ray, t_cam *cam, t_plane plane)
 {
     t_vect      dir;
@@ -81,6 +93,22 @@ float   pl_intersect(t_vect ray, t_cam *cam, t_plane plane)
     // // if (t < 0 || fabs(t) > TMAX)
     //     return (-1.0);
     // return (t);
+}
+
+double	pl_intersect2(t_ray *ray, t_plane *plane)
+{
+	t_vect	dir_dot_n;
+	t_vect	p_o;
+
+	dir_dot_n = vect_dot(ray->dir, plane->n);
+	if (fabs(dir_dot_n) > 10e-7)
+	{
+		p_o = vect_diff(plane->p, ray->origin);
+		t = vect_dot(p_o, plane->n) / dir_dot_n;
+		if (t >= 0)
+			return (t);
+	}
+	return (-1);
 }
 
 float   sq_intersect(t_vect ray_screen, t_cam *cam, t_square square)
@@ -232,6 +260,51 @@ float  cy_intersect(t_vect ray_screen, t_cam *cam, t_cylinder cy)
     tmp = vect_diff(oc_c, vect_const_prod(vect_dot(oc_c, u), u));
     c = vect_dot(tmp, tmp) - cy.radius * cy.radius;
     delta = b * b - 4 * a * c;
+    if (delta < 0)
+        return (-1);
+    t1 = (- b - sqrt(delta)) / (2 * a);
+    t2 = (- b + sqrt(delta)) / (2 * a);
+    tmin = vect_dot(u, oc_c) / vect_dot(d, u);
+    tmax = (cy.height + vect_dot(u, oc_c)) / vect_dot(d, u);
+    // printf("d ")
+    // printf("d.u == %f", vect_dot(d, u));
+    if (t1 < tmin || t1 > tmax)
+        t1 = -1;
+    if (t2 < tmin || t2 > tmax)
+        t2 = -1;
+    if (signbit(t1) ^ signbit(t2))
+        return (t1 > t2 ? t1 : t2);
+    else if (t1 < 0 && t2 < 0)
+        return (-1);
+	else
+        return (t1 < t2 ? t1 : t2);
+}
+
+double  cy_intersect2(t_ray *ray, t_cylinder *cy)
+{
+	double   delta;
+	double   t1;
+	double   t2;
+	double   tmin;
+	double   tmax;
+	double   a;
+	double   b;
+	double   c;
+	t_vect  d;
+	t_vect  u;
+	t_vect  tmp;
+	t_vect  oc_c;
+	
+	u = vect_unit(cy.axis);
+	d = vect_unit(vect_diff(ray_screen, cam->c));
+	oc_c = vect_diff(cy->origin, ray->origin);
+	a = 1 - pow(vect_dot(ray->dir, cy->axis), 2);
+	b = 2 * (vect_dot(ray->dir, cy->axis) * vect_dot(oc_c, cy->axis);
+	b = b - vect_dot(oc_c, ray->dir));
+	c = vect_diff(oc_c, vect_const_prod(vect_dot(oc_c, cy->axis), cy->axis));
+	c = vect_dot(c, c) - cy->radius * cy->radius;
+	t = solve_rt_quadratic(a, b, c);
+	delta = b * b - 4 * a * c;
     if (delta < 0)
         return (-1);
     t1 = (- b - sqrt(delta)) / (2 * a);
