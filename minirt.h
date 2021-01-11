@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/10 10:06:17 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/11 09:57:35 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,8 @@ typedef struct		s_square
 {
 	t_vect			origin;
 	t_vect			normal;
+	t_vect			u;
+	t_vect			v;
 	double			side;
 	int				color;
 }					t_square;

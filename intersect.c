@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 19:10:32 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/08 16:34:42 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/11 09:54:44 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,36 @@ float   sq_intersect(t_vect ray_screen, t_cam *cam, t_square square)
               return (t);
     }
     return(-1.0);
+}
+
+/*
+** Quadratic function in rt:
+** If delta is negative means no solution so we return a negative value
+** than if delta is 0 we return either one of the two solution since they're
+** equal.
+** If the two solutions have different signs we return the greater one
+** but if they are both positive we return the smallest
+** of course if they're both negative we return a negative value.
+*/
+
+double	solve_rt_quadratic(double a, double b, double c)
+{
+	double t1;
+	double t2;
+	double delta;
+
+	delta = b * b - 4 * a * c;
+    if (delta < 0)
+        return (-1.0);
+    t1 = (- b - sqrt(delta)) / (2 * a);
+    t2 = (- b + sqrt(delta)) / (2 * a);
+	if (delta == 0.0)
+		return (t1);
+    if ((t1 > 0 && t2 < 0) || (t1 < 0 && t2 > 0))
+        return (t1 > t2 ? t1 : t2);
+    if (t1 < 0 && t2 < 0)
+        return (-1);
+    return (t1 < t2 ? t1 : t2);
 }
 
 float  cy_intersect(t_vect ray_screen, t_cam *cam, t_cylinder cy)
