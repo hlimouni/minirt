@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/11 16:11:35 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/12 12:09:41 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,7 @@ typedef struct		s_plane
 	t_vect			p;
 	t_vect			n;
 	int				color;
+	t_vect			color_vect;
 }					t_plane;
 
 typedef struct		s_square
@@ -234,6 +235,7 @@ typedef struct		s_square
 	t_vect			v;
 	double			side;
 	int				color;
+	t_vect			color_vect;
 }					t_square;
 
 typedef struct 		s_triangle
@@ -242,6 +244,7 @@ typedef struct 		s_triangle
 	t_vect			pt_b;
 	t_vect			pt_c;
 	t_vect			normal;
+	t_vect			color_vect;
 	int				color;
 }					t_triangle;
 
@@ -252,6 +255,7 @@ typedef struct		s_cylinder
 	t_vect			axis;
 	double			height;
 	double			radius;
+	t_vect			color_vect;
 	int				color;
 }					t_cylinder;
 
@@ -260,6 +264,7 @@ typedef struct		s_light
 {
 	t_vect			l;
 	double			intensity;
+	t_vect			color_vect;
 	int				color;
 }					t_light;
 
@@ -278,13 +283,16 @@ typedef struct		s_ray
 typedef struct		s_amb
 {
 	double			intensity;
+	t_vect			color_vect;
 	int				color;
+	t_vect			coeff;
 }					t_amb;
 
 typedef	struct		s_sphere
 {
 	t_vect			o;
 	double			r;
+	t_vect			color_vect;
 	int				color;
 }					t_sphere;
 
