@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elems_push.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:16:47 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/12 12:11:16 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/12 15:30:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int		rt_amb_push(char **splitd_line, t_scene *scene)
 		return (0);
 	amb->intensity = str_tof(splitd_line[amb_ratio]);
 	amb->color = str_to_rgbint(splitd_line[amb_color]);
-	amb->coeff = vect_const_prod(1.0/255.0, itovect(amb->color));
+	amb->color_vect = itovect(amb->color);
+	amb->coeff = vect_const_prod(1.0/255.0, amb->color_vect);
 	amb->coeff = vect_const_prod(amb->intensity, amb->coeff);
 	scene->amb = amb;
 	return (1);
@@ -53,6 +54,9 @@ int		rt_light_push(char **splitd_line, t_scene *scene)
 	light->l = str_to_vect(splitd_line[l_position]);
 	light->intensity = str_tof(splitd_line[l_bright]);
 	light->color = str_to_rgbint(splitd_line[l_color]);
+	light->color_vect = itovect(light->color);
+	light->coeff = vect_const_prod(1.0/255.0, light->color_vect);
+	light->coeff = vect_const_prod(light->intensity, light->coeff);
 	if (!(new_node = ft_lstnew(light)))
 		return (0);
 	new_node->element = rt_light;
@@ -68,7 +72,7 @@ int		rt_camera_push(char **splitd_line, t_scene *scene)
 	if (!(camera = malloc(sizeof(t_cam))))
 		return (0);
 	camera->c = str_to_vect(splitd_line[c_position]);
-//	camera->l = vect_unit(str_to_vect(splitd_line[c_orientation]));
+	// camera->l = vect_unit(str_to_vect(splitd_line[c_orientation]));
 	camera->l = str_to_vect(splitd_line[c_orientation]);
 	camera->fov = str_tof(splitd_line[c_fov]);
 //	camera->fov = (camera->fov * M_PI) / 180.0;
