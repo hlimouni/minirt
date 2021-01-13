@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 11:00:31 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/09 08:16:08 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/13 09:54:10 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ static char		**check_line(char **line, int line_ct)
 
 static void		check_missing_elems(t_scene *scene)
 {
+	t_list	*last_cam_node;
+
 	if (scene->res == NULL)
 		ft_putstr_fd("Error\nminiRT: Resolution is not specified\n", 2);
 	else if (scene->amb == NULL)
@@ -113,6 +115,8 @@ static void		check_missing_elems(t_scene *scene)
 		rt_free_scene(scene);
 		exit(1);
 	}
+	last_cam_node = ft_lstlast(scene->cams);
+	last_cam_node->next = scene->cams;
 }
 
 void			rt_parse(int fd, t_scene *scene)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/12 15:01:18 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/13 08:17:07 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 # include "ft_printf/libft/libft.h"
 # include "get_next_line/get_next_line.h"
+# include "minilibx/mlx.h"
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
@@ -299,8 +300,8 @@ typedef	struct		s_sphere
 
 typedef	struct		s_resolution
 {
-	int			width;
-	int			height;
+	int				width;
+	int				height;
 }					t_resolution;
 
 typedef struct		s_translation
@@ -317,7 +318,7 @@ typedef struct		s_rotation
 	double			roll;
 }					t_rotation;
 
-typedef struct	s_scene
+typedef struct		s_scene
 {
 	t_resolution	*res;
 	t_amb			*amb;
@@ -325,6 +326,18 @@ typedef struct	s_scene
 	t_list			*lights;
 	t_list			*objs;
 }				t_scene;
+
+typedef struct		s_mlibx
+{
+	void			*ptr;
+	void			*win_ptr;
+	void			*img_ptr;
+	int				*img_data;
+	int				line_len;
+	int				bbp;
+	int				endian;
+}					t_mlibx;
+
 
 typedef int		(*t_elem_push)(char **, t_scene *);
 typedef	int		(*t_typechecker)(char *);
