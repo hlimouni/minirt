@@ -6,17 +6,16 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 12:37:44 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/13 12:58:45 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/13 17:21:37 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#define K_SPACE 0x31
 
 int		key_bind(int keycode, void	*ptr)
 {
-	if (keycode == K_SPACE)
-		printf("S");
+	if (keycode == 0x31)
+		fprintf(stderr, "S");
 	return (0);
 }
 

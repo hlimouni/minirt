@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 20:32:27 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/11 16:12:29 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/13 15:09:18 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ t_vect	mat_vect_prod(t_mat3x3	mat, t_vect	v)
 	return (prod);
 }
 
+/*
 int		is_vect_null(t_vect *vect)
 {
 	return (vect->x == 0 && vect->y == 0 && vect->z == 0)
 }
+*/
 
 t_vect	cam_ray_build2(int i, int j, t_cam *cam, float w, float h)
 {
@@ -69,6 +71,7 @@ t_vect	cam_ray_build2(int i, int j, t_cam *cam, float w, float h)
 	return (ray_screen);
 }
 
+/*
 t_vect	pixel_to_vect(int x, int y, t_resolution *res, double fov)
 {
 	t_vect	pixel;
@@ -121,3 +124,4 @@ t_ray	cam_ray_build3(int i, int j, t_cam *cam, t_resolution *res)
 	ray.dir = vect_unit(vect_diff(ray.screen, ray.origin));
 	return (ray);
 }
+*/

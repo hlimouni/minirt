@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 08:03:17 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/13 12:38:59 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/13 18:51:05 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_mlx_data(t_mlibx *mlx, t_resolution *res)
 int		ray_trace(int i, int j, t_scene *scene, t_mlibx *mlx)
 {
 	t_ray	ray;
-	t_list	*cam;
+	t_cam	*cam;
 
 	cam = scene->cams;
 	ray = cam_ray_build3(i, j, cam, scene->res);
@@ -35,6 +35,14 @@ t_cam	*rt_cam_switch(t_scene *scene)
 	t_cam	*cam;
 
 	cam = scene->cams;
+}
+
+int	key_bind(int keycode, )
+{
+	if (keycode == 0x31)
+	{
+
+	}
 }
 
 void	create_rt_image(t_scene *scene, t_mlibx *mlx)

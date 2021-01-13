@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 19:10:32 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/12 10:17:30 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/13 15:14:03 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ float  sp_intersect(t_vect ray, t_cam *cam, t_sphere sp)
 	else
         return (t1 < t2 ? t1 : t2);
 }
+/*
 
 double	sp_intersect2(t_ray *ray, t_sphere *sphere)
 {
@@ -60,6 +61,7 @@ double	sp_intersect2(t_ray *ray, t_sphere *sphere)
 	c = vect_dot(ray_sp_o, ray_sp_o) - sphere->r * sphere->r;
 	return (solve_rt_quadratic(1, b, c));
 }
+*/
 
 float   pl_intersect(t_vect ray, t_cam *cam, t_plane plane)
 {
@@ -95,6 +97,7 @@ float   pl_intersect(t_vect ray, t_cam *cam, t_plane plane)
     // return (t);
 }
 
+/*
 double	pl_intersect2(t_ray *ray, t_plane *plane)
 {
 	t_vect	dir_dot_n;
@@ -142,7 +145,7 @@ double	sq_intersect2(t_ray *ray, t_square *sq)
 	}
 	return (-1);
 }
-
+*/
 
 float   sq_intersect(t_vect ray_screen, t_cam *cam, t_square square)
 {
@@ -250,6 +253,7 @@ float   sq_intersect(t_vect ray_screen, t_cam *cam, t_square square)
 ** of course if they're both negative we return a negative value.
 */
 
+/*
 double	solve_rt_quadratic(double a, double b, double c)
 {
 	double t1;
@@ -267,6 +271,7 @@ double	solve_rt_quadratic(double a, double b, double c)
         return (-1);
     return (t1 < t2 ? t1 : t2);
 }
+*/
 
 float  cy_intersect(t_vect ray_screen, t_cam *cam, t_cylinder cy)
 {
@@ -310,7 +315,7 @@ float  cy_intersect(t_vect ray_screen, t_cam *cam, t_cylinder cy)
 	else
         return (t1 < t2 ? t1 : t2);
 }
-
+/*
 double		cy_intersect2(t_ray *ray, t_cylinder *cy)
 {
 	double	a;
@@ -332,6 +337,7 @@ double		cy_intersect2(t_ray *ray, t_cylinder *cy)
 		return (-1);
 	return (t);
 }
+*/
 
 
  float   tr_intersect(t_vect ray_screen, t_cam *cam, t_triangle *tr)
@@ -361,6 +367,7 @@ double		cy_intersect2(t_ray *ray, t_cylinder *cy)
     return(-1.0);
 }
 
+/*
 double   tr_intersect2(t_ray *ray, t_triangle *tr)
 {
 	t_vect		hit;
@@ -372,7 +379,7 @@ double   tr_intersect2(t_ray *ray, t_triangle *tr)
 	plane.n = vect_unit(plane.n);
 	tr->normal = plane.n;
 	plane.p = tr->pt_a;
-	if ((t = pl_intersect2(ray, &plane)) >= 0)
+	if ((t = pl_intersect(ray, &plane)) >= 0)
 	{
 		hit = vect_const_prod(t, ray->dir);
 		hit = vect_sum(ray->origin, hit);
@@ -386,3 +393,5 @@ double   tr_intersect2(t_ray *ray, t_triangle *tr)
 	}
 	return(-1);
 }
+
+*/

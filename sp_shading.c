@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 18:00:56 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/12 16:20:51 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/13 15:12:10 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_vect	amb_shading2(t_amb *amb, t_vect obj_color)
 	t_vect		amb_light_ratio;
 	t_vect		intensity;
 
-	amb_light_ratio = vect_const_prod(1.0/255.0, amb->color);
+	amb_light_ratio = vect_const_prod(1.0/255.0, itovect(amb->color));
 	intensity = vect_const_prod(amb->intensity, amb_light_ratio);
 	ambience = vect_prod(obj_color, intensity);
 	return (ambience);
