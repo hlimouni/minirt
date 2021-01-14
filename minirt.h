@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/13 08:17:07 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/14 11:53:12 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 # define A_BIG_VALUE 1e14
 # define NEGATIVE_VALUE -1
+# define K_SPACE 0x31
 
 // # define RT_TYPES_NUM 8
 // //# define RT_ELEMS_COUNT 10
@@ -338,6 +339,18 @@ typedef struct		s_mlibx
 	int				endian;
 }					t_mlibx;
 
+typedef struct		s_hit
+{
+	double			t;
+	t_list			*obj;
+	int				obj_color;
+}					t_hit;
+
+typedef struct		s_rt_data	
+{
+	t_mlibx			*mlx;
+	t_scene			*scene;
+}					t_rt_data;
 
 typedef int		(*t_elem_push)(char **, t_scene *);
 typedef	int		(*t_typechecker)(char *);
