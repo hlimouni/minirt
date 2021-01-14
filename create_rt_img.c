@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 08:03:17 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/14 12:26:14 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/14 17:38:37 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ int		get_pixel_color(int i, int j, t_scene *scene, t_mlibx *mlx)
 	ray = cam_ray_build3(i, j, cam, scene->res);
 }
 
-t_cam	*rt_cam_switch(t_scene *scene)
-{
-	t_cam	*cam;
-
-	cam = scene->cams->;
-}
-
 int	key_bind(int keycode, t_rt_data *data)
 {
 	static t_list *cam_lst = data->scene->cams;
@@ -50,8 +43,27 @@ int	key_bind(int keycode, t_rt_data *data)
 		img_array_set((t_cam *)cam_lst->content, data->scene,
 			data->mlx->img_data);
 	}
+	if (keycode == K_ESC)
+	{
+		mlx_destroy_window(data->mlx->ptr, data->mlx->win_ptr);
+		rt_free_scene(data->scene);
+		exit(0);
+	}
+	return (0);
 }
 
+int	close_bind(t_rt_data *data)
+{
+	rt_free_scene(data->scene);
+	exit(0);	
+}
+
+int	rt_event_hooks(t_rt_data *data)
+{
+	mlx_do_key_autorepeatoff(data->mlx->ptr);
+	mlx_hook(data->mlx->win_ptr, E_KEY_PRESS, 1L<<0, key_bind, data);
+	mlx_hook(data->mlx->win_ptr, E_DESTROY, 1L<<17, close_bind, data); 
+}
 
 void	img_array_set(t_cam *cam, t_scene *scene, int *img_data)
 {

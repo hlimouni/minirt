@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/14 11:53:12 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/14 16:33:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # define A_BIG_VALUE 1e14
 # define NEGATIVE_VALUE -1
 # define K_SPACE 0x31
+# define K_ESC 0x35
+# define E_DESTROY 0x17
+# define E_KEY_PRESS 2
 
 // # define RT_TYPES_NUM 8
 // //# define RT_ELEMS_COUNT 10
