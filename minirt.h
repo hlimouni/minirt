@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/14 16:33:49 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/15 15:53:59 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINIRT_H
 # include "ft_printf/libft/libft.h"
 # include "get_next_line/get_next_line.h"
-# include "minilibx/mlx.h"
+# include "minilibx_mms_20200219/mlx.h"
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
@@ -24,9 +24,9 @@
 
 # define A_BIG_VALUE 1e14
 # define NEGATIVE_VALUE -1
-# define K_SPACE 0x31
-# define K_ESC 0x35
-# define E_DESTROY 0x17
+# define K_SPACE 49
+# define K_ESC 53
+# define E_DESTROY 17
 # define E_KEY_PRESS 2
 
 // # define RT_TYPES_NUM 8
@@ -232,6 +232,11 @@ typedef struct		s_plane
 	t_vect			color_vect;
 }					t_plane;
 
+/*
+** For t_square:
+** R(origin, normal, u, v) is its orthonormal base
+*/
+
 typedef struct		s_square
 {
 	t_vect			origin;
@@ -354,6 +359,14 @@ typedef struct		s_rt_data
 	t_mlibx			*mlx;
 	t_scene			*scene;
 }					t_rt_data;
+
+typedef struct		s_coeff
+{
+	double			a;
+	double			b;
+	double			c;
+}					t_coeff;
+
 
 typedef int		(*t_elem_push)(char **, t_scene *);
 typedef	int		(*t_typechecker)(char *);

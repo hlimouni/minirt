@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 11:00:31 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/13 09:54:10 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/15 16:45:22 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ static void		check_missing_elems(t_scene *scene)
 		rt_free_scene(scene);
 		exit(1);
 	}
-	last_cam_node = ft_lstlast(scene->cams);
-	last_cam_node->next = scene->cams;
+	// last_cam_node = ft_lstlast(scene->cams);
+	// last_cam_node->next = scene->cams;
 }
 
 void			rt_parse(int fd, t_scene *scene)

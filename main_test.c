@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 10:55:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/08 16:10:45 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/15 19:13:31 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,15 @@ void	print_plane(t_plane *pl)
 void	print_elem(int elem, void *content)
 {
 	if (elem == rt_square)
-		return (print_sq((t_square *)content));
+		return (print_sq(content));
 	else if (elem == rt_plane)
-		return (print_plane((t_plane *)content));
+		return (print_plane(content));
 	else if (elem == rt_triangle)
-		return (print_triangle((t_triangle *)content));
+		return (print_triangle(content));
 	else if (elem == rt_sphere)
-		return (print_sphere((t_sphere *)content));
+		return (print_sphere(content));
 	else if (elem == rt_cylinder)
-		return (print_cylinder((t_cylinder *)content));
+		return (print_cylinder(content));
 }
 
 void	print_scene(t_scene *scene)
