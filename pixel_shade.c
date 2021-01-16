@@ -1,52 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sp_shading.c                                       :+:      :+:    :+:   */
+/*   pixel_shade.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/09 18:00:56 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/16 15:38:40 by hlimouni         ###   ########.fr       */
+/*   Created: 2021/01/16 15:01:40 by hlimouni          #+#    #+#             */
+/*   Updated: 2021/01/16 19:19:03 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include <stdio.h>
-
-t_vect			itovect(int color)
-{
-	t_vect			vect;
-	unsigned char	*rgb;
-
-	rgb = (unsigned char *)(&color);
-	vect.x = (double)rgb[2];
-	vect.y = (double)rgb[1];
-	vect.z = (double)rgb[0];
-	return (vect);
-}
-
-int				vectoi(t_vect vect)
-{
-	int		red;
-	int 	green;
-	int 	blue;
-	int		color;
-	double	x;
-	double	y;
-	double	z;
-
-	if ((x = vect.x) > 255.0)
-		x = 255.0;
-	if ((y = vect.y) > 255.0)
-		y = 255.0;
-	if ((z = vect.z) > 255.0)
-		z = 255.0;
-	red = (int)x;
-	green = (int)y;
-	blue = (int)z;
-	color = (red << 16 | green << 8 | blue);
-	return (color);
-}
 
 t_vect	amb_shading(t_amb *amb, int obj_color)
 {
@@ -99,13 +63,34 @@ t_vect	amb_shading2(t_amb *amb, t_vect obj_color)
 // 	return (ray);
 // }
 
-t_vect	hit_point(float t, t_ray *ray)
+t_vect	hit_point(double t, t_ray *ray)
 {
 	t_vect	hit;
 
 	hit = vect_const_prod(t, ray->dir);
 	hit = vect_sum(ray->origin, hit);
 	return (hit);
+}
+
+t_vect			sp_shading(t_hit *hit, t_ray *ray, t_light *light, t_sphere *sp)
+{
+	t_vect			specular_diffuse;
+	t_shade_vars	vars;
+
+	hit->ray_obj = hit_point(hit->t, ray);
+	vars.to_light = vect_unit(vect_diff(light->l, hit->ray_obj));
+	vars.normal = vect_unit(vect_diff(hit->ray_obj, sp->o));
+	vars.difuse_cst = DIFU_C * fmax(0, vect_dot(vars.normal, vars.to_light));
+	vars.diffuse = vect_const_prod(vars.difuse_cst, sp->color_vect);
+	vars.view = vect_unit(vect_diff(ray->origin, hit->ray_obj));
+	vars.ref_cst = 2 * vect_dot(vars.normal, vars.to_light);
+	vars.reflect = vect_const_prod(vars.ref_cst, vars.normal);
+	vars.reflect = vect_diff(vars.reflect, vars.to_light);
+	vars.specular = vect_dot(vars.view, vars.reflect);
+	vars.specular = SPEC_C * fmax(0, pow(vars.specular, SHINE));
+	vect_dot(vars.normal, vars.to_light) < 0 ? (vars.specular = 0) : 0;
+	specular_diffuse = vect_const_sum(vars.specular, vars.diffuse);
+	return (specular_diffuse);
 }
 
 int	sp_shading(float t, t_light *light, t_cam *cam, t_sphere sp,
@@ -283,3 +268,9 @@ int	cy_shading(float t, t_light *light, t_cam *cam, t_cylinder cy,
 	color = vectoi(color_vect);
 	return (color);
 }
+
+int		pixel_shade(t_hit *hit, t_ray *ray, t_scene *scene, t_list *obj)
+{
+	
+}
+

@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:16:47 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/12 15:30:49 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/16 15:07:27 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		rt_amb_push(char **splitd_line, t_scene *scene)
 		return (0);
 	amb->intensity = str_tof(splitd_line[amb_ratio]);
 	amb->color = str_to_rgbint(splitd_line[amb_color]);
-	amb->color_vect = itovect(amb->color);
+	amb->color_vect = str_to_vect(splitd_line[amb_color]);
 	amb->coeff = vect_const_prod(1.0/255.0, amb->color_vect);
 	amb->coeff = vect_const_prod(amb->intensity, amb->coeff);
 	scene->amb = amb;
@@ -53,8 +53,7 @@ int		rt_light_push(char **splitd_line, t_scene *scene)
 		return (0);
 	light->l = str_to_vect(splitd_line[l_position]);
 	light->intensity = str_tof(splitd_line[l_bright]);
-	light->color = str_to_rgbint(splitd_line[l_color]);
-	light->color_vect = itovect(light->color);
+	light->color_vect = str_to_vect(splitd_line[l_color]);
 	light->coeff = vect_const_prod(1.0/255.0, light->color_vect);
 	light->coeff = vect_const_prod(light->intensity, light->coeff);
 	if (!(new_node = ft_lstnew(light)))

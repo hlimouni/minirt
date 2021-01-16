@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/15 15:53:59 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/16 19:15:27 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # define K_ESC 53
 # define E_DESTROY 17
 # define E_KEY_PRESS 2
+# define DIFU_C 1
+# define SPEC_C	1
+# define SHINE 128
 
 // # define RT_TYPES_NUM 8
 // //# define RT_ELEMS_COUNT 10
@@ -351,6 +354,7 @@ typedef struct		s_hit
 {
 	double			t;
 	t_list			*obj;
+    t_vect          ray_obj;
 	int				obj_color;
 }					t_hit;
 
@@ -366,6 +370,41 @@ typedef struct		s_coeff
 	double			b;
 	double			c;
 }					t_coeff;
+
+typedef struct		s_diffuse
+{
+	t_vect			normal;
+	t_vect			to_light;
+	double			cst;
+}					t_diffuse;
+
+typedef struct		s_shade_vars
+{
+	t_vect			normal;
+	t_vect			to_light;
+	t_vect			diffuse;
+	double			difuse_cst;
+	t_vect			view;
+	t_vect			reflect;
+	double			ref_cst;
+	double			specular;
+}					t_shade_vars;
+
+
+typedef struct		s_specular
+{
+	t_vect			view;
+	t_vect			reflect;
+	double			cst;
+}					t_specular;
+
+
+typedef struct		s_shade
+{
+    t_vect			diffuse;
+    double			specular;
+	t_vect			spec_difu;
+}                   t_shade;
 
 
 typedef int		(*t_elem_push)(char **, t_scene *);

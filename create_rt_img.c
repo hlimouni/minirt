@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_rt_img.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 08:03:17 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/15 19:14:58 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/16 15:31:26 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	img_array_set(t_cam *cam, t_scene *scene, int *img_data)
 			ray = cam_ray_build3(i, j, cam, res);
 			if ((hit = ray_intersect(&ray, scene->objs)).t >= 0)
 			{
-				hit.obj_color = pixel_shade(hit, ray, scene, hit.obj);
+				hit.obj_color = pixel_shade(&hit, &ray, scene, hit.obj);
 				img_data[j * scene->res->width + i] = hit.obj_color;
 			}
 			i++;
@@ -115,3 +115,4 @@ void	display_rt_image(t_mlibx *mlx)
 	mlx_hook(data->mlx->win_ptr, E_DESTROY, 1L<<17, close_bind, data);
  	mlx_loop(mlx->ptr);
 }
+ 
