@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:01:40 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/16 19:19:03 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/17 17:01:36 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,26 +72,85 @@ t_vect	hit_point(double t, t_ray *ray)
 	return (hit);
 }
 
-t_vect			sp_shading(t_hit *hit, t_ray *ray, t_light *light, t_sphere *sp)
+void	set_cy_normal(t_hit *hit, t_cylinder *cy)
+{
+	hit->normal = vect_diff(hit->ray_obj, cy->origin);
+	hit->normal = vect_diff(hit->normal,
+		vect_const_prod(vect_dot(cy->axis, hit->normal), cy->axis));
+	hit->normal = vect_unit(hit->normal);
+}
+
+void			set_hit(t_hit *hit, t_ray *ray)
+{
+	void		*obj;
+	t_cylinder	*cy;
+
+	obj = hit->obj->content;
+	hit->ray_obj = vect_const_prod(t, ray->dir);
+	hit->ray_obj = vect_sum(ray->origin, hit->ray_obj);
+	if (hit->obj->element == rt_sphere)
+		hit->normal = vect_unit(vect_diff(hit->ray_obj, ((t_sphere *)obj)->o);
+	else if (hit->obj->element == rt_cylinder)
+	{
+		cy = obj;
+		hit->normal = vect_diff(hit->ray_obj, cy->origin);
+		hit->normal = vect_diff(hit->normal,
+			vect_const_prod(vect_dot(cy->axis, hit->normal), cy->axis));
+		hit->normal = vect_unit(hit->normal);
+	}
+	else if (hit->obj->element == rt_plane)
+		hit->normal = ((t_plane *)obj)->n;
+	else if (hit->obj->element == rt_square)
+		hit->normal = ((t_square *)obj)->normal;
+	else if (hit->obj->element == rt_triangle)
+		hit->normal = ((t_triangle *)obj)->normal;
+}
+
+t_vect			phong_diffuse_specular(t_hit *hit, t_ray *ray, t_light *light, t_vect color)
+{
+	t_vect			diffuse_specular;
+	t_shade_vars	shade;
+
+	shade.normal = hit->normal;
+	shade.to_light = vect_unit(vect_diff(light->l, hit->ray_obj));
+//	shade.difuse_cst = DIFU_C * fmax(0, vect_dot(shade.normal, shade.to_light));
+	shade.diffuse = vect_const_prod(DIFU_C, color);
+	shade.view = vect_unit(vect_diff(ray->origin, hit->ray_obj));
+	shade.ref_cst = 2 * vect_dot(shade.normal, shade.to_light);
+	shade.reflect = vect_const_prod(shade.ref_cst, shade.normal);
+	shade.reflect = vect_diff(shade.reflect, shade.to_light);
+	shade.reflect = vect_unit(shade.reflect);
+	shade.specular = vect_dot(shade.view, shade.reflect);
+	shade.specular = SPEC_C * pow(shade.specular, SHINE);
+	diffuse_specular = vect_const_sum(shade.specular, shade.diffuse);
+	shade.surface_illum = vect_dot(shade.normal, shade.to_light);
+	diffuse_specular = vect_const_prod(shade.surface_illum, diffuse_specular);
+	diffuse_specular = vect_prod(light->coeff, diffuse_specular);
+	return (diffuse_specular);	
+}
+
+t_vect			sp_lighting(t_hit *hit, t_ray *ray, t_light *light, t_sphere *sp)
 {
 	t_vect			specular_diffuse;
-	t_shade_vars	vars;
+	t_shade_vars	shade;
 
-	hit->ray_obj = hit_point(hit->t, ray);
-	vars.to_light = vect_unit(vect_diff(light->l, hit->ray_obj));
-	vars.normal = vect_unit(vect_diff(hit->ray_obj, sp->o));
-	vars.difuse_cst = DIFU_C * fmax(0, vect_dot(vars.normal, vars.to_light));
-	vars.diffuse = vect_const_prod(vars.difuse_cst, sp->color_vect);
-	vars.view = vect_unit(vect_diff(ray->origin, hit->ray_obj));
-	vars.ref_cst = 2 * vect_dot(vars.normal, vars.to_light);
-	vars.reflect = vect_const_prod(vars.ref_cst, vars.normal);
-	vars.reflect = vect_diff(vars.reflect, vars.to_light);
-	vars.specular = vect_dot(vars.view, vars.reflect);
-	vars.specular = SPEC_C * fmax(0, pow(vars.specular, SHINE));
-	vect_dot(vars.normal, vars.to_light) < 0 ? (vars.specular = 0) : 0;
-	specular_diffuse = vect_const_sum(vars.specular, vars.diffuse);
+	shade.normal = hit->normal;
+	shade.to_light = vect_unit(vect_diff(light->l, hit->ray_obj));
+	shade.difuse_cst = DIFU_C * fmax(0, vect_dot(shade.normal, shade.to_light));
+	shade.diffuse = vect_const_prod(shade.difuse_cst, sp->color_vect);
+	shade.view = vect_unit(vect_diff(ray->origin, hit->ray_obj));
+	shade.ref_cst = 2 * vect_dot(shade.normal, shade.to_light);
+	shade.reflect = vect_const_prod(shade.ref_cst, shade.normal);
+	shade.reflect = vect_diff(shade.reflect, shade.to_light);
+	shade.reflect = vect_unit(shade.reflect);
+	shade.specular = vect_dot(shade.view, shade.reflect);
+	shade.specular = SPEC_C * fmax(0, pow(shade.specular, SHINE));
+	vect_dot(shade.normal, shade.to_light) < 0 ? (shade.specular = 0) : 0;
+	specular_diffuse = vect_const_sum(shade.specular, shade.diffuse);
+	specular_diffuse = vect_prod(light->coeff, specular_diffuse);
 	return (specular_diffuse);
 }
+
 
 int	sp_shading(float t, t_light *light, t_cam *cam, t_sphere sp,
 					t_amb amb, t_vect ray_screen)
@@ -213,6 +272,27 @@ int	pl_shading(float t, t_light *light, t_cam *cam, t_plane pl,
 	return (color);
 }
 
+t_vect			pl_lighting(t_hit *hit, t_ray *ray, t_light *light, t_plane *pl)
+{
+	t_vect			specular_diffuse;
+	t_shade_vars	shade;
+
+	shade.normal = hit->normal;
+	shade.to_light = vect_unit(vect_diff(light->l, hit->ray_obj));
+	shade.difuse_cst = DIFU_C * fabs(vect_dot(shade.normal, shade.to_light));
+	shade.diffuse = vect_const_prod(shade.difuse_cst, pl->color_vect);
+	shade.view = vect_unit(vect_diff(ray->origin, hit->ray_obj));
+	shade.ref_cst = 2 * vect_dot(shade.normal, shade.to_light);
+	shade.reflect = vect_const_prod(shade.ref_cst, shade.normal);
+	shade.reflect = vect_diff(shade.reflect, shade.to_light);
+	shade.reflect = vect_unit(shade.reflect);
+	shade.specular = vect_dot(shade.view, shade.reflect);
+	shade.specular = SPEC_C * pow(shade.specular, SHINE);
+	specular_diffuse = vect_const_sum(shade.specular, shade.diffuse);
+	specular_diffuse = vect_prod(light->coeff, specular_diffuse);
+	return (specular_diffuse);
+}
+
 int	cy_shading(float t, t_light *light, t_cam *cam, t_cylinder cy,
 					t_amb amb, t_vect ray_screen)
 {
@@ -267,6 +347,28 @@ int	cy_shading(float t, t_light *light, t_cam *cam, t_cylinder cy,
 	// return (color);
 	color = vectoi(color_vect);
 	return (color);
+}
+
+t_vect			cy_lighting(t_hit *hit, t_ray *ray, t_light *light, t_cylinder *cy)
+{
+	t_vect			specular_diffuse;
+	t_shade_vars	shade;
+
+	shade.normal = hit->normal;
+	shade.to_light = vect_unit(vect_diff(light->l, hit->ray_obj));
+	shade.difuse_cst = DIFU_C * fmax(0, vect_dot(shade.normal, shade.to_light));
+	shade.diffuse = vect_const_prod(shade.difuse_cst, cy->color_vect);
+	shade.view = vect_unit(vect_diff(ray->origin, hit->ray_obj));
+	shade.ref_cst = 2 * vect_dot(shade.normal, shade.to_light);
+	shade.reflect = vect_const_prod(shade.ref_cst, shade.normal);
+	shade.reflect = vect_diff(shade.reflect, shade.to_light);
+	shade.reflect = vect_unit(shade.reflect);
+	shade.specular = vect_dot(shade.view, shade.reflect);
+	shade.specular = SPEC_C * fmax(0, pow(shade.specular, SHINE));
+	vect_dot(shade.normal, shade.to_light) < 0 ? (shade.specular = 0) : 0;
+	specular_diffuse = vect_const_sum(shade.specular, shade.diffuse);
+	specular_diffuse = vect_prod(light->coeff, specular_diffuse);
+	return (specular_diffuse);
 }
 
 int		pixel_shade(t_hit *hit, t_ray *ray, t_scene *scene, t_list *obj)

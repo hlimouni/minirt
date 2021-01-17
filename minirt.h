@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/16 19:15:27 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/17 16:41:41 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -355,6 +355,7 @@ typedef struct		s_hit
 	double			t;
 	t_list			*obj;
     t_vect          ray_obj;
+	t_vect			normal;
 	int				obj_color;
 }					t_hit;
 
@@ -384,6 +385,7 @@ typedef struct		s_shade_vars
 	t_vect			to_light;
 	t_vect			diffuse;
 	double			difuse_cst;
+	double			surface_illum;
 	t_vect			view;
 	t_vect			reflect;
 	double			ref_cst;
