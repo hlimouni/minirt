@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_tof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 14:58:57 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/08 16:02:24 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/18 07:39:56 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ double	str_tof(char *str)
 
 	i = 0;
 	res = 0;
-	frac_pt = NEGATIVE_VALUE;
+	frac_pt = -1;
 	sign = str_get_sign(str, &i);
 	while (str[i])
 	{
@@ -52,6 +52,6 @@ double	str_tof(char *str)
 	}
 	frac_pt >= 0 ? res = res * pow(10, frac_pt - (int)ft_strlen(str)) : 0;
 	if (res >= A_BIG_VALUE)
-		return (sign < 0 ? -INFINITY : INFINITY);
+		return (sign < 0 ? -A_BIG_VALUE : A_BIG_VALUE);
 	return (sign < 0 ? -res : res);
 }
