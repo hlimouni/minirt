@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_rt_img.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 08:03:17 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/16 15:31:26 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/18 16:04:28 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 // 	mlx_key_hook(mlx->win_ptr, key_bind, param);
 // 	ray = cam_ray_build3(i, j, cam, scene->res);
 // }
+//		mlx_clear_window(data->mlx->ptr, data->mlx->win_ptr);
 
 int					key_bind(int keycode, t_rt_data *data)
 {
@@ -41,7 +42,6 @@ int					key_bind(int keycode, t_rt_data *data)
 		if (!(cam_lst = cam_lst->next))
 			cam_lst = data->scene->cams;
 		img_array_set(cam_lst->content, data->scene, data->mlx->img_data);
-//		mlx_clear_window(data->mlx->ptr, data->mlx->win_ptr);
 		mlx_put_image_to_window(data->mlx->ptr, data->mlx->win_ptr,
 			mlx->img_ptr, 0, 0);
 	}
@@ -82,11 +82,12 @@ void	img_array_set(t_cam *cam, t_scene *scene, int *img_data)
 		i = 0;
 		while (i < scene->res->width)
 		{
-			ray = cam_ray_build3(i, j, cam, res);
-			if ((hit = ray_intersect(&ray, scene->objs)).t >= 0)
+			cam_ray_build3((int[]){i, j}, cam, res, &ray);
+			ray_intersect(&ray, scene->objs, &hit);
+			if (hit.t >= 0)
 			{
-				hit.obj_color = pixel_shade(&hit, &ray, scene, hit.obj);
-				img_data[j * scene->res->width + i] = hit.obj_color;
+				hit.pxl_color = pixel_shade(&hit, &ray, scene);
+				img_data[j * scene->res->width + i] = hit.pxl_color;
 			}
 			i++;
 		}
@@ -115,4 +116,3 @@ void	display_rt_image(t_mlibx *mlx)
 	mlx_hook(data->mlx->win_ptr, E_DESTROY, 1L<<17, close_bind, data);
  	mlx_loop(mlx->ptr);
 }
- 

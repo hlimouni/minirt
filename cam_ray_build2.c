@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 20:32:27 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/13 15:09:18 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/18 16:10:46 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_vect	cam_ray_build2(int i, int j, t_cam *cam, float w, float h)
 }
 
 /*
-t_vect	pixel_to_vect(int x, int y, t_resolution *res, double fov)
+t_vect	pixel_to_vect(int i, int j, t_resolution *res, double fov)
 {
 	t_vect	pixel;
 	double	w;
@@ -102,8 +102,10 @@ t_vect	tmp_vect_set(t_vect *orient)
 	}
 	return (tmp);
 }
+*/
 
-t_ray	cam_ray_build3(int i, int j, t_cam *cam, t_resolution *res)
+t_ray	cam_ray_build3(int pxl[], t_cam *cam, t_resolution *res,
+						t_ray *ray)
 {
 	t_vect		pixel;
     t_vect  	forward;
@@ -111,7 +113,7 @@ t_ray	cam_ray_build3(int i, int j, t_cam *cam, t_resolution *res)
 	t_mat3x3	mat;
 	t_ray		ray;
 
-	pixel = pixel_to_vect(i, j, res, cam->fov);
+	pixel = pixel_to_vect(pxl[i_pxl], pxl[j_pxl], res, cam->fov);
     forward = vect_unit(vect_const_prod(-1, cam->l));
 	right = vect_cross(tmp_vect_set(cam->l), forward);
     right = vect_unit(right);
@@ -124,4 +126,4 @@ t_ray	cam_ray_build3(int i, int j, t_cam *cam, t_resolution *res)
 	ray.dir = vect_unit(vect_diff(ray.screen, ray.origin));
 	return (ray);
 }
-*/
+

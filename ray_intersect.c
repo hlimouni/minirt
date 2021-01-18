@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:09:30 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/15 19:42:01 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/18 16:01:20 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,57 +164,40 @@ double			tr_intersect2(t_ray *ray, t_triangle *tr)
 	return (-1);
 }
 
-t_hit			ray_intersect(t_ray *ray, t_list *objs)
+double			one_obj_intersect(t_ray *ray, t_list *obj_node)
 {
-	t_hit		hit;
+	double		hit;
+
+	if (obj_node->element == rt_sphere)
+		t = sp_intersect2(ray, obj_node->content);
+	else if (obj_node->element == rt_cylinder)
+		t = cy_intersect2(ray, obj_node->content);
+	else if (obj_node->element == rt_plane)
+		t = pl_intersect2(ray, obj_node->content);
+	else if (obj_node->element == rt_square)
+		t = sq_intersect2(ray, obj_node->content);
+	else if (obj_node->element == rt_triangle)
+		t = tr_intersect2(ray, obj_node->content);
+	return (t);
+}
+
+void			ray_intersect(t_ray *ray, t_list *obj_node, t_hit *hit)
+{
 	double		t;
 	
-	hit.t = HUGE_VALF;
-	while (objs)
+	hit->t = +INFINITY;
+	while (obj_node)
 	{
-		if (objs->element == rt_sphere)
+		t = one_obj_intersect(ray, obj_node);
+		if (t >= 0 && t < hit->t)
 		{
-			if ((t = sp_intersect2(ray, objs->content)) >= 0 && t < hit.t)
-			{
-				(hit.t = t) && (hit.obj = objs);
-			}
-		}
-		else if (objs->element == rt_cylinder)
-		{
-			if ((t = cy_intersect2(ray, objs->content)) >= 0 && t < hit.t)
-			{
-				hit.t = t;
-				hit.obj = objs;
-			}
-		}
-		else if (objs->element == rt_plane)
-		{
-			if ((t = pl_intersect2(ray, objs->content)) >= 0 && t < hit.t)
-			{
-				hit.t = t;
-				hit.obj = objs;
-			}
-		}
-		else if (objs->element == rt_square)
-		{
-			if ((t = sq_intersect2(ray, objs->content)) >= 0 && t < hit.t)
-			{
-				hit.t = t;
-				hit.obj = objs;
-			}
-		}
-		else if (objs->element == rt_triangle)
-		{
-			if ((t = tr_intersect2(ray, objs->content)) >= 0 && t < hit.t)
-			{
-				hit.t = t;
-				hit.obj = objs;
-			}
-			t = tr_intersect2(ray, objs->content);
-		}
-		objs = objs->next;
+			hit->t = t;
+			hit->obj = obj_node;
+		}	
+		obj_node = obj_node->next;
 	}
-	if (hit.t == INFINITY)
-		hit.t = -1;
-	return (hit);
+	if (isinf(hit->t))
+		hit->t = -1;
+	else
+		set_hit(hit, ray);
 }

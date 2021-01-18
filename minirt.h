@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/17 16:41:41 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/18 16:10:40 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@
 # define K_ESC 53
 # define E_DESTROY 17
 # define E_KEY_PRESS 2
-# define DIFU_C 1
+# define AMB_C M_1_PI
+# define DIFU_C M_1_PI
 # define SPEC_C	1
-# define SHINE 128
+# define SHINE 5
 
 // # define RT_TYPES_NUM 8
 // //# define RT_ELEMS_COUNT 10
@@ -195,6 +196,12 @@ enum	e_rotation_parameters
 	rot_params_num
 };
 
+enum	e_pixel_coordinates
+{
+	i_pxl,
+	j_pxl
+}
+
 typedef	struct		s_vect
 {
 	double			x;
@@ -356,7 +363,11 @@ typedef struct		s_hit
 	t_list			*obj;
     t_vect          ray_obj;
 	t_vect			normal;
-	int				obj_color;
+	t_vect			view;
+	t_vect			color;
+	t_vect			to_light;
+	double			surface_illumi;
+	int				pxl_color;
 }					t_hit;
 
 typedef struct		s_rt_data	
