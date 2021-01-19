@@ -1,0 +1,43 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    makefile_copy                                      :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/12/26 21:52:28 by hlimouni          #+#    #+#              #
+#    Updated: 2021/01/19 18:48:21 by hlimouni         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+CC=gcc
+CFLAGS=-Wall -Wextra -Werror
+NAME=miniRT
+
+HEADER=minirt.h
+
+SRC=\
+
+OBJ=$(SRC:.c=.o)
+
+all: $(NAME)
+
+$(NAME) : $(OBJLIBFT) $(OBJ) $(HEADER)
+	$(AR) $(ARFLAGS) $(NAME) $(OBJ) $(OBJLIBFT)
+
+$(OBJ) : %.o : %.c 
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJLIBFT) : %.o : %.c
+	make -C libft
+
+clean :
+	make clean -C libft
+	rm -f $(OBJ)
+
+fclean : clean
+	make fclean -C libft
+	rm -f $(NAME)
+
+re : fclean all
+
