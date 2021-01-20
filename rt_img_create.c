@@ -1,37 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_rt_img.c                                    :+:      :+:    :+:   */
+/*   rt_img_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 08:03:17 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/18 16:04:28 by hlimouni         ###   ########.fr       */
+/*   Created: 2021/01/20 12:38:48 by hlimouni          #+#    #+#             */
+/*   Updated: 2021/01/20 12:38:50 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-// void	mlx_data_set(t_mlibx *mlx, t_resolution *res)
-// {
-// 	mlx->ptr = mlx_init();
-// 	mlx->win_ptr = mlx_new_window(mlx->ptr, res->width, res->height, "miniRT");
-// 	mlx->img_ptr = mlx_new_image(mlx->ptr, res->width, res->height);
-// 	mlx->img_data = (int *)mlx_get_data_addr(mlx->img_ptr, &mlx->bbp,
-// 		&mlx->line_len, &mlx->endian);
-// }
-
-
-// int		get_pixel_color(int i, int j, t_scene *scene, t_mlibx *mlx)
-// {
-// 	t_ray	ray;
-// 	t_list	*cams;
-
-// 	cam = scene->cams;
-// 	mlx_key_hook(mlx->win_ptr, key_bind, param);
-// 	ray = cam_ray_build3(i, j, cam, scene->res);
-// }
-//		mlx_clear_window(data->mlx->ptr, data->mlx->win_ptr);
 
 int					key_bind(int keycode, t_rt_data *data)
 {
@@ -58,13 +37,6 @@ int	close_bind(t_rt_data *data)
 {
 	rt_free_scene(data->scene);
 	exit(0);	
-}
-
-int	rt_event_hooks(t_rt_data *data)
-{
-	mlx_do_key_autorepeatoff(data->mlx->ptr);
-	mlx_hook(data->mlx->win_ptr, E_KEY_PRESS, 1L<<0, key_bind, data);
-	mlx_hook(data->mlx->win_ptr, E_DESTROY, 1L<<17, close_bind, data); 
 }
 
 void	img_array_set(t_cam *cam, t_scene *scene, int *img_data)
@@ -112,7 +84,7 @@ void	display_rt_image(t_mlibx *mlx)
 {
 	mlx_put_image_to_window(mlx->ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
 	mlx_do_key_autorepeatoff(data->mlx->ptr);
-	mlx_hook(data->mlx->win_ptr, E_KEY_PRESS, 1L<<0, key_bind, data);
-	mlx_hook(data->mlx->win_ptr, E_DESTROY, 1L<<17, close_bind, data);
+	mlx_hook(data->mlx->win_ptr, E_KEY_PRESS, 1L << 0, key_bind, data);
+	mlx_hook(data->mlx->win_ptr, E_DESTROY, 1L << 17, close_bind, data);
  	mlx_loop(mlx->ptr);
 }

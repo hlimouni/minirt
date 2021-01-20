@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/18 16:10:40 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/20 11:11:26 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ enum	e_pixel_coordinates
 {
 	i_pxl,
 	j_pxl
-}
+};
 
 typedef	struct		s_vect
 {

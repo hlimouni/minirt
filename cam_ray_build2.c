@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 20:32:27 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/18 16:10:46 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/20 10:33:06 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,26 +104,26 @@ t_vect	tmp_vect_set(t_vect *orient)
 }
 */
 
-t_ray	cam_ray_build3(int pxl[], t_cam *cam, t_resolution *res,
-						t_ray *ray)
-{
-	t_vect		pixel;
-    t_vect  	forward;
-    t_vect  	right;
-	t_mat3x3	mat;
-	t_ray		ray;
+// t_ray	cam_ray_build3(int pxl[], t_cam *cam, t_resolution *res,
+// 						t_ray *ray)
+// {
+// 	t_vect		pixel;
+//     t_vect  	forward;
+//     t_vect  	right;
+// 	t_mat3x3	mat;
+// 	t_ray		ray;
 
-	pixel = pixel_to_vect(pxl[i_pxl], pxl[j_pxl], res, cam->fov);
-    forward = vect_unit(vect_const_prod(-1, cam->l));
-	right = vect_cross(tmp_vect_set(cam->l), forward);
-    right = vect_unit(right);
-    cam->up = vect_unit(vect_cross(forward, right));
-	mat.line1 = (t_vect){.x = right.x, .y = up.x, .z = forward.x};
-	mat.line2 = (t_vect){.x = right.y, .y = up.y, .z = forward.y};
-	mat.line3 = (t_vect){.x = right.z, .y = up.z, .z = forward.z};
-	ray.screen = vect_sum(cam->c, mat_vect_prod(mat, pixel));
-	ray.origin = cam->c;
-	ray.dir = vect_unit(vect_diff(ray.screen, ray.origin));
-	return (ray);
-}
+// 	pixel = pixel_to_vect(pxl[i_pxl], pxl[j_pxl], res, cam->fov);
+//     forward = vect_unit(vect_const_prod(-1, cam->l));
+// 	right = vect_cross(tmp_vect_set(cam->l), forward);
+//     right = vect_unit(right);
+//     cam->up = vect_unit(vect_cross(forward, right));
+// 	mat.line1 = (t_vect){.x = right.x, .y = up.x, .z = forward.x};
+// 	mat.line2 = (t_vect){.x = right.y, .y = up.y, .z = forward.y};
+// 	mat.line3 = (t_vect){.x = right.z, .y = up.z, .z = forward.z};
+// 	ray.screen = vect_sum(cam->c, mat_vect_prod(mat, pixel));
+// 	ray.origin = cam->c;
+// 	ray.dir = vect_unit(vect_diff(ray.screen, ray.origin));
+// 	return (ray);
+// }
 

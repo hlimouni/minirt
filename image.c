@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/11 09:36:54 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/20 10:39:29 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,18 +230,18 @@ pl.color = 0x8A2BE2;
 			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			// }
 
-			if ((t = pl_intersect(ray, &cam, pl)) >= 0.0)
-			{
-				color = pl_shading(t, &light, &cam, pl, amb, ray);
-				mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
-			}
-
-			// if ((t = sq_intersect(ray, &cam, sq)) >= 0.0)
+			// if ((t = pl_intersect(ray, &cam, pl)) >= 0.0)
 			// {
-			// 	//color = 0x8A2BE2;
 			// 	color = pl_shading(t, &light, &cam, pl, amb, ray);
 			// 	mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
 			// }
+
+			if ((t = sq_intersect(ray, &cam, sq)) >= 0.0)
+			{
+				//color = 0x8A2BE2;
+				color = pl_shading(t, &light, &cam, pl, amb, ray);
+				mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
+			}
 			// if ((t = cy_intersect(ray, &cam, cy)) >= 0.0)
 			// {
 			// 	//color = 0x8A2BE2;
