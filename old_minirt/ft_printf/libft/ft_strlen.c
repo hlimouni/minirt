@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_str_uint.c                                      :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/02 18:59:15 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/08 07:22:29 by hlimouni         ###   ########.fr       */
+/*   Created: 2019/10/17 22:06:50 by hlimouni          #+#    #+#             */
+/*   Updated: 2019/10/22 16:28:02 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int		is_str_uint(char *str)
+size_t		ft_strlen(const char *str)
 {
-	int		i;
+	size_t	i;
 
-	if (!str)
-		return (0);
 	i = 0;
-	while (ft_isdigit(str[i++]))
-	if (ft_strlen(str) == i)
-		return (i);
-	return (0);
+	while (str[i])
+		i++;
+	return (i);
 }

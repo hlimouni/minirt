@@ -6,14 +6,11 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:35:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/20 10:39:29 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/20 18:17:14 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libftprintf/ft_printf.h"
-#include "minilibx/mlx.h"
 #include "minirt.h"
-#include <stdio.h>
 
 void	print_vect(t_vect v)
 {

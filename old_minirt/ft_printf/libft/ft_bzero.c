@@ -1,14 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   elems_push.c                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 19:16:47 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/20 18:57:47 by hlimouni         ###   ########.fr       */
+/*   Created: 2019/10/19 13:10:00 by hlimouni          #+#    #+#             */
+/*   Updated: 2019/10/20 17:25:10 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
+void	ft_bzero(void *dest, size_t len)
+{
+	size_t	i;
+
+	if (len == 0)
+		return ;
+	i = 0;
+	while (i < len)
+		((char*)dest)[i++] = 0;
+}

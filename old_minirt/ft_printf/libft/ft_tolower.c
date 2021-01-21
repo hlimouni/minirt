@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_to_rgbint.c                                    :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/23 16:58:26 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/23 18:48:49 by hlimouni         ###   ########.fr       */
+/*   Created: 2019/10/21 16:29:39 by hlimouni          #+#    #+#             */
+/*   Updated: 2019/11/08 20:21:21 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-
-int     str_to_rgbint(char *str)
+int		ft_tolower(int c)
 {
-    int		color_int;
-    t_vect	color_vect;
-
-	color_vect = str_to_vect(str);
-	color_int = vectoi(color_vect);
-	return (color_int);
+	if ((unsigned char)c <= 0x7f && c >= 'A' && c <= 'Z')
+		return (c - 'A' + 'a');
+	return (c);
 }

@@ -1,14 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   elems_push.c                                       :+:      :+:    :+:   */
+/*   ft_free_null.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 19:16:47 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/20 18:57:47 by hlimouni         ###   ########.fr       */
+/*   Created: 2020/12/10 10:29:49 by hlimouni          #+#    #+#             */
+/*   Updated: 2021/01/05 22:34:02 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
+void    ft_free_null(void   **ptr)
+{
+    if (!ptr)
+        return ;
+    free(*ptr);
+    *ptr = NULL;
+}

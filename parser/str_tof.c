@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   str_tof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 14:58:57 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/18 07:39:56 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/20 18:29:46 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int		str_get_sign(char *str, int *index)
+static int	str_get_sign(char *str, int *index)
 {
 	int		sign;
 
@@ -30,7 +30,7 @@ static int		str_get_sign(char *str, int *index)
 	return (sign);
 }
 
-double	str_tof(char *str)
+double		str_tof(char *str)
 {
 	double	res;
 	float	sign;

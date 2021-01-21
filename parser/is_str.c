@@ -3,14 +3,113 @@
 /*                                                        :::      ::::::::   */
 /*   is_str.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 17:01:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/06 17:26:38 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/20 18:36:35 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int		is_str_uint(char *str)
+{
+	int		i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (ft_isdigit(str[i++]))
+	if (ft_strlen(str) == i)
+		return (i);
+	return (0);
+}
+
+int			is_str_rgb(char *str)
+{
+	int		i;
+	char	**arr;
+	char	*trimd_str;
+	char	comma_count;
+	int		color;
+
+	if (!str)
+		return (0);
+	if ((comma_count = ft_strchar_count(str, ',')) != 2)
+		return (0);
+	if (!(trimd_str = ft_strtrim(str, ",")))
+		return (-1);
+	if (ft_strcmp(str, trimd_str) != 0)
+	{
+		ft_free_null((void *)&trimd_str);
+		return (0);
+	}
+	ft_free_null((void *)&trimd_str);
+	if (!(arr = ft_split(str, ',')))
+		return (-1);
+	i = 0;
+	while (is_str_uint(arr[i]) && !ft_strtoi(arr[i], &color) && color <= 0xFF)
+		i++;
+	free_2d_array(&arr);
+	return (i == 3 ? 1 : 0);
+}
+
+int			is_str_vect(char *str)
+{
+	int		i;
+	char	**arr;
+	char	*trimd_str;
+	char	comma_count;
+
+	if (!str)
+		return (0);
+	if ((comma_count = ft_strchar_count(str, ',')) != 2)
+		return (0);
+	if (!(trimd_str = ft_strtrim(str, ",")))
+		return (-1);
+	if (ft_strcmp(str, trimd_str) != 0)
+	{
+		ft_free_null((void **)&trimd_str);
+		return (0);
+	}
+	ft_free_null((void **)&trimd_str);
+	if (!(arr = ft_split(str, ',')))
+		return (-1);
+	i = 0;
+	while (is_str_float(arr[i]))
+		i++;
+	free_2d_array(&arr);
+	return (i == 3 ? 1 : 0);
+}
+
+int	is_str_ID(char *str)
+{
+	if (!str)
+		return (NEGATIVE_VALUE);
+	if (ft_strcmp(str, "sq") == 0)
+		return (rt_square);
+	if (ft_strcmp(str, "A") == 0)
+		return (rt_ambiant);
+	if (ft_strcmp(str, "R") == 0)
+		return (rt_resolution);
+	if (ft_strcmp(str, "c") == 0)
+		return (rt_camera);
+	if (ft_strcmp(str, "tr") == 0)
+		return (rt_triangle);
+	if (ft_strcmp(str, "l") == 0)
+		return (rt_light);
+	if (ft_strcmp(str, "pl") == 0)
+		return (rt_plane);
+	if (ft_strcmp(str, "sp") == 0)
+		return (rt_sphere);
+	if (ft_strcmp(str, "cy") == 0)
+		return (rt_cylinder);
+	if (ft_strcmp(str, "tran") == 0)
+		return (rt_translation);
+	if (ft_strcmp(str, "rot") == 0)
+		return (rt_rotation);
+	return (NEGATIVE_VALUE);
+}
 
 int	is_str(char *str, int type)
 {

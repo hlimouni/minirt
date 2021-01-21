@@ -3,68 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pixel_shade.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:01:40 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/18 15:49:59 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/20 16:46:15 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-void				set_cy_normal(t_hit *hit, t_cylinder *cy)
-{
-	hit->normal = vect_diff(hit->ray_obj, cy->origin);
-	hit->normal = vect_diff(hit->normal,
-		vect_const_prod(vect_dot(cy->axis, hit->normal), cy->axis));
-	hit->normal = vect_unit(hit->normal);
-}
-
-void				set_planar_normals(t_vect og_norml, t_hit *hit, t_ray *ray)
-{
-	if (vect_dot(og_norml, hit->view) < 0)
-		hit->normal = vect_const_prod(-1, og_norml);
-	else
-		hit->normal = og_norml;
-}
-
-void				set_hit_color(t_hit *hit)
-{
-	void			*obj;
-
-	obj = hit->obj->content;
-	if (hit->obj->element == rt_sphere)
-		hit->color = ((t_sphere *)obj)->color_vect;
-	else if (hit->obj->element == rt_cylinder)
-		hit->color = ((t_cylinder *)obj)->color_vect;
-	else if (hit->obj->element == rt_plane)
-		hit->color = ((t_plane *)obj)->color_vect;
-	else if (hit->obj->element == rt_square)
-		hit->color = ((t_square *)obj)->color_vect;
-	else if (hit->obj->element == rt_triangle)
-		hit->color = ((t_triangle *)obj)->color_vect;
-}
-
-void				set_hit(t_hit *hit, t_ray *ray)
-{
-	void			*obj;
-
-	obj = hit->obj->content;
-	hit->ray_obj = vect_const_prod(hit->t, ray->dir);
-	hit->ray_obj = vect_sum(ray->origin, hit->ray_obj);
-	hit->view = vect_unit(vect_diff(ray->origin, hit->ray_obj));
-	set_hit_color(hit);
-	if (hit->obj->element == rt_sphere)
-		hit->normal = vect_unit(vect_diff(hit->ray_obj, ((t_sphere *)obj)->o));
-	else if (hit->obj->element == rt_cylinder)
-		set_cy_normal(hit, obj);
-	else if (hit->obj->element == rt_plane)
-		set_planar_normals(((t_plane *)obj)->n, hit, ray);
-	else if (hit->obj->element == rt_square)
-		set_planar_normals(((t_square *)obj)->normal, hit, ray);
-	else if (hit->obj->element == rt_triangle)
-		set_planar_normals(((t_triangle *)obj)->normal, hit, ray);
-}
 
 t_vect				phong_diffuse_specular(t_hit *hit, t_ray *ray,
 										t_light *light, t_vect color)
@@ -110,74 +56,6 @@ t_vect				phong_diffuse_specular2(t_hit *hit, t_ray *ray,
 	diffuse_specular = vect_const_prod(hit->surface_illumi, diffuse_specular);
 	diffuse_specular = vect_prod(light->coeff, diffuse_specular);
 	return (diffuse_specular);
-}
-
-t_vect				sp_lighting(t_hit *hit, t_ray *ray, t_light *light,
-								t_sphere *sp)
-{
-	t_vect			specular_diffuse;
-	t_shade_vars	shade;
-
-	shade.normal = hit->normal;
-	shade.to_light = vect_unit(vect_diff(light->l, hit->ray_obj));
-	shade.difuse_cst = DIFU_C * fmax(0, vect_dot(shade.normal, shade.to_light));
-	shade.diffuse = vect_const_prod(shade.difuse_cst, sp->color_vect);
-	shade.view = vect_unit(vect_diff(ray->origin, hit->ray_obj));
-	shade.ref_cst = 2 * vect_dot(shade.normal, shade.to_light);
-	shade.reflect = vect_const_prod(shade.ref_cst, shade.normal);
-	shade.reflect = vect_diff(shade.reflect, shade.to_light);
-	shade.reflect = vect_unit(shade.reflect);
-	shade.specular = vect_dot(shade.view, shade.reflect);
-	shade.specular = SPEC_C * fmax(0, pow(shade.specular, SHINE));
-	vect_dot(shade.normal, shade.to_light) < 0 ? (shade.specular = 0) : 0;
-	specular_diffuse = vect_const_sum(shade.specular, shade.diffuse);
-	specular_diffuse = vect_prod(light->coeff, specular_diffuse);
-	return (specular_diffuse);
-}
-
-t_vect				pl_lighting(t_hit *hit, t_ray *ray, t_light *light,
-								t_plane *pl)
-{
-	t_vect			specular_diffuse;
-	t_shade_vars	shade;
-
-	shade.normal = hit->normal;
-	shade.to_light = vect_unit(vect_diff(light->l, hit->ray_obj));
-	shade.difuse_cst = DIFU_C * fabs(vect_dot(shade.normal, shade.to_light));
-	shade.diffuse = vect_const_prod(shade.difuse_cst, pl->color_vect);
-	shade.view = vect_unit(vect_diff(ray->origin, hit->ray_obj));
-	shade.ref_cst = 2 * vect_dot(shade.normal, shade.to_light);
-	shade.reflect = vect_const_prod(shade.ref_cst, shade.normal);
-	shade.reflect = vect_diff(shade.reflect, shade.to_light);
-	shade.reflect = vect_unit(shade.reflect);
-	shade.specular = vect_dot(shade.view, shade.reflect);
-	shade.specular = SPEC_C * pow(shade.specular, SHINE);
-	specular_diffuse = vect_const_sum(shade.specular, shade.diffuse);
-	specular_diffuse = vect_prod(light->coeff, specular_diffuse);
-	return (specular_diffuse);
-}
-
-t_vect				cy_lighting(t_hit *hit, t_ray *ray, t_light *light,
-							t_cylinder *cy)
-{
-	t_vect			specular_diffuse;
-	t_shade_vars	shade;
-
-	shade.normal = hit->normal;
-	shade.to_light = vect_unit(vect_diff(light->l, hit->ray_obj));
-	shade.difuse_cst = DIFU_C * fmax(0, vect_dot(shade.normal, shade.to_light));
-	shade.diffuse = vect_const_prod(shade.difuse_cst, cy->color_vect);
-	shade.view = vect_unit(vect_diff(ray->origin, hit->ray_obj));
-	shade.ref_cst = 2 * vect_dot(shade.normal, shade.to_light);
-	shade.reflect = vect_const_prod(shade.ref_cst, shade.normal);
-	shade.reflect = vect_diff(shade.reflect, shade.to_light);
-	shade.reflect = vect_unit(shade.reflect);
-	shade.specular = vect_dot(shade.view, shade.reflect);
-	shade.specular = SPEC_C * fmax(0, pow(shade.specular, SHINE));
-	vect_dot(shade.normal, shade.to_light) < 0 ? (shade.specular = 0) : 0;
-	specular_diffuse = vect_const_sum(shade.specular, shade.diffuse);
-	specular_diffuse = vect_prod(light->coeff, specular_diffuse);
-	return (specular_diffuse);
 }
 
 int					shadow_intersect(t_hit *hit, t_list *obj_node,

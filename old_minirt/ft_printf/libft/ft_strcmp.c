@@ -1,14 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   elems_push.c                                       :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 19:16:47 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/20 18:57:47 by hlimouni         ###   ########.fr       */
+/*   Created: 2019/10/20 16:33:07 by hlimouni          #+#    #+#             */
+/*   Updated: 2019/11/05 21:28:25 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	if (*s1 != *s2 || *s1 == '\0' || *s2 == '\0')
+		return ((unsigned char)*s1 - (unsigned char)*s2);
+	return (ft_strcmp(s1 + 1, s2 + 1));
+}
