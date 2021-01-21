@@ -6,11 +6,11 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 19:04:02 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/07 12:46:40 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 14:37:11 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 static int		is_strint(char *str)
 {

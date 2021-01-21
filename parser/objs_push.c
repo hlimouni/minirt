@@ -6,11 +6,11 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:11:56 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/08 07:29:10 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 14:37:05 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 int		rt_plane_push(char **splitd_line, t_scene *scene)
 {

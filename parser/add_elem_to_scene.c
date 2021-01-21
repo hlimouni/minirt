@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   add_elem_to_scene.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 12:51:30 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/20 18:57:54 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 19:32:18 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 int		rt_res_push(char **splitd_line, t_scene *scene)
 {
@@ -36,7 +36,6 @@ int		rt_amb_push(char **splitd_line, t_scene *scene)
 	if (!(amb = malloc(sizeof(t_amb))))
 		return (0);
 	amb->intensity = str_tof(splitd_line[amb_ratio]);
-	amb->color = str_to_rgbint(splitd_line[amb_color]);
 	amb->color_vect = str_to_vect(splitd_line[amb_color]);
 	amb->coeff = vect_const_prod(1.0/255.0, amb->color_vect);
 	amb->coeff = vect_const_prod(amb->intensity, amb->coeff);

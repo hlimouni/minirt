@@ -6,11 +6,11 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:16:34 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/23 16:16:45 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 15:13:48 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "t_vect_math.h"
 
 int				vectoi(t_vect vect)
 {

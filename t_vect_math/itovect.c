@@ -6,11 +6,11 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:15:31 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/23 16:15:54 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 15:13:24 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "t_vect_math.h"
 
 t_vect			itovect(int color)
 {

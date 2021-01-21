@@ -6,11 +6,11 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:25:08 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/06 19:27:58 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 14:38:34 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 int		is_str_pitch(char *str)
 {

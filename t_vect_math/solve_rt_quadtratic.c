@@ -6,9 +6,11 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:41:44 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/20 12:41:51 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 15:13:41 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "t_vect_math.h"
 
 double			solve_rt_quadratic(double a, double b, double c)
 {

@@ -6,11 +6,11 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 15:38:25 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/06 15:21:04 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 14:38:01 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 t_vect  str_to_vect(char *str)
 {

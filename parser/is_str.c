@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   is_str.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 17:01:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/20 18:36:35 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 14:38:25 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 int		is_str_uint(char *str)
 {

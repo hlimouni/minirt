@@ -6,13 +6,13 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:36:25 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/20 12:37:07 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 18:35:26 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double			sp_intersect2(t_ray *ray, t_sphere *sphere)
+double			sp_intersect(t_ray *ray, t_sphere *sphere)
 {
 	double		b;
 	double		c;
@@ -24,7 +24,7 @@ double			sp_intersect2(t_ray *ray, t_sphere *sphere)
 	return (solve_rt_quadratic(1, b, c));
 }
 
-double			pl_intersect2(t_ray *ray, t_plane *plane)
+double			pl_intersect(t_ray *ray, t_plane *plane)
 {
 	double		dir_dot_n;
 	t_vect		p_o;
@@ -41,7 +41,7 @@ double			pl_intersect2(t_ray *ray, t_plane *plane)
 	return (-1);
 }
 
-double			sq_intersect2(t_ray *ray, t_square *sq)
+double			sq_intersect(t_ray *ray, t_square *sq)
 {
 	t_plane	plane;
 	t_vect	hit;
@@ -50,7 +50,7 @@ double			sq_intersect2(t_ray *ray, t_square *sq)
 
 	plane.n = sq->normal;
 	plane.p = sq->origin;
-	if ((t = pl_intersect2(ray, &plane)) >= 0)
+	if ((t = pl_intersect(ray, &plane)) >= 0)
 	{
 		hit = vect_const_prod(t, ray->dir);
 		hit = vect_sum(ray->origin, hit);
@@ -62,7 +62,7 @@ double			sq_intersect2(t_ray *ray, t_square *sq)
 	return (-1);
 }
 
-double			cy_intersect2(t_ray *ray, t_cylinder *cy)
+double			cy_intersect(t_ray *ray, t_cylinder *cy)
 {
 	t_coeff		equat;
 	t_vect		oc_c;
@@ -85,7 +85,7 @@ double			cy_intersect2(t_ray *ray, t_cylinder *cy)
 	return (t);
 }
 
-double			tr_intersect2(t_ray *ray, t_triangle *tr)
+double			tr_intersect(t_ray *ray, t_triangle *tr)
 {
 	t_vect		hit;
 	t_plane		plane;
@@ -96,7 +96,7 @@ double			tr_intersect2(t_ray *ray, t_triangle *tr)
 	plane.n = vect_unit(plane.n);
 	tr->normal = plane.n;
 	plane.p = tr->pt_a;
-	if ((t = pl_intersect2(ray, &plane)) >= 0)
+	if ((t = pl_intersect(ray, &plane)) >= 0)
 	{
 		hit = vect_const_prod(t, ray->dir);
 		hit = vect_sum(ray->origin, hit);

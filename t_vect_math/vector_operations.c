@@ -6,11 +6,11 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 18:51:07 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/23 18:48:49 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 15:13:58 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "t_vect_math.h"
 
 t_vect  vect_diff(t_vect u, t_vect v)
 {

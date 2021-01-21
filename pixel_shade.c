@@ -3,39 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pixel_shade.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:01:40 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/20 16:46:15 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 18:41:52 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vect				phong_diffuse_specular(t_hit *hit, t_ray *ray,
-										t_light *light, t_vect color)
-{
-	t_vect			diffuse_specular;
-	t_shade_vars	shade;
-
-	shade.normal = hit->normal;
-	shade.to_light = hit->to_light;
-	shade.diffuse = vect_const_prod(DIFU_C, color);
-	shade.view = hit->view;
-	shade.ref_cst = 2 * vect_dot(shade.normal, shade.to_light);
-	shade.reflect = vect_const_prod(shade.ref_cst, shade.normal);
-	shade.reflect = vect_diff(shade.reflect, shade.to_light);
-	shade.reflect = vect_unit(shade.reflect);
-	shade.specular = vect_dot(shade.view, shade.reflect);
-	shade.specular = SPEC_C * pow(shade.specular, SHINE);
-	diffuse_specular = vect_const_sum(shade.specular, shade.diffuse);
-	shade.surface_illum = fmax(0, vect_dot(shade.normal, shade.to_light));
-	diffuse_specular = vect_const_prod(shade.surface_illum, diffuse_specular);
-	diffuse_specular = vect_prod(light->coeff, diffuse_specular);
-	return (diffuse_specular);
-}
-
-t_vect				phong_diffuse_specular2(t_hit *hit, t_ray *ray,
+t_vect				phong_diffuse_specular(t_hit *hit,
 											t_light *light, t_vect color)
 {
 	t_vect			diffuse_specular;
@@ -77,7 +54,7 @@ int					shadow_intersect(t_hit *hit, t_list *obj_node,
 	return (0);
 }
 
-int					pixel_shade(t_hit *hit, t_ray *ray, t_scene *scene)
+int					pixel_shade(t_hit *hit, t_scene *scene)
 {
 	t_list			*light_lst;
 	t_light			*light;
@@ -92,7 +69,7 @@ int					pixel_shade(t_hit *hit, t_ray *ray, t_scene *scene)
 		light = light_lst->content;
 		if (shadow_intersect(hit, scene->objs, light) == 0)
 		{
-			difu_spec = phong_diffuse_specular(hit, ray, light, hit->color);
+			difu_spec = phong_diffuse_specular(hit, light, hit->color);
 			color = vect_sum(amb, difu_spec);
 		}
 		light_lst = light_lst->next;

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   str_tof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 14:58:57 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/20 18:29:46 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 14:37:29 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 static int	str_get_sign(char *str, int *index)
 {

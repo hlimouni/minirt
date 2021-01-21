@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_intersect.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:09:30 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/20 17:39:49 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 18:48:06 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			set_hit_color(t_hit *hit)
 ** }
 */
 
-void			set_planar_normals(t_vect og_norml, t_hit *hit, t_ray *ray)
+void			set_planar_normals(t_vect og_norml, t_hit *hit)
 {
 	if (vect_dot(og_norml, hit->view) < 0)
 		hit->normal = vect_const_prod(-1, og_norml);
@@ -66,27 +66,28 @@ void			set_hit(t_hit *hit, t_ray *ray)
 			((t_cylinder *)obj)->axis)));
 	}
 	else if (hit->obj->element == rt_plane)
-		set_planar_normals(((t_plane *)obj)->n, hit, ray);
+		set_planar_normals(((t_plane *)obj)->n, hit);
 	else if (hit->obj->element == rt_square)
-		set_planar_normals(((t_square *)obj)->normal, hit, ray);
+		set_planar_normals(((t_square *)obj)->normal, hit);
 	else if (hit->obj->element == rt_triangle)
-		set_planar_normals(((t_triangle *)obj)->normal, hit, ray);
+		set_planar_normals(((t_triangle *)obj)->normal, hit);
 }
 
 double			one_obj_intersect(t_ray *ray, t_list *obj_node)
 {
-	double		hit;
+	double		t;
 
+	t = -1;
 	if (obj_node->element == rt_sphere)
-		t = sp_intersect2(ray, obj_node->content);
+		t = sp_intersect(ray, obj_node->content);
 	else if (obj_node->element == rt_cylinder)
-		t = cy_intersect2(ray, obj_node->content);
+		t = cy_intersect(ray, obj_node->content);
 	else if (obj_node->element == rt_plane)
-		t = pl_intersect2(ray, obj_node->content);
+		t = pl_intersect(ray, obj_node->content);
 	else if (obj_node->element == rt_square)
-		t = sq_intersect2(ray, obj_node->content);
+		t = sq_intersect(ray, obj_node->content);
 	else if (obj_node->element == rt_triangle)
-		t = tr_intersect2(ray, obj_node->content);
+		t = tr_intersect(ray, obj_node->content);
 	return (t);
 }
 

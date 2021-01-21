@@ -6,11 +6,11 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 16:57:18 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/07 12:33:35 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 14:37:53 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 int	rt_elemlen(char	*element)
 {

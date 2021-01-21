@@ -6,11 +6,11 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 10:33:44 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/08 11:35:58 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/21 14:36:58 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 static void	free_ptrs(void *ptrs[])
 {
