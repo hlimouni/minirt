@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/21 19:36:10 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/22 14:21:12 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define E_KEY_PRESS 2
 # define AMB_C M_1_PI
 # define DIFU_C M_1_PI
-# define SPEC_C	1
-# define SHINE 10
+# define SPEC_C	150
+# define SHINE 22
 
 enum				e_pixel_coordinates
 {
@@ -49,6 +49,7 @@ typedef struct		s_hit
 	t_vect			view;
 	t_vect			color;
 	t_vect			to_light;
+	t_vect			cam_up;
 	double			surface_illumi;
 	int				pxl_color;
 }					t_hit;

@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 19:04:02 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/21 14:37:11 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/22 08:33:13 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		is_strint(char *str)
 {
-	int		i;
+	size_t		i;
 
 	if (!str)
 		return (0);
@@ -31,22 +31,21 @@ static int		is_strint(char *str)
 ** is_strint and is_strsign both check if string is integer but:
 ** is_strint returns FALSE when the input values are "-" or "+"
 ** is_strsign returns them as true
+** static int		is_strsign(char *str)
+** {
+** 	size_t		i;
+** 
+** 	if (!str)
+** 		return (0);
+** 	i = 0;
+** 	if (str[i] == '-' || str[i] == '+')
+** 		i++;
+** 	while (ft_isdigit(str[i++]))
+** 	if (ft_strlen(str) == i)
+** 		return (i);
+** 	return (0);
+** }
 */
-
-static int		is_strsign(char *str)
-{
-	int		i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (ft_isdigit(str[i++]))
-	if (ft_strlen(str) == i)
-		return (i);
-	return (0);
-}
 
 static int		is_strnint(char *str, size_t n)
 {

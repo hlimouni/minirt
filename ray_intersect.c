@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:09:30 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/21 18:48:06 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/22 14:21:54 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void			set_hit(t_hit *hit, t_ray *ray)
 	hit->ray_obj = vect_const_prod(hit->t, ray->dir);
 	hit->ray_obj = vect_sum(ray->origin, hit->ray_obj);
 	hit->view = vect_unit(vect_diff(ray->origin, hit->ray_obj));
+	hit->cam_up = ray->cam_up;
 	set_hit_color(hit);
 	if (hit->obj->element == rt_sphere)
 		hit->normal = vect_unit(vect_diff(hit->ray_obj, ((t_sphere *)obj)->o));

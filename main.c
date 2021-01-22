@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:08:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/21 19:22:08 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/22 09:17:56 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
   int     main(int ac, char* av[])
   {
-      int         fd;
-      t_scene     scene;
-      t_mlibx		mlibx;
+      int		fd;
+      t_scene	scene;
+      t_mlibx	mlibx;
   
       fd = open_rt_file(ac, av);
       rt_scene_initialize(&scene);

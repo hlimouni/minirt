@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:11:56 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/21 14:37:05 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/22 12:27:05 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		rt_plane_push(char **splitd_line, t_scene *scene)
 		return (0);
 	plane->p = str_to_vect(splitd_line[pl_position]);
 	plane->n = vect_unit(str_to_vect(splitd_line[pl_normal]));
-	plane->color = str_to_rgbint(splitd_line[pl_color]);
+	plane->color_vect = str_to_vect(splitd_line[pl_color]);
 	if (!(new_node = ft_lstnew(plane)))
 		return (0);
 	new_node->element = rt_plane;
@@ -39,7 +39,7 @@ int		rt_triangle_push(char **splitd_line, t_scene *scene)
 	triangle->pt_a = str_to_vect(splitd_line[tr_1st_pnt]);
 	triangle->pt_b = str_to_vect(splitd_line[tr_2nd_pnt]);
 	triangle->pt_c = str_to_vect(splitd_line[tr_3rd_pnt]);
-	triangle->color = str_to_rgbint(splitd_line[tr_color]);
+	triangle->color_vect = str_to_vect(splitd_line[tr_color]);
 	if (!(new_node = ft_lstnew(triangle)))
 		return (0);
 	new_node->element = rt_triangle;
@@ -59,7 +59,7 @@ int		rt_cylinder_push(char **splitd_line, t_scene *scene)
 	cylinder->radius = str_tof(splitd_line[cy_diameter]);
 	cylinder->radius /= 2;
 	cylinder->height = str_tof(splitd_line[cy_height]);
-	cylinder->color = str_to_rgbint(splitd_line[cy_color]);
+	cylinder->color_vect = str_to_vect(splitd_line[cy_color]);
 	if (!(new_node = ft_lstnew(cylinder)))
 		return (0);
 	new_node->element = rt_cylinder;
@@ -77,7 +77,7 @@ int		rt_sphere_push(char **splitd_line, t_scene *scene)
 	sphere->o = str_to_vect(splitd_line[sp_center]);
 	sphere->r = str_tof(splitd_line[sp_diameter]);
 	sphere->r /= 2;
-	sphere->color = str_to_rgbint(splitd_line[sp_color]);
+	sphere->color_vect = str_to_vect(splitd_line[sp_color]);
 	if (!(new_node = ft_lstnew(sphere)))
 		return (0);
 	new_node->element = rt_sphere;
@@ -93,10 +93,12 @@ int		rt_square_push(char   **splitd_line, t_scene *scene)
 	if (!(square = malloc(sizeof(t_square))))
 		return (0);
     square->origin = str_to_vect(splitd_line[sq_position]);
-    square->normal = str_to_vect(splitd_line[sq_normal]);
+    square->normal = vect_unit(str_to_vect(splitd_line[sq_normal]));
 	square->normal = vect_unit(square->normal);
     square->side = str_tof(splitd_line[sq_side]);
-    square->color = str_to_rgbint(splitd_line[sq_color]);
+    square->color_vect = str_to_vect(splitd_line[sq_color]);
+	square->u = (t_vect){.x = 0, .y = 0, .z = 0};
+	square->v = (t_vect){.x = 0, .y = 0, .z = 0};
 	if (!(new_node = ft_lstnew(square)))
 		return (0);
 	new_node->element = rt_square;

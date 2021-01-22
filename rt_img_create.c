@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:38:48 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/21 19:30:08 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/22 12:17:40 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	img_array_set(t_cam *cam, t_scene *scene, int *img_data)
 	t_ray	ray;
 
 	j = 0;
-	set_base_for_squares(cam, scene->objs);
 	while (j < scene->res->height)
 	{
 		i = 0;

@@ -6,16 +6,17 @@
 #    By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/26 21:52:28 by hlimouni          #+#    #+#              #
-#    Updated: 2021/01/21 18:17:47 by hlimouni         ###   ########.fr        #
+#    Updated: 2021/01/22 15:11:52 by hlimouni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror -g
 LINKFLAGS=-Lmlx -framework OpenGL -framework AppKit
 NAME=miniRT
 LIBFT=libft.a
 LIBMLX=libmlx.dylib
+HEADERS=minrt.h parser/parser.h t_vect_math/t_vect_math.h
 
 SRC=cam_ray_build.c \
 	main.c \
@@ -51,11 +52,11 @@ all: $(NAME)
 $(NAME) : $(OBJ) $(LIBMLX) $(LIBFT)
 	$(CC) $(CFLAGS) $(LINKFLAGS)  $^ -o $(NAME)
 
-$(OBJ) : %.o : %.c
+%.o : %.c
 	$(CC) $(CFLAGS) -Imlx -Ilibft -c $< -o $@
 
 $(LIBFT) :
-	make -C libft
+	make bonus -C libft
 	cp libft/$(LIBFT) .
 
 $(LIBMLX) :
@@ -69,7 +70,6 @@ clean :
 
 fclean : clean
 	make fclean -C libft
-	make fclean -C mlx
 	rm -f $(LIBMLX)
 	rm -f $(LIBFT)
 	rm -f $(NAME)

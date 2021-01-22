@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 18:48:49 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/21 19:39:18 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/22 12:23:42 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define NEGATIVE_VALUE -1
 # include <fcntl.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 enum	e_rt_file_param_types
 {
@@ -231,6 +232,7 @@ typedef struct		s_ray
 	t_vect			origin;
 	t_vect			screen;
 	t_vect			dir;
+	t_vect			cam_up;
 }					t_ray;
 
 typedef struct		s_amb
@@ -284,6 +286,8 @@ typedef	int			(*t_typechecker)(char *);
 int					get_next_line(int fd, char **line);
 double				str_tof(char *str);
 t_vect 				str_to_vect(char *str);
+int					is_str_ID(char *str);
+int					is_str_uint(char *str);
 int					is_str_float(char *str);
 int					is_str_ufloat(char *str);
 int					is_str_ratio(char *str);

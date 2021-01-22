@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:01:40 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/21 18:41:52 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/22 14:22:50 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int					shadow_intersect(t_hit *hit, t_list *obj_node,
 	float			bias;
 
 	bias = 1e-5;
+	sh_ray.cam_up = hit->cam_up;
 	sh_ray.origin = vect_sum(hit->ray_obj, vect_const_prod(bias, hit->normal));
 	sh_ray.dir = vect_unit(vect_diff(light->l, hit->ray_obj));
 	hit->to_light = sh_ray.dir;
@@ -67,11 +68,10 @@ int					pixel_shade(t_hit *hit, t_scene *scene)
 	while (light_lst)
 	{
 		light = light_lst->content;
+		difu_spec = (t_vect){.x = 0, .y = 0, .z = 0};
 		if (shadow_intersect(hit, scene->objs, light) == 0)
-		{
 			difu_spec = phong_diffuse_specular(hit, light, hit->color);
-			color = vect_sum(amb, difu_spec);
-		}
+		color = vect_sum(amb, difu_spec);
 		light_lst = light_lst->next;
 	}
 	return (vectoi(color));

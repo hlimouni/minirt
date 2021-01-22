@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:36:25 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/21 18:35:26 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/22 12:24:34 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ double			sq_intersect(t_ray *ray, t_square *sq)
 	{
 		hit = vect_const_prod(t, ray->dir);
 		hit = vect_sum(ray->origin, hit);
+		sq->u = vect_cross(sq->normal, ray->cam_up);
+		sq->v = vect_cross(sq->normal, sq->u);
+		sq->u = vect_unit(sq->u);
+		sq->v = vect_unit(sq->v);
 		origin_to_hit = vect_diff(hit, sq->origin);
 		if (fabs(vect_dot(origin_to_hit, sq->u)) < sq->side / 2 &&
 				fabs(vect_dot(origin_to_hit, sq->v)) < sq->side / 2)

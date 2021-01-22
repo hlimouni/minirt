@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 18:51:07 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/21 15:13:58 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/22 08:47:27 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,11 @@ int     is_vect_equal(t_vect u, t_vect v)
     if (u.x == v.x && u.y == v.y && u.z == v.z)
         return (1);
     return (0);
+}
+
+int		is_vect_null(t_vect v)
+{
+	if (v.x == 0 && v.y == 0 && v.z == 0)
+		return (1);
+	return (0);
 }

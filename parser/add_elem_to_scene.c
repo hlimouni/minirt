@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 12:51:30 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/21 19:32:18 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/22 09:35:18 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int		rt_res_push(char **splitd_line, t_scene *scene)
 int		rt_amb_push(char **splitd_line, t_scene *scene)
 {
 	t_amb		*amb;
-	t_vect		intensity;
 
 	if (scene->amb)
 		return (-1);
@@ -70,10 +69,10 @@ int		rt_camera_push(char **splitd_line, t_scene *scene)
 	if (!(camera = malloc(sizeof(t_cam))))
 		return (0);
 	camera->c = str_to_vect(splitd_line[c_position]);
-	// camera->l = vect_unit(str_to_vect(splitd_line[c_orientation]));
+	camera->l = vect_unit(str_to_vect(splitd_line[c_orientation]));
 	camera->l = str_to_vect(splitd_line[c_orientation]);
 	camera->fov = str_tof(splitd_line[c_fov]);
-//	camera->fov = (camera->fov * M_PI) / 180.0;
+	camera->fov = (camera->fov * M_PI) / 180.0;
 	if (!(new_node = ft_lstnew(camera)))
 		return (0);
 	new_node->element = rt_camera;

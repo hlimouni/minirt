@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 15:15:39 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/21 18:32:54 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/22 12:35:13 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void		cam_ray_build(int pxl[], t_cam *cam, t_resolution *res,
     forward = vect_unit(vect_const_prod(-1, cam->l));
 	right = vect_cross(tmp_vect_set(&(cam->l)), forward);
     right = vect_unit(right);
-    cam->up = vect_unit(vect_cross(forward, right));
-	mat.line1 = (t_vect){.x = right.x, .y = (cam->up).x, .z = forward.x};
-	mat.line2 = (t_vect){.x = right.y, .y = (cam->up).y, .z = forward.y};
-	mat.line3 = (t_vect){.x = right.z, .y = (cam->up).z, .z = forward.z};
+    ray->cam_up = vect_unit(vect_cross(forward, right));
+	mat.line1 = (t_vect){.x = right.x, .y = (ray->cam_up).x, .z = forward.x};
+	mat.line2 = (t_vect){.x = right.y, .y = (ray->cam_up).y, .z = forward.y};
+	mat.line3 = (t_vect){.x = right.z, .y = (ray->cam_up).z, .z = forward.z};
 	ray->screen = vect_sum(cam->c, mat_vect_prod(mat, pixel));
 	ray->origin = cam->c;
 	ray->dir = vect_unit(vect_diff(ray->screen, ray->origin));
