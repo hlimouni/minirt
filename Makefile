@@ -6,7 +6,7 @@
 #    By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/26 21:52:28 by hlimouni          #+#    #+#              #
-#    Updated: 2021/01/22 15:11:52 by hlimouni         ###   ########.fr        #
+#    Updated: 2021/01/22 16:33:58 by hlimouni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ LINKFLAGS=-Lmlx -framework OpenGL -framework AppKit
 NAME=miniRT
 LIBFT=libft.a
 LIBMLX=libmlx.dylib
-HEADERS=minrt.h parser/parser.h t_vect_math/t_vect_math.h
 
 SRC=cam_ray_build.c \
 	main.c \

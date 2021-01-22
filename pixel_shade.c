@@ -6,14 +6,14 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:01:40 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/22 14:22:50 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/22 15:56:34 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vect				phong_diffuse_specular(t_hit *hit,
-											t_light *light, t_vect color)
+t_vect				phong_diffuse_specular(t_hit *hit, t_light *light,
+											t_vect color)
 {
 	t_vect			diffuse_specular;
 	double			refle_cst;
