@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:36:25 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/22 12:24:34 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/24 08:33:01 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,25 @@
 
 double			sp_intersect(t_ray *ray, t_sphere *sphere)
 {
-	double		b;
-	double		c;
+	t_coeff		coef;
 	t_vect		ray_sp_o;
+	double		t1;
+	double		t2;
+	double		delta;
 
 	ray_sp_o = vect_diff(ray->origin, sphere->o);
-	b = 2 * vect_dot(ray->dir, ray_sp_o);
-	c = vect_dot(ray_sp_o, ray_sp_o) - sphere->r * sphere->r;
-	return (solve_rt_quadratic(1, b, c));
+	coef.b = 2 * vect_dot(ray->dir, ray_sp_o);
+	coef.c = vect_dot(ray_sp_o, ray_sp_o) - sphere->r * sphere->r;
+	delta = coef.b * coef.b - 4 * coef.c;
+	if (delta < 0)
+		return (-1);
+	t1 = (-coef.b - sqrt(delta)) / 2;
+	t2 = (-coef.b + sqrt(delta)) / 2;
+	if (t1 < 0 && t2 < 0)
+		return (-1);
+	if ((t1 > 0 && t2 < 0) || (t1 < 0 && t2 > 0))
+		return (t1 > t2 ? t1 : t2);
+	return (t1 < t2 ? t1 : t2);
 }
 
 double			pl_intersect(t_ray *ray, t_plane *plane)
@@ -81,11 +92,7 @@ double			cy_intersect(t_ray *ray, t_cylinder *cy)
 	tmp_vect = vect_diff(oc_c,
 			vect_const_prod(vect_dot(oc_c, cy->axis), cy->axis));
 	equat.c = vect_dot(tmp_vect, tmp_vect) - cy->radius * cy->radius;
-	t = solve_rt_quadratic(equat.a, equat.b, equat.c);
-	if (t < (vect_dot(cy->axis, oc_c) / vect_dot(ray->dir, cy->axis)) ||
-			t > ((cy->height + vect_dot(cy->axis, oc_c))
-				/ vect_dot(ray->dir, cy->axis)))
-		return (-1);
+	t = limit_cylinder(&equat, ray, cy);
 	return (t);
 }
 

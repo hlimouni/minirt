@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 18:48:49 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/22 12:23:42 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/23 12:58:42 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,18 +206,6 @@ typedef struct 		s_triangle
 	int				color;
 }					t_triangle;
 
-
-typedef struct		s_cylinder
-{
-	t_vect			origin;
-	t_vect			axis;
-	double			height;
-	double			radius;
-	t_vect			color_vect;
-	int				color;
-}					t_cylinder;
-
-
 typedef struct		s_light
 {
 	t_vect			l;
@@ -226,14 +214,6 @@ typedef struct		s_light
 	t_vect			color_vect;
 	int				color;
 }					t_light;
-
-typedef struct		s_ray
-{
-	t_vect			origin;
-	t_vect			screen;
-	t_vect			dir;
-	t_vect			cam_up;
-}					t_ray;
 
 typedef struct		s_amb
 {

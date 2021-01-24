@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/22 14:21:12 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/24 09:21:54 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define E_KEY_PRESS 2
 # define AMB_C M_1_PI
 # define DIFU_C M_1_PI
-# define SPEC_C	150
+# define SPEC_C	180
 # define SHINE 22
 
 enum				e_pixel_coordinates
@@ -59,13 +59,6 @@ typedef struct		s_rt_data
 	t_mlibx			*mlx;
 	t_scene			*scene;
 }					t_rt_data;
-
-typedef struct		s_coeff
-{
-	double			a;
-	double			b;
-	double			c;
-}					t_coeff;
 
 void				cam_ray_build(int pxl[], t_cam *cam,
 							t_resolution *res, t_ray *ray);

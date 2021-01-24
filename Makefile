@@ -6,7 +6,7 @@
 #    By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/26 21:52:28 by hlimouni          #+#    #+#              #
-#    Updated: 2021/01/22 16:33:58 by hlimouni         ###   ########.fr        #
+#    Updated: 2021/01/24 09:16:21 by hlimouni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,10 @@ all: $(NAME)
 
 $(NAME) : $(OBJ) $(LIBMLX) $(LIBFT)
 	$(CC) $(CFLAGS) $(LINKFLAGS)  $^ -o $(NAME)
+
+*.o : minirt.h parser/parser.h t_vect_math/t_vect_math.h
+parser/*.o : parser/parser.h t_vect_math/t_vect_math.h
+t_vect_math/*.o : t_vect_math/t_vect_math.h
 
 %.o : %.c
 	$(CC) $(CFLAGS) -Imlx -Ilibft -c $< -o $@

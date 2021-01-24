@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:01:40 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/22 15:56:34 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/23 08:31:54 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,17 @@ int					pixel_shade(t_hit *hit, t_scene *scene)
 
 	light_lst = scene->lights;
 	amb = vect_prod(scene->amb->coeff, hit->color);
+	difu_spec = (t_vect){.x = 0, .y = 0, .z = 0};
 	while (light_lst)
 	{
 		light = light_lst->content;
-		difu_spec = (t_vect){.x = 0, .y = 0, .z = 0};
 		if (shadow_intersect(hit, scene->objs, light) == 0)
-			difu_spec = phong_diffuse_specular(hit, light, hit->color);
-		color = vect_sum(amb, difu_spec);
+		{
+			difu_spec = vect_sum(difu_spec,
+				phong_diffuse_specular(hit, light, hit->color));
+		}
 		light_lst = light_lst->next;
 	}
+	color = vect_sum(amb, difu_spec);
 	return (vectoi(color));
 }
