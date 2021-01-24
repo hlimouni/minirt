@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:38:48 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/24 10:40:56 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/24 18:42:54 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	img_array_set(t_cam *cam, t_scene *scene, int *img_data)
 	}
 }
 
-void	rt_image_clear(t_scene *scene, int *img_data)
+void	clear_image(t_scene *scene, int *img_data)
 {
 	int		i;
 	int		j;
@@ -58,15 +58,20 @@ void	rt_image_clear(t_scene *scene, int *img_data)
 			i++;
 		}
 		j++;
-	}	
+	}
 }
 
 void	rt_image_create(t_scene *scene, t_mlibx *mlx)
 {
 	t_resolution	*res;
+	int				sizex;
+	int				sizey;
 
 	res = scene->res;
 	mlx->ptr = mlx_init();
+	mlx_get_screen_size(mlx->ptr, &sizex, &sizey);
+	res->height > sizey ? (res->height = sizey) : 0;
+	res->width > sizex ? (res->width = sizex) : 0;
 	mlx->win_ptr = mlx_new_window(mlx->ptr, res->width, res->height, "miniRT");
 	mlx->img_ptr = mlx_new_image(mlx->ptr, res->width, res->height);
 	mlx->img_data = (int *)mlx_get_data_addr(mlx->img_ptr, &mlx->bbp,
@@ -84,17 +89,16 @@ int					key_bind(int keycode, t_rt_data *data)
 			cam_lst = data->scene->cams->next;
 		if (cam_lst == NULL && firstcall)
 			cam_lst = data->scene->cams;
-		else
-			if (!(cam_lst = cam_lst->next))
-				cam_lst = data->scene->cams;
-		rt_image_clear(data->scene, data->mlx->img_data);
+		else if (!(cam_lst = cam_lst->next))
+			cam_lst = data->scene->cams;
+		clear_image(data->scene, data->mlx->img_data);
+		// ft_memset(data->mlx->img_data, 0, data->scene->res->height * data->scene->res->width);
 		img_array_set(cam_lst->content, data->scene, data->mlx->img_data);
 		mlx_put_image_to_window(data->mlx->ptr, data->mlx->win_ptr,
 			data->mlx->img_ptr, 0, 0);
 	}
 	if (keycode == K_ESC)
 	{
-		mlx_destroy_image(data->mlx->ptr, data->mlx->win_ptr);
 		mlx_destroy_window(data->mlx->ptr, data->mlx->win_ptr);
 		rt_free_scene(data->scene);
 		exit(0);
