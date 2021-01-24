@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:38:48 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/22 12:17:40 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/24 10:40:56 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,24 @@ void	img_array_set(t_cam *cam, t_scene *scene, int *img_data)
 	}
 }
 
+void	rt_image_clear(t_scene *scene, int *img_data)
+{
+	int		i;
+	int		j;
+
+	j = 0;
+	while (j < scene->res->height)
+	{
+		i = 0;
+		while (i < scene->res->width)
+		{
+			img_data[j * scene->res->width + i] = 0;
+			i++;
+		}
+		j++;
+	}	
+}
+
 void	rt_image_create(t_scene *scene, t_mlibx *mlx)
 {
 	t_resolution	*res;
@@ -59,18 +77,24 @@ void	rt_image_create(t_scene *scene, t_mlibx *mlx)
 int					key_bind(int keycode, t_rt_data *data)
 {
 	static t_list	*cam_lst;
+	static	int		firstcall;
 	
 	if (keycode == K_SPACE)
-	{	if (cam_lst == NULL)
+	{	if (cam_lst == NULL && firstcall++ == 0)
+			cam_lst = data->scene->cams->next;
+		if (cam_lst == NULL && firstcall)
 			cam_lst = data->scene->cams;
 		else
-			cam_lst = cam_lst->next;
+			if (!(cam_lst = cam_lst->next))
+				cam_lst = data->scene->cams;
+		rt_image_clear(data->scene, data->mlx->img_data);
 		img_array_set(cam_lst->content, data->scene, data->mlx->img_data);
 		mlx_put_image_to_window(data->mlx->ptr, data->mlx->win_ptr,
 			data->mlx->img_ptr, 0, 0);
 	}
 	if (keycode == K_ESC)
 	{
+		mlx_destroy_image(data->mlx->ptr, data->mlx->win_ptr);
 		mlx_destroy_window(data->mlx->ptr, data->mlx->win_ptr);
 		rt_free_scene(data->scene);
 		exit(0);

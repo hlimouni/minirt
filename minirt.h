@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/24 09:21:54 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/24 10:39:47 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define E_KEY_PRESS 2
 # define AMB_C M_1_PI
 # define DIFU_C M_1_PI
-# define SPEC_C	180
+# define SPEC_C	150
 # define SHINE 22
 
 enum				e_pixel_coordinates
@@ -77,6 +77,7 @@ double				sp_intersect(t_ray *ray, t_sphere *sphere);
 double				pl_intersect(t_ray *ray, t_plane *plane);
 double				cy_intersect(t_ray *ray, t_cylinder *cy);
 double				tr_intersect(t_ray *ray, t_triangle *tr);
+void				rt_image_clear(t_scene *scene, int *img_data);
 double				one_obj_intersect(t_ray *ray, t_list *obj_node);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 15:15:39 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/22 12:35:13 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/24 11:31:28 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static t_vect	tmp_vect_set(t_vect *orient)
 	if (is_vect_null(cross))
 	{
 		if (vect_dot(*orient, tmp) > 0)
-			tmp = (t_vect){.x = -1, .y = 0, .z = 0};
+			tmp = (t_vect){.x = 0, .y = 0, .z = -1};
 		else
-			tmp = (t_vect){.x = 1, .y = 0, .z = 0};
+			tmp = (t_vect){.x = 0, .y = 0, .z = 1};
 	}
 	return (tmp);
 }
