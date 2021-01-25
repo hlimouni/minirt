@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 18:48:49 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/24 18:36:47 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/25 17:19:21 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ enum	e_errors
 	type_err,
 	num_params_err,
 	multicall_err,
+	transform_err
 };
 
 enum	e_ambiant_parameters
@@ -283,6 +284,7 @@ int					rt_cylinder_push(char **splt_line, t_scene *scene);
 int					rt_plane_push(char **splt_line, t_scene *scene);
 int					add_elem_to_scene(t_scene *scene, char **splt_line);
 void				rt_free_scene(t_scene *scene);
+void				transform_err_msg(int line);
 void				rt_exit(int rt_error_num, int line, int param, void *ptrs[]);
 
 #endif

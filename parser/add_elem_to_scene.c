@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_elem_to_scene.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 12:51:30 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/24 18:36:38 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/25 17:12:31 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,13 @@ int		rt_camera_push(char **splitd_line, t_scene *scene)
 	ft_lstadd_front(&(scene->cams), new_node);
 	return (1);
 }
+
+/*
+** add_elem_to_scene returns:
+** 0 when an allocation failes
+** -1 when a capital letter identifier is called more than once
+** 1 when a transformation is not well configured
+*/
 
 int		add_elem_to_scene(t_scene *scene, char **splitd_line)
 {
