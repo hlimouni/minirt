@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transformations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 16:23:36 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/26 10:59:22 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/26 19:02:03 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,41 @@ int		rt_tran_apply(char **splitd_line, t_scene *scene)
 	return (1);
 }
 
-void	rotate_vector(t_vect *vec, double phi, double theta, double psi)
+int		rt_rot_apply(char **splitd_line, t_scene *scene)
+{
+	int				elem;
+	t_list			*list;
+	double			phi;
+	double			theta;
+	double			psi;
+	
+	elem = is_str_ID(splitd_line[rot_object]);
+	
+}
+
+t_vect	rotate_vector(t_vect vec, double phi, double theta, double psi)
 {
 	t_mat3x3	mat;
+	t_vect		rot_vect;
 
-	mat.line1 = (t_vect){.x = cos(theta) * cos(phi), .y = -cos(theta) * sin(psi),
-													.z = sin(theta)};
-	mat.line2 = (t_vect){.x = cos(theta) * sin(psi) + sin(theta) * sin(theta) 
-		* cos(psi), .y = cos(theta) * cos(psi) - sin(theta) * sin(theta) * sin(ps)}
+	mat.line1 = (t_vect)
+	{
+		.x = cos(psi) * cos(theta),
+		.y = cos(psi) * sin(theta) * sin(phi) - sin(psi) * cos(phi),
+		.z = cos(psi) * sin(theta) * cos(phi) + sin(psi) * sin(phi)
+	};
+	mat.line2 = (t_vect)
+	{
+		.x = sin(psi) * cos(theta),
+		.y = sin(psi) * sin(theta) * sin(phi) + cos(psi) * cos(phi),
+		.z = sin(psi) * sin(theta) * cos(phi) - cos(psi) * sin(phi)
+	};
+	mat.line3 = (t_vect)
+	{
+		.x = -sin(theta),
+		.y = cos(theta) * sin(phi),
+		.z = cos(theta) * cos(phi)
+	};
+	rot_vect = mat_vect_prod(mat, vec);
+	return (rot_vect);
 }

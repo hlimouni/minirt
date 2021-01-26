@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_str.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 17:01:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/22 08:27:59 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/26 19:31:01 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,8 @@ int	is_str(char *str, int type)
 	typechecker_arr[ratio_type] = is_str_ratio;
 	typechecker_arr[angle_type] = is_str_angle;
 	typechecker_arr[uint_type] = is_str_uint;
-	typechecker_arr[yaw_type] = is_str_yaw;
-	typechecker_arr[pitch_type] = is_str_pitch;
-	typechecker_arr[roll_type] = is_str_pitch;
+	typechecker_arr[phi_type] = is_str_phi;
+	typechecker_arr[theta_type] = is_str_theta;
+	typechecker_arr[psi_type] = is_str_theta;
 	return (typechecker_arr[type](str));
 }

@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 18:48:49 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/25 17:19:21 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/26 19:32:23 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ enum	e_rt_file_param_types
 	ratio_type,
 	angle_type,
 	uint_type,
-	yaw_type,
-	pitch_type,
-	roll_type,
+	phi_type,
+	theta_type,
+	psi_type,
 	rt_types_num
 };
 
@@ -164,9 +164,9 @@ enum	e_rotation_parameters
 {
 	rot_ID,
 	rot_object,
-	rot_yaw,
-	rot_pitch,
-	rot_roll,
+	rot_phi,
+	rot_theta,
+	rot_psi,
 	rot_params_num
 };
 
@@ -273,8 +273,8 @@ int					is_str_float(char *str);
 int					is_str_ufloat(char *str);
 int					is_str_ratio(char *str);
 int					is_str_angle(char *str);
-int					is_str_yaw(char *str);
-int					is_str_pitch(char *str);
+int					is_str_phi(char *str);
+int					is_str_theta(char *str);
 int					is_str(char *str, int type);
 int					rt_elemlen(char *arr);
 int					rt_square_push(char **splt_line, t_scene *scene);

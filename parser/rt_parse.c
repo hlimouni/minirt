@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 11:00:31 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/26 09:51:23 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/26 19:31:48 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		info_arr_set(int elem, char info[])
 			udecimal_type, rgb_type, -1},
 		(char[]){rt_plane, vector_type, vector_type, rgb_type, -1},
 		(char[]){rt_translation, ID_type, vector_type, -1},
-		(char[]){rt_rotation, ID_type, yaw_type, pitch_type, roll_type, -1}
+		(char[]){rt_rotation, ID_type, phi_type, theta_type, psi_type, -1}
 	};
 	ft_memmove(info, data[elem], rt_elemlen(data[elem]));
 }
