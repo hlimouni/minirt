@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 11:00:31 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/25 17:09:42 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/26 09:51:23 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,25 +120,21 @@ void			rt_parse(int fd, t_scene *scene)
 	char		*line;
 	int			line_ct;
 	int			gnl_ret;
-	void		**ptrs;
 	char		**splitd_line;
 
 	line = NULL;
 	line_ct = 1;
 	gnl_ret = 1;
-	ptrs = (void *[]){line, &splitd_line};
 	while (gnl_ret > 0)
 	{
 		gnl_ret = get_next_line(fd, &line);
 		if (is_line_empty(&line, &line_ct))
 			continue ;
 		splitd_line = check_line(&line, line_ct);
-		if (add_elem_to_scene(scene, splitd_line) == -1)
-			rt_exit(multicall_err, line_ct, 0, ptrs);
-		if (add_elem_to_scene(scene, splitd_line) == 0)
-			rt_exit(alloc_err, line_ct, 0, ptrs);
-		if (add_elem_to_scene(scene, splitd_line) == 1)
-			rt_exit(transform_err, line_ct, 0, ptrs);
+		if (add_elem_to_scene(scene, splitd_line) <= 0)
+			rt_exit(multicall_err, line_ct, 0, (void *[]){line, &splitd_line});
+		if (add_elem_to_scene(scene, splitd_line) > 1)
+			rt_exit(transform_err, line_ct, 0, (void *[]){line, &splitd_line});
 		free_2d_array(&splitd_line);
 		ft_free_null((void **)&line);
 		line_ct++;
