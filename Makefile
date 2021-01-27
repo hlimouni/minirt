@@ -6,7 +6,7 @@
 #    By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/26 21:52:28 by hlimouni          #+#    #+#              #
-#    Updated: 2021/01/24 09:16:21 by hlimouni         ###   ########.fr        #
+#    Updated: 2021/01/27 16:34:59 by hlimouni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ SRC=cam_ray_build.c \
 	rt_free_scene.c \
 	rt_img_create.c \
 	rt_scene_initialize.c \
-	set_bases_for_squares.c \
 	parser/add_elem_to_scene.c \
 	parser/get_next_line.c \
 	parser/is_str.c \
@@ -38,6 +37,9 @@ SRC=cam_ray_build.c \
 	parser/rt_parse.c \
 	parser/str_to_vect.c \
 	parser/str_tof.c \
+	parser/translation.c \
+	parser/rotation.c \
+	parser/is_str_id.c \
 	t_vect_math/itovect.c \
 	t_vect_math/mat_vect_prod.c \
 	t_vect_math/solve_rt_quadtratic.c \
@@ -52,7 +54,9 @@ $(NAME) : $(OBJ) $(LIBMLX) $(LIBFT)
 	$(CC) $(CFLAGS) $(LINKFLAGS)  $^ -o $(NAME)
 
 *.o : minirt.h parser/parser.h t_vect_math/t_vect_math.h
+
 parser/*.o : parser/parser.h t_vect_math/t_vect_math.h
+
 t_vect_math/*.o : t_vect_math/t_vect_math.h
 
 %.o : %.c

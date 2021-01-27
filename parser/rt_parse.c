@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 11:00:31 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/26 19:31:48 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/27 16:32:19 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static char		**check_line(char **line, int line_ct)
 	ptrs = (void *[]){line, &splitd_line};
 	if (!(splitd_line = ft_split(*line, ' ')))
 		rt_exit(alloc_err, line_ct, 0, ptrs);
-	if ((elem = is_str(splitd_line[0], ID_type)) < 0)
+	if ((elem = str_to_elem(splitd_line[0])) < 0)
 		rt_exit(type_err, line_ct, ID_type, ptrs);
 	info_arr_set(elem, info);
 	param = 1;

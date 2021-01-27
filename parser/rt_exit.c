@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 10:33:44 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/25 17:18:02 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/27 15:08:54 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void	type_err_msg(int line_ct, int type)
 		ft_putstr_fd("an angle\n", 2);
 	else if (type == uint_type)
 		ft_putstr_fd("an unsigned integer\n", 2);
+	else if (type == phi_type || type == theta_type || type == psi_type)
+		ft_putstr_fd("a proper euler angle\n", 2);
 	exit(1);
 }
 

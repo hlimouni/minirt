@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 15:12:46 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/06 12:51:43 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/27 16:20:02 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,7 +313,7 @@ t_cam	rt_cam_create(char **splitd_line)
 t_translation	rt_translation_apply(char **splitd_line, t_list	*objs)
 {
 	t_translation		translation;
-	translation.obj_ID = is_str_ID(splitd_line[tran_object]);
+	translation.obj_ID = str_to_elem(splitd_line[tran_object]);
 	translation.vector = str_to_vect(splitd_line[tran_vect]);
 	return (translation);
 }
@@ -322,7 +322,7 @@ t_rotation		rt_rotation_apply(char **splitd_line, t_list *obj)
 {
 	t_rotation		rotation;
 
-	rotation.obj_ID = is_str_ID(splitd_line[rot_object]);
+	rotation.obj_ID = str_to_elem(splitd_line[rot_object]);
 	rotation.yaw = str_tof(splitd_line[rot_yaw]);
 	rotation.pitch = str_tof(splitd_line[rot_pitch]);
 	rotation.roll = str_tof(splitd_line[rot_roll]);

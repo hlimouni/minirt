@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_str.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 17:01:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/26 19:31:01 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/27 16:15:55 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int			is_str_vect(char *str)
 	return (i == 3 ? 1 : 0);
 }
 
-int	is_str_ID(char *str)
+int	str_to_elem(char *str)
 {
 	if (!str)
 		return (NEGATIVE_VALUE);

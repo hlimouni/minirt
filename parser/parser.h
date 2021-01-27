@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 18:48:49 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/26 19:32:23 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/27 16:17:16 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,20 +238,6 @@ typedef	struct		s_resolution
 	int				height;
 }					t_resolution;
 
-typedef struct		s_translation
-{
-	int				obj_ID;
-	t_vect			vector;
-}					t_translation;
-
-typedef struct		s_rotation
-{
-	int				obj_ID;
-	double			yaw;
-	double			pitch;
-	double			roll;
-}					t_rotation;
-
 typedef struct		s_scene
 {
 	t_resolution	*res;
@@ -268,6 +254,7 @@ int					get_next_line(int fd, char **line);
 double				str_tof(char *str);
 t_vect 				str_to_vect(char *str);
 int					is_str_ID(char *str);
+int					str_to_elem(char *str);
 int					is_str_uint(char *str);
 int					is_str_float(char *str);
 int					is_str_ufloat(char *str);
@@ -285,6 +272,8 @@ int					rt_plane_push(char **splt_line, t_scene *scene);
 int					add_elem_to_scene(t_scene *scene, char **splt_line);
 void				rt_free_scene(t_scene *scene);
 void				transform_err_msg(int line);
+int					rt_rot_apply(char **splitd_line, t_scene *scene);
+int					rt_tran_apply(char **splitd_line, t_scene *scene);
 void				rt_exit(int rt_error_num, int line, int param, void *ptrs[]);
 
 #endif
