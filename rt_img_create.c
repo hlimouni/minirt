@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:38:48 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/24 18:42:54 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/27 18:59:09 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ void	rt_image_create(t_scene *scene, t_mlibx *mlx)
 	res = scene->res;
 	mlx->ptr = mlx_init();
 	mlx_get_screen_size(mlx->ptr, &sizex, &sizey);
+	if (res->height == 0)
+		res->height++;
+	if (res->width == 0)
+		res->width++;
 	res->height > sizey ? (res->height = sizey) : 0;
 	res->width > sizex ? (res->width = sizex) : 0;
 	mlx->win_ptr = mlx_new_window(mlx->ptr, res->width, res->height, "miniRT");

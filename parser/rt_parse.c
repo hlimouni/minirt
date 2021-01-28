@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 11:00:31 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/27 16:32:19 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/28 09:14:23 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void			rt_parse(int fd, t_scene *scene)
 	int			line_ct;
 	int			gnl_ret;
 	char		**splitd_line;
+	int			push_flag;
 
 	line = NULL;
 	line_ct = 1;
@@ -131,10 +132,9 @@ void			rt_parse(int fd, t_scene *scene)
 		if (is_line_empty(&line, &line_ct))
 			continue ;
 		splitd_line = check_line(&line, line_ct);
-		if (add_elem_to_scene(scene, splitd_line) <= 0)
-			rt_exit(multicall_err, line_ct, 0, (void *[]){line, &splitd_line});
-		if (add_elem_to_scene(scene, splitd_line) > 1)
-			rt_exit(transform_err, line_ct, 0, (void *[]){line, &splitd_line});
+		if ((push_flag = add_elem_to_scene(scene, splitd_line)) != 1)
+			rt_exit(push_flag < 1 ? multicall_err : transform_err,
+					line_ct, 0, (void *[]){&line, &splitd_line});
 		free_2d_array(&splitd_line);
 		ft_free_null((void **)&line);
 		line_ct++;

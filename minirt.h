@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/27 15:20:17 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/28 09:29:32 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define E_KEY_PRESS 2
 # define AMB_C M_1_PI
 # define DIFU_C M_1_PI
-# define SPEC_C	100
-# define SHINE 77
+# define SPEC_C	180
+# define SHINE 100
 
 enum				e_pixel_coordinates
 {
