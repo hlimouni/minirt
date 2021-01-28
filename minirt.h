@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/28 09:29:32 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/28 18:50:11 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 # include "parser/parser.h"
 # include "mlx/mlx.h"
+# define BIAS 1e-5
 # define K_SPACE 49
 # define K_ESC 53
 # define E_DESTROY 17

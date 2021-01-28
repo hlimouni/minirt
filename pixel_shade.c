@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:01:40 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/23 08:31:54 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/28 16:03:12 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,17 @@ int					shadow_intersect(t_hit *hit, t_list *obj_node,
 										t_light *light)
 {
 	t_ray			sh_ray;
-	float			bias;
+	double			o_l_dis;
+	double			t;
 
-	bias = 1e-5;
 	sh_ray.cam_up = hit->cam_up;
-	sh_ray.origin = vect_sum(hit->ray_obj, vect_const_prod(bias, hit->normal));
+	sh_ray.origin = vect_sum(hit->ray_obj, vect_const_prod(BIAS, hit->normal));
 	sh_ray.dir = vect_unit(vect_diff(light->l, hit->ray_obj));
 	hit->to_light = sh_ray.dir;
+	o_l_dis = vect_norm(vect_diff(light->l, sh_ray.origin));
 	while (obj_node)
 	{
-		if (one_obj_intersect(&sh_ray, obj_node) >= 0)
+		if ((t = one_obj_intersect(&sh_ray, obj_node)) >= 0 && t < o_l_dis)
 			return (1);
 		obj_node = obj_node->next;
 	}

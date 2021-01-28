@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:09:30 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/22 14:21:54 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/28 19:19:58 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,21 @@ void			set_hit_color(t_hit *hit)
 ** }
 */
 
-void			set_planar_normals(t_vect og_norml, t_hit *hit)
+void			set_planar_normals(t_vect obj_norml, t_hit *hit)
 {
-	if (vect_dot(og_norml, hit->view) < 0)
-		hit->normal = vect_const_prod(-1, og_norml);
+	if (vect_dot(obj_norml, hit->view) < 0)
+		hit->normal = vect_const_prod(-1, obj_norml);
 	else
-		hit->normal = og_norml;
+		hit->normal = obj_norml;
+}
+
+void			set_cy_normal(t_cylinder *cy, t_hit *hit, t_vect dir)
+{
+	hit->normal = vect_diff(hit->ray_obj, cy->origin);
+	hit->normal = vect_unit(vect_diff(hit->normal,
+		vect_const_prod(vect_dot(cy->axis, hit->normal), cy->axis)));
+	if (vect_dot(dir, hit->normal) > 0)
+		hit->normal = vect_const_prod(-1, hit->normal);
 }
 
 void			set_hit(t_hit *hit, t_ray *ray)
@@ -58,14 +67,13 @@ void			set_hit(t_hit *hit, t_ray *ray)
 	hit->cam_up = ray->cam_up;
 	set_hit_color(hit);
 	if (hit->obj->element == rt_sphere)
-		hit->normal = vect_unit(vect_diff(hit->ray_obj, ((t_sphere *)obj)->o));
-	else if (hit->obj->element == rt_cylinder)
 	{
-		hit->normal = vect_diff(hit->ray_obj, ((t_cylinder *)obj)->origin);
-		hit->normal = vect_unit(vect_diff(hit->normal,
-			vect_const_prod(vect_dot(((t_cylinder *)obj)->axis, hit->normal),
-			((t_cylinder *)obj)->axis)));
+		hit->normal = vect_unit(vect_diff(hit->ray_obj, ((t_sphere *)obj)->o));
+		if (vect_dot(ray->dir, hit->normal) > 0)
+			hit->normal = vect_const_prod(-1, hit->normal);
 	}
+	else if (hit->obj->element == rt_cylinder)
+		set_cy_normal(obj, hit, ray->dir);
 	else if (hit->obj->element == rt_plane)
 		set_planar_normals(((t_plane *)obj)->n, hit);
 	else if (hit->obj->element == rt_square)
