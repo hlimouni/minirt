@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:09:30 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/28 19:19:58 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/29 10:51:13 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,14 @@ void			set_planar_normals(t_vect obj_norml, t_hit *hit)
 
 void			set_cy_normal(t_cylinder *cy, t_hit *hit, t_vect dir)
 {
-	hit->normal = vect_diff(hit->ray_obj, cy->origin);
-	hit->normal = vect_unit(vect_diff(hit->normal,
-		vect_const_prod(vect_dot(cy->axis, hit->normal), cy->axis)));
-	if (vect_dot(dir, hit->normal) > 0)
-		hit->normal = vect_const_prod(-1, hit->normal);
+	t_vect		center_to_hit;
+
+	(void)dir;
+	center_to_hit = vect_diff(hit->ray_obj, cy->origin);
+	hit->normal = vect_unit(vect_diff(center_to_hit,
+		vect_const_prod(vect_dot(cy->axis, center_to_hit), cy->axis)));
+	// if (vect_dot(dir, hit->normal) > 0)
+	// 	hit->normal = vect_const_prod(1, hit->normal);
 }
 
 void			set_hit(t_hit *hit, t_ray *ray)

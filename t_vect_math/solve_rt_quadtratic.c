@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:41:44 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/24 08:38:13 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/01/29 10:09:46 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ double		limit_cylinder(t_coeff *coeff, t_ray *ray,
 	ret.t1 = INFINITY;
 	ret.t2 = INFINITY;
 	sol = solve_rt_quadratic(coeff);
-	cy_top = vect_sum(cy->origin, vect_const_prod(cy->height, cy->axis));
-	if (isinf(sol.t1))
+	if (isinf(sol.t1) && isinf(sol.t2))
 		return (-1);
+	cy_top = vect_sum(cy->origin, vect_const_prod(cy->height, cy->axis));
 	hit1 = vect_sum(ray->origin, vect_const_prod(sol.t1, ray->dir));
 	hit2 = vect_sum(ray->origin, vect_const_prod(sol.t2, ray->dir));
 	if (sol.t1 > 0 && vect_dot(cy->axis, vect_diff(hit1, cy->origin)) > 0
