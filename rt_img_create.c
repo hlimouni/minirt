@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:38:48 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/27 18:59:09 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/01 15:44:23 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** 	cam_lst = data->scene->cams;
 */
 
-void	img_array_set(t_cam *cam, t_scene *scene, int *img_data)
+void	img_array_set(t_cam *cam, t_scene *scene, t_mlibx *mlx)
 {
 	int		i;
 	int		j;
@@ -35,7 +35,8 @@ void	img_array_set(t_cam *cam, t_scene *scene, int *img_data)
 			if (hit.t >= 0)
 			{
 				hit.pxl_color = pixel_shade(&hit, scene);
-				img_data[j * scene->res->width + i] = hit.pxl_color;
+				mlx->img_data[j * (mlx->line_len / 4) +
+					i * (mlx->bbp / 32)] = hit.pxl_color;
 			}
 			i++;
 		}
@@ -43,7 +44,7 @@ void	img_array_set(t_cam *cam, t_scene *scene, int *img_data)
 	}
 }
 
-void	clear_image(t_scene *scene, int *img_data)
+void	clear_image(t_scene *scene, t_mlibx *mlx)
 {
 	int		i;
 	int		j;
@@ -54,7 +55,7 @@ void	clear_image(t_scene *scene, int *img_data)
 		i = 0;
 		while (i < scene->res->width)
 		{
-			img_data[j * scene->res->width + i] = 0;
+			mlx->img_data[j * (mlx->line_len / 4) + i * (mlx->bbp / 32)] = 0;
 			i++;
 		}
 		j++;
@@ -80,7 +81,7 @@ void	rt_image_create(t_scene *scene, t_mlibx *mlx)
 	mlx->img_ptr = mlx_new_image(mlx->ptr, res->width, res->height);
 	mlx->img_data = (int *)mlx_get_data_addr(mlx->img_ptr, &mlx->bbp,
 		&mlx->line_len, &mlx->endian);
-	img_array_set(scene->cams->content, scene, mlx->img_data);
+	img_array_set(scene->cams->content, scene, mlx);
 }
 
 int					key_bind(int keycode, t_rt_data *data)
@@ -95,9 +96,9 @@ int					key_bind(int keycode, t_rt_data *data)
 			cam_lst = data->scene->cams;
 		else if (!(cam_lst = cam_lst->next))
 			cam_lst = data->scene->cams;
-		clear_image(data->scene, data->mlx->img_data);
+		clear_image(data->scene, data->mlx);
 		// ft_memset(data->mlx->img_data, 0, data->scene->res->height * data->scene->res->width);
-		img_array_set(cam_lst->content, data->scene, data->mlx->img_data);
+		img_array_set(cam_lst->content, data->scene, data->mlx);
 		mlx_put_image_to_window(data->mlx->ptr, data->mlx->win_ptr,
 			data->mlx->img_ptr, 0, 0);
 	}
