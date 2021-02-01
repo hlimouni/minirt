@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/20 18:15:38 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/01 18:08:20 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define E_KEY_PRESS 2
 # define AMB_C M_1_PI
 # define DIFU_C M_1_PI
-# define SPEC_C	1
+# define SPEC_C	0
 # define SHINE 5
 
 // # define RT_TYPES_NUM 8

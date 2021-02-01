@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 19:10:32 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/13 15:14:03 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/01 17:47:10 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,7 +253,7 @@ float   sq_intersect(t_vect ray_screen, t_cam *cam, t_square square)
 ** of course if they're both negative we return a negative value.
 */
 
-/*
+
 double	solve_rt_quadratic(double a, double b, double c)
 {
 	double t1;
@@ -271,7 +271,7 @@ double	solve_rt_quadratic(double a, double b, double c)
         return (-1);
     return (t1 < t2 ? t1 : t2);
 }
-*/
+
 
 float  cy_intersect(t_vect ray_screen, t_cam *cam, t_cylinder cy)
 {
@@ -315,7 +315,7 @@ float  cy_intersect(t_vect ray_screen, t_cam *cam, t_cylinder cy)
 	else
         return (t1 < t2 ? t1 : t2);
 }
-/*
+
 double		cy_intersect2(t_ray *ray, t_cylinder *cy)
 {
 	double	a;
@@ -337,7 +337,7 @@ double		cy_intersect2(t_ray *ray, t_cylinder *cy)
 		return (-1);
 	return (t);
 }
-*/
+
 
 
  float   tr_intersect(t_vect ray_screen, t_cam *cam, t_triangle *tr)

@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:09:30 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/29 10:51:13 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/01 18:18:37 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			set_hit_color(t_hit *hit)
 void			set_planar_normals(t_vect obj_norml, t_hit *hit)
 {
 	if (vect_dot(obj_norml, hit->view) < 0)
-		hit->normal = vect_const_prod(-1, obj_norml);
+		hit->normal = vect_unit(vect_const_prod(-1, obj_norml));
 	else
 		hit->normal = obj_norml;
 }
@@ -51,12 +51,11 @@ void			set_cy_normal(t_cylinder *cy, t_hit *hit, t_vect dir)
 {
 	t_vect		center_to_hit;
 
-	(void)dir;
 	center_to_hit = vect_diff(hit->ray_obj, cy->origin);
 	hit->normal = vect_unit(vect_diff(center_to_hit,
 		vect_const_prod(vect_dot(cy->axis, center_to_hit), cy->axis)));
-	// if (vect_dot(dir, hit->normal) > 0)
-	// 	hit->normal = vect_const_prod(1, hit->normal);
+	if (vect_dot(dir, hit->normal) > 0)
+		hit->normal = vect_unit(vect_const_prod(-1, hit->normal));
 }
 
 void			set_hit(t_hit *hit, t_ray *ray)
@@ -73,7 +72,7 @@ void			set_hit(t_hit *hit, t_ray *ray)
 	{
 		hit->normal = vect_unit(vect_diff(hit->ray_obj, ((t_sphere *)obj)->o));
 		if (vect_dot(ray->dir, hit->normal) > 0)
-			hit->normal = vect_const_prod(-1, hit->normal);
+			hit->normal = vect_unit(vect_const_prod(-1, hit->normal));
 	}
 	else if (hit->obj->element == rt_cylinder)
 		set_cy_normal(obj, hit, ray->dir);
