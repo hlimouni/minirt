@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/02/01 18:18:50 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/02 19:09:25 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define AMB_C M_1_PI
 # define DIFU_C M_1_PI
 # define SPEC_C	140
-# define SHINE 15
+# define SHINE 16
 
 enum				e_pixel_coordinates
 {
@@ -46,6 +46,7 @@ typedef struct		s_hit
 	double			t;
 	t_list			*obj;
     t_vect          ray_obj;
+	t_vect			ray_dir;
 	t_vect			normal;
 	t_vect			view;
 	t_vect			color;
