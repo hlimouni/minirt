@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:08:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/24 19:31:47 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/03 17:16:36 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int     main(int ac, char* av[])
     rt_image_create(&scene, &mlibx);
     if (ac == 2)
         display_rt_image(&scene, &mlibx);
-  //   if (ac == 3)
-  //       save_rt_image(&mlibx);		
+	if (ac == 3)
+	    save_rt_image(&mlibx, &scene);	
   	rt_free_scene(&scene);
     return (0);
 }

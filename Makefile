@@ -6,7 +6,7 @@
 #    By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/26 21:52:28 by hlimouni          #+#    #+#              #
-#    Updated: 2021/01/27 16:34:59 by hlimouni         ###   ########.fr        #
+#    Updated: 2021/02/03 17:15:12 by hlimouni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC=cam_ray_build.c \
 	ray_intersect.c \
 	rt_free_scene.c \
 	rt_img_create.c \
+	save_rt_image.c \
 	rt_scene_initialize.c \
 	parser/add_elem_to_scene.c \
 	parser/get_next_line.c \

@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/02/02 19:09:25 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/03 17:16:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ double				cy_intersect(t_ray *ray, t_cylinder *cy);
 double				tr_intersect(t_ray *ray, t_triangle *tr);
 void				rt_image_clear(t_scene *scene, int *img_data);
 double				one_obj_intersect(t_ray *ray, t_list *obj_node);
+void				save_rt_image(t_mlibx *mlx, t_scene *scene);
 
 #endif
