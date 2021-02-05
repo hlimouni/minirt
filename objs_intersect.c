@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:36:25 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/02/01 18:00:29 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 15:56:04 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ double			tr_intersect(t_ray *ray, t_triangle *tr)
 	double		t;
 
 	plane.n = vect_cross(vect_diff(tr->pt_b, tr->pt_a),
-						vect_diff(tr->pt_c, tr->pt_a));
+			vect_diff(tr->pt_c, tr->pt_a));
 	plane.n = vect_unit(plane.n);
 	tr->normal = plane.n;
 	plane.p = tr->pt_a;
@@ -112,11 +112,11 @@ double			tr_intersect(t_ray *ray, t_triangle *tr)
 		hit = vect_const_prod(t, ray->dir);
 		hit = vect_sum(ray->origin, hit);
 		if (vect_dot(plane.n, vect_cross(vect_diff(tr->pt_b, tr->pt_a),
-										vect_diff(hit, tr->pt_a))) >= 0 &&
-			vect_dot(plane.n, vect_cross(vect_diff(tr->pt_c, tr->pt_b),
-										vect_diff(hit, tr->pt_b))) >= 0 &&
-			vect_dot(plane.n, vect_cross(vect_diff(tr->pt_a, tr->pt_c),
-										vect_diff(hit, tr->pt_c))) >= 0)
+						vect_diff(hit, tr->pt_a))) >= 0 &&
+				vect_dot(plane.n, vect_cross(vect_diff(tr->pt_c, tr->pt_b),
+						vect_diff(hit, tr->pt_b))) >= 0 &&
+				vect_dot(plane.n, vect_cross(vect_diff(tr->pt_a, tr->pt_c),
+						vect_diff(hit, tr->pt_c))) >= 0)
 			return (t);
 	}
 	return (-1);

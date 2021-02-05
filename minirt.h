@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/02/03 17:16:49 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 17:22:38 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct		s_hit
 {
 	double			t;
 	t_list			*obj;
-    t_vect          ray_obj;
+	t_vect			ray_obj;
 	t_vect			ray_dir;
 	t_vect			normal;
 	t_vect			view;
@@ -56,7 +56,7 @@ typedef struct		s_hit
 	int				pxl_color;
 }					t_hit;
 
-typedef struct		s_rt_data	
+typedef struct		s_rt_data
 {
 	t_mlibx			*mlx;
 	t_scene			*scene;
@@ -64,9 +64,11 @@ typedef struct		s_rt_data
 
 void				cam_ray_build(int pxl[], t_cam *cam,
 							t_resolution *res, t_ray *ray);
+int					close_bind(t_rt_data *data);
+int					key_bind(int keycode, t_rt_data *data);
 void				set_base_for_squares(t_cam *cam, t_list *list);
 void				rt_free_scene(t_scene *scene);
-int     			open_rt_file(int ac, char *av[]);
+int					open_rt_file(int ac, char *av[]);
 void				rt_parse(int fd, t_scene *scene);
 void				rt_scene_initialize(t_scene *scene);
 int					pixel_shade(t_hit *hit, t_scene *scene);

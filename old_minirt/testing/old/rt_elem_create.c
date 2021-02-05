@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 15:12:46 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/27 16:20:02 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 18:13:58 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,7 +334,7 @@ int		add_elem_to_scene(t_scene *scene, char **splitd_line)
 	t_elem_push	elem_push_arr[rt_elems_num];
 	int			elem;
 
-	elem = is_str_ID(splitd_line[0]);
+	elem = is_str_id(splitd_line[0]);
 	elem_push_arr[rt_camera] = rt_camera_push;
 	elem_push_arr[rt_ambiant] = rt_amb_push;
 	elem_push_arr[rt_resolution] = rt_res_push;

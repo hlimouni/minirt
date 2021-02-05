@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 10:33:44 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/27 15:08:54 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 18:23:38 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	type_err_msg(int line_ct, int type)
 		ft_putstr_fd("an angle\n", 2);
 	else if (type == uint_type)
 		ft_putstr_fd("an unsigned integer\n", 2);
-	else if (type == phi_type || type == theta_type || type == psi_type)
+	else if (type == euler_type)
 		ft_putstr_fd("a proper euler angle\n", 2);
 	exit(1);
 }
@@ -60,7 +60,7 @@ static void	multicall_err_msg(int line_ct)
 	ft_putstr_fd(" should not be called more than once\n", 2);
 }
 
-void	rt_exit(int rt_error_num, int line, int param, void *ptrs[])
+void		rt_exit(int rt_error_num, int line, int param, void *ptrs[])
 {
 	free_ptrs(ptrs);
 	if (rt_error_num == alloc_err)

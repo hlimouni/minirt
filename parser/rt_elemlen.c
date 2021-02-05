@@ -6,13 +6,13 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 16:57:18 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/21 14:37:53 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 18:22:06 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	rt_elemlen(char	*element)
+int	rt_elemlen(char *element)
 {
 	int	i;
 

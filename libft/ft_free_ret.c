@@ -6,15 +6,15 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 10:44:54 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/10 10:46:09 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 17:27:24 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int     ft_free_ret(void **ptr, int ret)
+int	ft_free_ret(void **ptr, int ret)
 {
-    free(*ptr);
-    *ptr = NULL;
-    return (ret);
+	free(*ptr);
+	*ptr = NULL;
+	return (ret);
 }

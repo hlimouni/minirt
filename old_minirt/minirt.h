@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:37:09 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/02/01 18:08:20 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 18:13:26 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -425,7 +425,7 @@ int					vectoi(t_vect vect);
 double				str_tof(char *str);
 t_vect 				str_to_vect(char *str);
 int					str_to_rgbint(char *str);
-int					is_str_ID(char *str);
+int					is_str_id(char *str);
 int					is_str_vect(char *str);
 int					is_str_float(char *str);
 int					is_str_ufloat(char *str);

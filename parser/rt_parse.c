@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 11:00:31 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/28 09:14:23 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 17:43:48 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,10 @@ static void		info_arr_set(int elem, char info[])
 			udecimal_type, rgb_type, -1},
 		(char[]){rt_plane, vector_type, vector_type, rgb_type, -1},
 		(char[]){rt_translation, ID_type, vector_type, -1},
-		(char[]){rt_rotation, ID_type, phi_type, theta_type, psi_type, -1}
+		(char[]){rt_rotation, ID_type, euler_type, euler_type, euler_type, -1}
 	};
 	ft_memmove(info, data[elem], rt_elemlen(data[elem]));
 }
-
-/*
-**	static int		is_line_empty(char **line, int	*line_ct)
-**	{
-**		int	ret;
-**
-**		if (ft_strcmp(*line, "") == 0 || *(ft_skip_spaces(*line)) == '#')
-**		{
-**			ft_free_null((void **)line);
-**			(*line_ct)++;
-**			ret = 1;
-**		}
-**		else
-**			ret = 0;
-**		return (ret);
-**	}
-*/
 
 static int		is_line_empty(char **line, int *line_ct)
 {

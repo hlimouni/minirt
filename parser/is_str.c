@@ -6,32 +6,32 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 17:01:03 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/27 16:15:55 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 18:13:44 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int		is_str_uint(char *str)
+int					is_str_uint(char *str)
 {
-	size_t		i;
+	size_t			i;
 
 	if (!str)
 		return (0);
 	i = 0;
 	while (ft_isdigit(str[i++]))
-	if (ft_strlen(str) == i)
-		return (i);
+		if (ft_strlen(str) == i)
+			return (i);
 	return (0);
 }
 
-int			is_str_rgb(char *str)
+int					is_str_rgb(char *str)
 {
-	int		i;
-	char	**arr;
-	char	*trimd_str;
-	char	comma_count;
-	int		color;
+	int				i;
+	char			**arr;
+	char			*trimd_str;
+	char			comma_count;
+	int				color;
 
 	if (!str)
 		return (0);
@@ -54,12 +54,12 @@ int			is_str_rgb(char *str)
 	return (i == 3 ? 1 : 0);
 }
 
-int			is_str_vect(char *str)
+int					is_str_vect(char *str)
 {
-	int		i;
-	char	**arr;
-	char	*trimd_str;
-	char	comma_count;
+	int				i;
+	char			**arr;
+	char			*trimd_str;
+	char			comma_count;
 
 	if (!str)
 		return (0);
@@ -82,7 +82,7 @@ int			is_str_vect(char *str)
 	return (i == 3 ? 1 : 0);
 }
 
-int	str_to_elem(char *str)
+int					str_to_elem(char *str)
 {
 	if (!str)
 		return (NEGATIVE_VALUE);
@@ -111,13 +111,13 @@ int	str_to_elem(char *str)
 	return (NEGATIVE_VALUE);
 }
 
-int	is_str(char *str, int type)
+int					is_str(char *str, int type)
 {
 	t_typechecker	typechecker_arr[rt_types_num];
-	
+
 	if (type >= rt_types_num || type < 0)
 		return (NEGATIVE_VALUE);
-	typechecker_arr[ID_type] = is_str_ID;
+	typechecker_arr[ID_type] = is_str_id;
 	typechecker_arr[vector_type] = is_str_vect;
 	typechecker_arr[decimal_type] = is_str_float;
 	typechecker_arr[udecimal_type] = is_str_ufloat;
@@ -125,8 +125,6 @@ int	is_str(char *str, int type)
 	typechecker_arr[ratio_type] = is_str_ratio;
 	typechecker_arr[angle_type] = is_str_angle;
 	typechecker_arr[uint_type] = is_str_uint;
-	typechecker_arr[phi_type] = is_str_phi;
-	typechecker_arr[theta_type] = is_str_theta;
-	typechecker_arr[psi_type] = is_str_theta;
+	typechecker_arr[euler_type] = is_str_euler;
 	return (typechecker_arr[type](str));
 }

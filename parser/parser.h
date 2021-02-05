@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 18:48:49 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/27 16:17:16 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 18:21:12 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ enum	e_rt_file_param_types
 	ratio_type,
 	angle_type,
 	uint_type,
-	phi_type,
-	theta_type,
-	psi_type,
+	euler_type,
 	rt_types_num
 };
 
@@ -197,7 +195,7 @@ typedef struct		s_square
 	t_vect			color_vect;
 }					t_square;
 
-typedef struct 		s_triangle
+typedef struct		s_triangle
 {
 	t_vect			pt_a;
 	t_vect			pt_b;
@@ -245,23 +243,22 @@ typedef struct		s_scene
 	t_list			*cams;
 	t_list			*lights;
 	t_list			*objs;
-}				t_scene;
+}					t_scene;
 
 typedef int			(*t_elem_push)(char **, t_scene *);
 typedef	int			(*t_typechecker)(char *);
 
 int					get_next_line(int fd, char **line);
 double				str_tof(char *str);
-t_vect 				str_to_vect(char *str);
-int					is_str_ID(char *str);
+t_vect				str_to_vect(char *str);
+int					is_str_id(char *str);
 int					str_to_elem(char *str);
 int					is_str_uint(char *str);
 int					is_str_float(char *str);
 int					is_str_ufloat(char *str);
 int					is_str_ratio(char *str);
 int					is_str_angle(char *str);
-int					is_str_phi(char *str);
-int					is_str_theta(char *str);
+int					is_str_euler(char *str);
 int					is_str(char *str, int type);
 int					rt_elemlen(char *arr);
 int					rt_square_push(char **splt_line, t_scene *scene);
@@ -274,6 +271,7 @@ void				rt_free_scene(t_scene *scene);
 void				transform_err_msg(int line);
 int					rt_rot_apply(char **splitd_line, t_scene *scene);
 int					rt_tran_apply(char **splitd_line, t_scene *scene);
-void				rt_exit(int rt_error_num, int line, int param, void *ptrs[]);
+void				rt_exit(int rt_error_num, int line,
+							int param, void *ptrs[]);
 
 #endif

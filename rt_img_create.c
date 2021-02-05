@@ -6,23 +6,18 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:38:48 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/02/01 15:44:23 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 17:13:31 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/*
-** if (!(cam_lst = cam_lst->next))
-** 	cam_lst = data->scene->cams;
-*/
-
-void	img_array_set(t_cam *cam, t_scene *scene, t_mlibx *mlx)
+void				img_array_set(t_cam *cam, t_scene *scene, t_mlibx *mlx)
 {
-	int		i;
-	int		j;
-	t_hit	hit;
-	t_ray	ray;
+	int				i;
+	int				j;
+	t_hit			hit;
+	t_ray			ray;
 
 	j = 0;
 	while (j < scene->res->height)
@@ -44,10 +39,10 @@ void	img_array_set(t_cam *cam, t_scene *scene, t_mlibx *mlx)
 	}
 }
 
-void	clear_image(t_scene *scene, t_mlibx *mlx)
+void				clear_image(t_scene *scene, t_mlibx *mlx)
 {
-	int		i;
-	int		j;
+	int				i;
+	int				j;
 
 	j = 0;
 	while (j < scene->res->height)
@@ -62,7 +57,7 @@ void	clear_image(t_scene *scene, t_mlibx *mlx)
 	}
 }
 
-void	rt_image_create(t_scene *scene, t_mlibx *mlx)
+void				rt_image_create(t_scene *scene, t_mlibx *mlx)
 {
 	t_resolution	*res;
 	int				sizex;
@@ -80,7 +75,7 @@ void	rt_image_create(t_scene *scene, t_mlibx *mlx)
 	mlx->win_ptr = mlx_new_window(mlx->ptr, res->width, res->height, "miniRT");
 	mlx->img_ptr = mlx_new_image(mlx->ptr, res->width, res->height);
 	mlx->img_data = (int *)mlx_get_data_addr(mlx->img_ptr, &mlx->bbp,
-		&mlx->line_len, &mlx->endian);
+			&mlx->line_len, &mlx->endian);
 	img_array_set(scene->cams->content, scene, mlx);
 }
 
@@ -88,19 +83,19 @@ int					key_bind(int keycode, t_rt_data *data)
 {
 	static t_list	*cam_lst;
 	static	int		firstcall;
-	
+
 	if (keycode == K_SPACE)
-	{	if (cam_lst == NULL && firstcall++ == 0)
+	{
+		if (cam_lst == NULL && firstcall++ == 0)
 			cam_lst = data->scene->cams->next;
 		if (cam_lst == NULL && firstcall)
 			cam_lst = data->scene->cams;
 		else if (!(cam_lst = cam_lst->next))
 			cam_lst = data->scene->cams;
 		clear_image(data->scene, data->mlx);
-		// ft_memset(data->mlx->img_data, 0, data->scene->res->height * data->scene->res->width);
 		img_array_set(cam_lst->content, data->scene, data->mlx);
 		mlx_put_image_to_window(data->mlx->ptr, data->mlx->win_ptr,
-			data->mlx->img_ptr, 0, 0);
+				data->mlx->img_ptr, 0, 0);
 	}
 	if (keycode == K_ESC)
 	{
@@ -111,21 +106,8 @@ int					key_bind(int keycode, t_rt_data *data)
 	return (0);
 }
 
-int	close_bind(t_rt_data *data)
+int					close_bind(t_rt_data *data)
 {
 	rt_free_scene(data->scene);
-	exit(0);	
-}
-
-void	display_rt_image(t_scene *scene, t_mlibx *mlx)
-{
-	t_rt_data	data;
-	
-	data.scene = scene;
-	data.mlx = mlx;
-	mlx_put_image_to_window(mlx->ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
-	mlx_do_key_autorepeatoff(mlx->ptr);
-	mlx_hook(mlx->win_ptr, E_KEY_PRESS, 1L << 0, key_bind, &data);
-	mlx_hook(mlx->win_ptr, E_DESTROY, 1L << 17, close_bind, &data);
- 	mlx_loop(mlx->ptr);
+	exit(0);
 }

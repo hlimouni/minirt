@@ -6,13 +6,13 @@
 /*   By: hlimouni <hlimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:13:20 by hlimouni          #+#    #+#             */
-/*   Updated: 2020/12/21 15:13:59 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 17:28:35 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_getstr_sign(char *str, int *index)
+int			ft_getstr_sign(char *str, int *index)
 {
 	int		sign;
 

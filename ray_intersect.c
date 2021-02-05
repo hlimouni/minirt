@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:09:30 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/02/03 09:44:46 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 17:08:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,33 +29,13 @@ void			set_hit_color(t_hit *hit)
 		hit->color = ((t_triangle *)obj)->color_vect;
 }
 
-/*
-** void				set_cy_normal(t_hit *hit, t_cylinder *cy)
-** {
-** 	hit->normal = vect_diff(hit->ray_obj, cy->origin);
-** 	hit->normal = vect_diff(hit->normal,
-** 		vect_const_prod(vect_dot(cy->axis, hit->normal), cy->axis));
-** 	hit->normal = vect_unit(hit->normal);
-** }
-*/
-
-void			set_planar_normals(t_vect obj_norml, t_hit *hit)
-{
-	if (vect_dot(obj_norml, hit->view) < 0)
-		hit->normal = vect_unit(vect_const_prod(1, obj_norml));
-	else
-		hit->normal = obj_norml;
-}
-
-void			set_cy_normal(t_cylinder *cy, t_hit *hit, t_vect dir)
+void			set_cy_normal(t_cylinder *cy, t_hit *hit)
 {
 	t_vect		center_to_hit;
 
 	center_to_hit = vect_diff(hit->ray_obj, cy->origin);
 	hit->normal = vect_unit(vect_diff(center_to_hit,
-		vect_const_prod(vect_dot(cy->axis, center_to_hit), cy->axis)));
-	if (vect_dot(dir, hit->normal) > 0)
-		hit->normal = vect_unit(vect_const_prod(1, hit->normal));
+				vect_const_prod(vect_dot(cy->axis, center_to_hit), cy->axis)));
 }
 
 void			set_hit(t_hit *hit, t_ray *ray)
@@ -70,19 +50,15 @@ void			set_hit(t_hit *hit, t_ray *ray)
 	hit->cam_up = ray->cam_up;
 	set_hit_color(hit);
 	if (hit->obj->element == rt_sphere)
-	{
 		hit->normal = vect_unit(vect_diff(hit->ray_obj, ((t_sphere *)obj)->o));
-		// if (vect_dot(ray->dir, hit->normal) > 0)
-		// 	hit->normal = vect_unit(vect_const_prod(1, hit->normal));
-	}
 	else if (hit->obj->element == rt_cylinder)
-		set_cy_normal(obj, hit, ray->dir);
+		set_cy_normal(obj, hit);
 	else if (hit->obj->element == rt_plane)
-		set_planar_normals(((t_plane *)obj)->n, hit);
+		hit->normal = ((t_plane *)obj)->n;
 	else if (hit->obj->element == rt_square)
-		set_planar_normals(((t_square *)obj)->normal, hit);
+		hit->normal = ((t_square *)obj)->normal;
 	else if (hit->obj->element == rt_triangle)
-		set_planar_normals(((t_triangle *)obj)->normal, hit);
+		hit->normal = ((t_triangle *)obj)->normal;
 }
 
 double			one_obj_intersect(t_ray *ray, t_list *obj_node)
@@ -104,7 +80,7 @@ double			one_obj_intersect(t_ray *ray, t_list *obj_node)
 }
 
 void			ray_intersect(t_ray *ray, t_list *obj_node,
-							t_hit *hit)
+		t_hit *hit)
 {
 	double		t;
 

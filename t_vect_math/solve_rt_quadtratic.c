@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:41:44 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/02/01 17:24:46 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 18:30:09 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_solution		solve_rt_quadratic(t_coeff *coeff)
 	return (sol);
 }
 
-double		limit_cylinder(t_coeff *coeff, t_ray *ray,
+double			limit_cylinder(t_coeff *coeff, t_ray *ray,
 							t_cylinder *cy)
 {
 	t_vect		hit1;

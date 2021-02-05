@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 12:51:30 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/27 18:58:18 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/05 17:32:26 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		rt_amb_push(char **splitd_line, t_scene *scene)
 		return (0);
 	amb->intensity = str_tof(splitd_line[amb_ratio]);
 	amb->color_vect = str_to_vect(splitd_line[amb_color]);
-	amb->coeff = vect_const_prod(1.0/255.0, amb->color_vect);
+	amb->coeff = vect_const_prod(1.0 / 255.0, amb->color_vect);
 	amb->coeff = vect_const_prod(amb->intensity, amb->coeff);
 	scene->amb = amb;
 	return (1);
@@ -46,13 +46,13 @@ int		rt_light_push(char **splitd_line, t_scene *scene)
 {
 	t_light		*light;
 	t_list		*new_node;
-	
+
 	if (!(light = malloc(sizeof(t_light))))
 		return (0);
 	light->l = str_to_vect(splitd_line[l_position]);
 	light->intensity = str_tof(splitd_line[l_bright]);
 	light->color_vect = str_to_vect(splitd_line[l_color]);
-	light->coeff = vect_const_prod(1.0/255.0, light->color_vect);
+	light->coeff = vect_const_prod(1.0 / 255.0, light->color_vect);
 	light->coeff = vect_const_prod(light->intensity, light->coeff);
 	if (!(new_node = ft_lstnew(light)))
 		return (0);
@@ -65,7 +65,7 @@ int		rt_camera_push(char **splitd_line, t_scene *scene)
 {
 	t_cam		*camera;
 	t_list		*new_node;
-	
+
 	if (!(camera = malloc(sizeof(t_cam))))
 		return (0);
 	camera->c = str_to_vect(splitd_line[c_position]);
