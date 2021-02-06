@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 12:38:48 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/02/05 17:13:31 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/06 15:43:29 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,11 @@ int					key_bind(int keycode, t_rt_data *data)
 	{
 		if (cam_lst == NULL && firstcall++ == 0)
 			cam_lst = data->scene->cams->next;
-		if (cam_lst == NULL && firstcall)
+		else if (cam_lst == NULL && firstcall)
 			cam_lst = data->scene->cams;
 		else if (!(cam_lst = cam_lst->next))
 			cam_lst = data->scene->cams;
+		cam_lst == NULL ? (cam_lst = data->scene->cams) : 0;
 		clear_image(data->scene, data->mlx);
 		img_array_set(cam_lst->content, data->scene, data->mlx);
 		mlx_put_image_to_window(data->mlx->ptr, data->mlx->win_ptr,
