@@ -6,7 +6,7 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:08:53 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/02/06 17:44:49 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/06 17:47:37 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	is_overflow(long res, int *number, long max)
 {
 	if (res > max)
 	{
-		*number = 0x7fffffff;
+		*number = (int)MAXINT;
 		return (1);
 	}
 	return (0);
@@ -26,7 +26,7 @@ static int	is_underflow(long res, int *number, long abs_min)
 {
 	if (res > abs_min)
 	{
-		*number = (int)0x80000000;
+		*number = (int)MININT;
 		return (-1);
 	}
 	return (0);
