@@ -6,12 +6,11 @@
 /*   By: hlimouni <hlimouni@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:08:53 by hlimouni          #+#    #+#             */
-/*   Updated: 2021/01/09 10:28:09 by hlimouni         ###   ########.fr       */
+/*   Updated: 2021/02/06 17:44:49 by hlimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static int	is_overflow(long res, int *number, long max)
 {
@@ -70,14 +69,3 @@ int			ft_strtoi(char *str, int *num)
 	*num = sn * res;
 	return (0);
 }
-
-/*
-**	int main(void)
-**	{
-**		char *str = "  	2147483646";
-**		int number, ret;
-**
-**		ret = ft_strtoi(str, &number);
-**		printf("str -> |%s| number == %d ret = %d\n", str, number, ret);
-**	}
-*/
